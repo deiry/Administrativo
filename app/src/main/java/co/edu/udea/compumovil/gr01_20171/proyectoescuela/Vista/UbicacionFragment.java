@@ -1,4 +1,4 @@
-package co.edu.udea.compumovil.gr01_20171.proyectoescuela;
+package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 
 /**

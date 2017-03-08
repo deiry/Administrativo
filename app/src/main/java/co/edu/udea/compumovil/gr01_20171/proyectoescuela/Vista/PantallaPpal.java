@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.UbicacionFragment;
 
 public class PantallaPpal extends AppCompatActivity {
 
