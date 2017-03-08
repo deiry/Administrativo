@@ -56,15 +56,22 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/fragmet_contenedor_ubicacion"
-        android:orientation="vertical"
+        android:id="@+id/contenedor_ubicacion"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
+        android:layout_weight="6"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/fragment_contenedor_funcionalidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
 
         <GridView
-            android:id="@+id/grid"
+            android:id="@+id/grid_view_ubicacion"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </LinearLayout>

@@ -3,8 +3,11 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.Toast;
 
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
@@ -18,7 +21,7 @@ public class PantallaPpal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_ppal);
 
         agregarFragmentNombreGrupo();
-        agregarFragmentUbicacion();
+        //agregarFragmentUbicacion();
         CrearGridView();
     }
 
@@ -26,13 +29,13 @@ public class PantallaPpal extends AppCompatActivity {
      * este metodo asigna al contenerdor de ubicacion el fragment de ubicacion
      */
     private void agregarFragmentUbicacion() {
-        /*FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         UbicacionFragment fragment = new UbicacionFragment();
 
-        fragmentTransaction.add(R.id.fragmet_contenedor_ubicacion, fragment);
+        fragmentTransaction.add(R.id.fragment_contenedor_funcionalidad, fragment);
 
-        fragmentTransaction.commit();*/
+        fragmentTransaction.commit();
     }
 
     /**
@@ -67,6 +70,14 @@ public class PantallaPpal extends AppCompatActivity {
         gridEstudiante.setAdapter(adapter);
 
         gridEstudiante.setNumColumns(6);
+
+        gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(PantallaPpal.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                agregarFragmentUbicacion();
+            }
+        });
 
 
     }
