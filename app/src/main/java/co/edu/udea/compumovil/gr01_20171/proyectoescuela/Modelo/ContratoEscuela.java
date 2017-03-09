@@ -19,8 +19,8 @@ public class ContratoEscuela {
     }
 
     interface ColumnasGrupo{
-        String GRP_NOMBRE = "grp_nombre";
-        String GRP_GRADO = "grp_grado";
+        String GRP_CURSO = "grp_curso";
+        String GRP_GRUPO = "grp_grupo";
     }
 
     interface ColumnasMaterias{

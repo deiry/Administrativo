@@ -29,15 +29,69 @@ public class ManejaSQL extends SQLiteOpenHelper {
         String TBL_SEGUIMIENTO = "tbl_seguimiento";
         String TBL_SUBCATEGORIAS = "tbl_subcategorias";
         String TBL_CATEGORIAS = "tbl_categorias";
+        String TBL_ASISTENCIA = "tbl_asistencia";
+        String TBL_META = "tbl_meta";
+        String TBL_LISTA_METAS = "tbl_lista_metas";
+        String TBL_GRUPOS_LISTA_ESTUDIANTES = "tbl_grupos_lista_estudiantes";
+        String TBL_GRUPOS_ESTUDIANTES = "tbl_grupos_estudiantes";
+    }
+
+    interface Referencias{
+
+        String ID_CATEGORIAS = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_CATEGORIAS, ContratoEscuela.Categorias.CAT_ID);
+
+        String ID_SUBCATEGORIAS = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_SUBCATEGORIAS, ContratoEscuela.Subcategorias.SUBC_CAT_ID);
+
+        String ID_SEGUIMIENTO = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_SEGUIMIENTO, ContratoEscuela.Seguimiento.SEG_ID);
+
+        String ID_LISTA_METAS = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID);
+
+        String ID_METAS = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_META, ContratoEscuela.Metas.MET_ID);
+
+        String ID_GRUPOS_ESTUDIANTES = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.GrupoEstudiantes.GPEST_ID);
+
+        String ID_MATERIAS = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        columnas materias ColumnasMateriasEstudiantes  ColumnasCategorias ColumnasListaMetas  ColumnasListaGrupoEstudiantes
+        ColumnasGrupoEstudiantes
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER ," +
+                        "%s VARCHAR(2) )",
+                Tablas.TBL_GRUPO, ContratoEscuela.Grupo.GRP_CURSO, ContratoEscuela.Grupo.GRP_GRUPO));
+
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s TEXT NOT NULL UNIQUE,%s TEXT NOT NULL )",
+                Tablas.FORMA_PAGO, BaseColumns._ID,
+                FormasPago.ID_FORMA_PAGO, FormasPago.NOMBRE));
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_ASISTENCIA);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_CATEGORIAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_ESTUDIANTE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPO);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPOS_ESTUDIANTES);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPOS_LISTA_ESTUDIANTES);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_LISTA_METAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS_ESTUDIANTE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_META);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SEGUIMIENTO);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SUBCATEGORIAS);
+
+        onCreate(db);
 
     }
 
