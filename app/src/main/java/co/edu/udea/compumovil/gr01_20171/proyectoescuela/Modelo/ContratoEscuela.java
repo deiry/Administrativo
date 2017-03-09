@@ -13,7 +13,8 @@ public class ContratoEscuela {
         String EST_NOMBRES = "est_nombres";
         String EST_APELLIDOS = "est_apellidos";
         String EST_FOTO = "est_foto";
-        String EST_GRP_ID = "est_grp_id";
+        String EST_GRP_CURSO = "est_grp_curso";
+        String EST_GRP_GRUPO = "est_grp_grupo";
         String EST_POS_COL = "est_pos_col";
         String EST_POS_FILA = "est_pos_fila";
     }
@@ -72,7 +73,7 @@ public class ContratoEscuela {
 
     interface ColumnasGrupoEstudiantes{
         String GPEST_ID = "gpest_id";
-        String GPEST_EST_IDENTIFICACION = "gpest_est_identificacion";
+        String GPEST_NOMBRE = "gpest_nombre";
     }
 
     interface ColumnasListaMetas{

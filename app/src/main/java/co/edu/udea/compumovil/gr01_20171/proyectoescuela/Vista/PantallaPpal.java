@@ -13,7 +13,7 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_agregar_estudiantes);
+        setContentView(R.layout.activity_pantalla_ppal);
     }
 
 }
