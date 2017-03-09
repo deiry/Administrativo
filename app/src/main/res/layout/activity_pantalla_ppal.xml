@@ -8,72 +8,67 @@
     tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.PantallaPpal"
     android:orientation="vertical">
 
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="1dp"
+        android:layout_height="match_parent"
         android:background="@color/colorPrimary">
-        
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/btn_asistencia"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/btn_metas"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/btn_seguimiento_etico"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/btn_seguimiento_cognitivo"
-            android:layout_weight="1" />
 
         <LinearLayout
-            android:id="@+id/fragment_contenedor"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
-            ></LinearLayout>
+            android:padding="10dp">
 
+            <ImageButton
+                android:id="@+id/btn_seguimiento_etico"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_launcher"
 
-    </LinearLayout>
+                />
 
-    <LinearLayout
-        android:id="@+id/contenedor_ubicacion"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:orientation="vertical">
+            <ImageButton
+                android:id="@+id/btn_seguimiento_cognitivo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:labelFor="@+id/btn_asistencia"
+                android:onClick="clickSeguimientoCognitivo"
+                app:srcCompat="@mipmap/ic_launcher" />
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/fragment_contenedor_funcionalidad"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
-            android:orientation="vertical"></LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <GridView
-            android:id="@+id/grid_view_ubicacion"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorAccent" />
+            <ImageButton
+                android:id="@+id/btn_metas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_launcher"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_asistencia"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_launcher"
+                />
+        </LinearLayout>
+
+
+
+
+
     </LinearLayout>
 
 </LinearLayout>
