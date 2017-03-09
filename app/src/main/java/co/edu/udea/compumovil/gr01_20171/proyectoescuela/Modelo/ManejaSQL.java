@@ -48,16 +48,16 @@ public class ManejaSQL extends SQLiteOpenHelper {
                 Tablas.TBL_SUBCATEGORIAS, ContratoEscuela.Subcategorias.SUBC_CAT_ID);
 
         String ID_SEGUIMIENTO = String.format("REFERENCES %s(%s)",
-                Tablas.TBL_SEGUIMIENTO, ContratoEscuela.Seguimiento.SEG_ID);
+                Tablas.TBL_SEGUIMIENTO, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Seguimiento.SEG_ID);
 
         String ID_LISTA_METAS = String.format("REFERENCES %s(%s)",
-                Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID);
+                Tablas.TBL_LISTA_METAS, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas.LISTMET_ID);
 
         String ID_METAS = String.format("REFERENCES %s(%s)",
                 Tablas.TBL_META, ContratoEscuela.Metas.MET_ID);
 
         String ID_GRUPOS_ESTUDIANTES = String.format("REFERENCES %s(%s)",
-                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.GrupoEstudiantes.GPEST_ID);
+                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.GrupoEstudiantes.GPEST_ID);
 
         String ID_MATERIAS = String.format("REFERENCES %s(%s)",
                 Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID);
