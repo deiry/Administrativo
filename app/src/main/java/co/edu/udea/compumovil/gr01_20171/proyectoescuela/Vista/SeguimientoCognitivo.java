@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class SeguimientoCognitivo extends AppCompatActivity {
@@ -46,32 +48,33 @@ public class SeguimientoCognitivo extends AppCompatActivity {
     private void agregarFragmentNombreGrupo() {
 
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+       /* FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         TituloGrupoFragment fragment = new TituloGrupoFragment();
 
         fragmentTransaction.add(R.id.fragment_contenedor, fragment);
 
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
 
     private void CrearGridView() {
-        String[] estudiantes = new String[]{"Estudiante1","Estudiante2","Estudiante1","Estudiante2",
-                "Estudiante1","Estudiante2","Estudiante1","Estudiante2",
-                "Estudiante1","Estudiante2","Estudiante1","Estudiante2",
-                "Estudiante1","Estudiante2","Estudiante1","Estudiante2"};
+        String[] estudiantes = new String[]{"Estudiante1","Estudiante2"};
+        String[] estudiantes2 = new String[]{"Estu1","Estu2"};
 
-        ArrayAdapter<String> adapter;
 
-        adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,estudiantes);
+
+        EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes, estudiantes2);
+        //ArrayAdapter<String> adapter;
+
+        //adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,estudiantes);/**/
         // adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.item_estudiante,estudiantes);
 
         GridView gridEstudiante = (GridView) findViewById(R.id.grid_view_ubicacion);
 
         gridEstudiante.setAdapter(adapter);
 
-        gridEstudiante.setNumColumns(6);
+        //gridEstudiante.setNumColumns(6);
 
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
