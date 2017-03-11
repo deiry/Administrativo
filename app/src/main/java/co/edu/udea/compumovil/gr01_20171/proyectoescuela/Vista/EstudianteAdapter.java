@@ -41,6 +41,8 @@ public class EstudianteAdapter extends BaseAdapter
     //public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
     public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
         this.context = context;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 
     @Override
