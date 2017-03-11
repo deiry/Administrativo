@@ -27,6 +27,7 @@ public class SeguimientoCognitivo extends AppCompatActivity {
         setContentView(R.layout.activity_seguimiento_cognitivo);
 
         CrearGridView();
+
     }
 
 
