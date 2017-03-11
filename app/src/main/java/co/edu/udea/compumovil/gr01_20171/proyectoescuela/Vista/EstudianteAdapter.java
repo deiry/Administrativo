@@ -35,7 +35,6 @@ public class EstudianteAdapter extends BaseAdapter
      * @param context
      * @param nombres
      * @param apellidos
-     * @param fotos
      */
 
     //public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
