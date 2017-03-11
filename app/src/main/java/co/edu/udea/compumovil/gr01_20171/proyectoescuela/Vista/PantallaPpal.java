@@ -21,15 +21,13 @@ public class PantallaPpal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_profesor);
         PantallaProfesor pp = new PantallaProfesor();
-        pp.onCreate();
+       // pp.onCreate();
 
-<<<<<<< HEAD
        // agregarFragmentNombreGrupo();
     }
 
     private void agregarFragmentNombreGrupo() {
-=======
->>>>>>> origin/master
+
 
     }
 
