@@ -26,13 +26,8 @@ public class SeguimientoCognitivo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
 
-<<<<<<< HEAD
-        agregarFragmentNombreGrupo();
-        //agregarFragmentUbicacion();
-        //CrearGridView();
-=======
         CrearGridView();
->>>>>>> refs/remotes/origin/cognitivo
+
     }
 
 
