@@ -5,20 +5,20 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_seguimiento_cognitivo">Seguimiento Cognitivo</string>
 
-<<<<<<< HEAD
-    <!--strings Seguimiento cognitivo-->
+
+    <!-- strings Seguimiento cognitivo -->
     <string name="recordar">Recordar</string>
     <string name="comprender">Comprender</string>
     <string name="aplicar">Aplicar</string>
     <string name="analizar">Analizar</string>
     <string name="evaluar">Evaluar</string>
     <string name="crear">Crear</string>
-=======
+
    <!-- String pantalla principal-->
     <string name="seguimiento_cognitivo">Seguimiento Cognitivo</string>
     <string name="seguimiento_etico">Seguimiento Etico</string>
     <string name="metas">Metas</string>
     <string name="asistencia">Asistencia</string>
->>>>>>> origin/cognitivo
+
 
 </resources>
