@@ -43,7 +43,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/IdenGrupo"
+        android:id="@+id/idenGrupo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/numGrado"
@@ -57,9 +57,9 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/IdenGrupo"
-        android:layout_alignStart="@+id/IdenGrupo"
-        android:layout_below="@+id/IdenGrupo"
+        android:layout_alignLeft="@+id/idenGrupo"
+        android:layout_alignStart="@+id/idenGrupo"
+        android:layout_below="@+id/idenGrupo"
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="35dp"
@@ -75,15 +75,15 @@
         app:backgroundTint="@android:color/holo_green_dark"
         app:fabSize="mini"
         app:srcCompat="@android:drawable/ic_menu_upload"
-        android:layout_below="@+id/IdenGrupo"
-        android:layout_alignRight="@+id/IdenGrupo"
-        android:layout_alignEnd="@+id/IdenGrupo"
+        android:layout_below="@+id/idenGrupo"
+        android:layout_alignRight="@+id/idenGrupo"
+        android:layout_alignEnd="@+id/idenGrupo"
         android:layout_marginRight="11dp"
         android:layout_marginEnd="11dp"
         android:layout_marginTop="26dp" />
 
     <Button
-        android:id="@+id/bnt_guardarGrupo"
+        android:id="@+id/btn_guardarGrupo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_subirEstudiantes"
