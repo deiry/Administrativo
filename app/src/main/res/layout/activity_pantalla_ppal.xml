@@ -22,23 +22,24 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <ImageButton
+            <Button
                 android:id="@+id/btn_seguimiento_etico"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:contextClickable="false"
+                android:text="@string/seguimiento_etico"
+               />
 
-                />
-
-            <ImageButton
+            <Button
                 android:id="@+id/btn_seguimiento_cognitivo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:labelFor="@+id/btn_asistencia"
                 android:onClick="clickSeguimientoCognitivo"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:text="@string/seguimiento_cognitivo"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -48,20 +49,21 @@
             android:orientation="horizontal"
             android:padding="10dp">
 
-            <ImageButton
+            <Button
                 android:id="@+id/btn_metas"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:text="@string/metas"
+
                 />
 
-            <ImageButton
+            <Button
                 android:id="@+id/btn_asistencia"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:text="@string/asistencia"
                 />
         </LinearLayout>
 
