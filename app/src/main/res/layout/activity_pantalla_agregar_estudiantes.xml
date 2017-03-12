@@ -28,7 +28,7 @@
         android:layout_alignStart="@+id/editText3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_ingresar_profesor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ingresar Foto"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button"
+        android:layout_alignTop="@+id/btn_ingresar_profesor"
         android:layout_marginEnd="77dp"
         android:layout_marginRight="77dp"
         android:text="Registrar" />

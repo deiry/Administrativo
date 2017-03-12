@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -22,6 +24,15 @@ public class PantallaPpal extends AppCompatActivity {
 
         setContentView(R.layout.activity_pantalla_ppal);
 
+        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
+        ImageButton asistencia = (ImageButton)findViewById(R.id.btn_asistencia);
+        asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
+                startActivity(ingresar);
+            }
+        });
     }
 
 }
