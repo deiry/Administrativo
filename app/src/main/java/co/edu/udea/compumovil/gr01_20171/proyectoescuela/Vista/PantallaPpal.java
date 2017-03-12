@@ -19,8 +19,19 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 
         setContentView(R.layout.activity_pantalla_ppal);
+=======
+        setContentView(R.layout.activity_pantalla_ppal);
+
+    }
+
+    private void agregarFragmentNombreGrupo() {
+
+
+    }
+>>>>>>> refs/remotes/origin/master
 
     }
 
