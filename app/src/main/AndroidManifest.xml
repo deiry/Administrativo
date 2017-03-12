@@ -19,8 +19,16 @@
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
         <activity android:name=".Vista.PantallaConfiguracion" />
         <activity android:name=".Vista.PantallaProfesor"></activity>
+=======
+<<<<<<< HEAD
+        <activity android:name=".AgregarEstudiantes"></activity>
+=======
+        <activity android:name=".Vista.SegCogEstudiante"></activity>
+>>>>>>> refs/remotes/origin/master
+>>>>>>> origin/configuracion
     </application>
 
 </manifest>
