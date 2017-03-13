@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -19,6 +21,10 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        setContentView(R.layout.activity_pantalla_ppal);
+
         setContentView(R.layout.activity_pantalla_ppal);
 
     }
@@ -28,12 +34,16 @@ public class PantallaPpal extends AppCompatActivity {
 
     }
 
-    public void clickSeguimientoCognitivo(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
+
+        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
+        ImageButton asistencia = (ImageButton)findViewById(R.id.btn_asistencia);
+        asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
+                startActivity(ingresar);
+            }
+        });
     }
 
 
-
-}
