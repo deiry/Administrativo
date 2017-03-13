@@ -1,5 +1,6 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
+import android.app.Dialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,17 +56,6 @@ public class PantallaProfesor extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-    private void showDialog() {
-        final Dialog addGrupo = new Dialog(this);
-        //set title
-        addGrupo.setTitle("Agregar grupo");
-        //inflate layout
-        //addGrupo.setContentView(R.layout.activity_agregar_grupo_alert);
 
-        // Button guardar = (Button)addGrupo.findViewBy(R.id.btn_guardarGrupo);    }
-        addGrupo.show();
-=======
->>>>>>> origin/configuracion
     }
 }

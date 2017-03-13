@@ -163,6 +163,36 @@ public final class OperacionesBaseDeDatos {
         return db.rawQuery(sentence,null);
     }
 
+    public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo){
+        String consulta = String.format("SELECT FROM tbl_estudiantes WHERE (curso = %s AND grupo= %s)",grupo.getCurso(),grupo.getGrupo());
+        Cursor estudiantes = obtenerDataDB(consulta);
+        Estudiante estudiante;
+        ArrayList<Estudiante> estudiantesAL = new ArrayList<>();
+        if(estudiantes.moveToFirst()){
+            do{
+                estudiante = new Estudiante(estudiantes.getInt(1),estudiantes.getString(2),estudiantes.getString(3),
+                        estudiantes.getBlob(4),estudiantes.getInt(5),estudiantes.getString(6),estudiantes.getInt(7),
+                        estudiantes.getInt(8));
+                estudiantesAL.add(estudiante);
+            }while(estudiantes.moveToNext());
+        }
+        return estudiantesAL;
+    }
+
+    public ArrayList<Grupo> obtenerGruposDB(){
+        String consulta = "SELECT * FROM tbl_grupo";
+        Cursor grupos = obtenerDataDB(consulta);
+        Grupo grupo;
+        ArrayList<Grupo> grupoAL = new ArrayList<>();
+        if(grupos.moveToFirst()){
+            do{
+                grupo = new Grupo(grupos.getInt(1),grupos.getString(2));
+                grupoAL.add(grupo);
+            }while(grupos.moveToNext());
+        }
+        return grupoAL;
+    }
+
 
     public SQLiteDatabase getDb() {
         return baseDatos.getWritableDatabase();

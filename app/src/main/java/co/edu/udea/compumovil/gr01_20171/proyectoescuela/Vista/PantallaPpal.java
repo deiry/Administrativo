@@ -27,6 +27,17 @@ public class PantallaPpal extends AppCompatActivity {
 
         setContentView(R.layout.activity_pantalla_ppal);
 
+
+        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
+        Button asistencia = (Button)findViewById(R.id.btn_asistencia);
+        asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
+                startActivity(ingresar);
+            }
+        });
+
     }
 
     private void agregarFragmentNombreGrupo() {
@@ -35,15 +46,6 @@ public class PantallaPpal extends AppCompatActivity {
     }
 
 
-        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
-        ImageButton asistencia = (ImageButton)findViewById(R.id.btn_asistencia);
-        asistencia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
-                startActivity(ingresar);
-            }
-        });
     }
 
 

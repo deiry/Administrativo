@@ -3,20 +3,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-<<<<<<< HEAD
 
 
-=======
-<<<<<<< HEAD
+
+
     <string name="title_activity_seguimiento_cognitivo">SeguimientoCognitivo</string>
-<<<<<<< HEAD
+
     <string name="grupo_guardado_msg">Grupo guardado</string>
     <string name="estudiantes_guardadps_msg">Se han guardado los estudiantes</string>
-=======
->>>>>>> origin/configuracion
+
     <string name="title_activity_agregar_estudiante">AgregarEstudiante</string>
 
-    <string name="title_activity_seguimiento_cognitivo">Seguimiento Cognitivo</string>
+
 
 
     <!-- strings Seguimiento cognitivo -->
@@ -34,11 +32,6 @@
     <string name="asistencia">Asistencia</string>
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/master
->>>>>>> origin/configuracion
->>>>>>> origin/configuracion
 </resources>
 
