@@ -33,7 +33,7 @@ public class PantallaProfesor extends Activity {
         //set title
         addGrupo.setTitle("Agregar grupo");
         //inflate layout
-        addGrupo.setContentView(R.layout.activity_agregar_grupo_alert);
+        //addGrupo.setContentView(R.layout.activity_agregar_grupo_alert);
 
         // Button guardar = (Button)addGrupo.findViewBy(R.id.btn_guardarGrupo);    }
         addGrupo.show();

@@ -25,17 +25,17 @@ public class SeguimientoCognitivo extends Activity {
 
 
 
-<<<<<<< HEAD
-        TituloGrupoFragment fragment = new TituloGrupoFragment();
 
-        fragmentTransaction.commit();
-    }
-=======
+     //   TituloGrupoFragment fragment = new TituloGrupoFragment();
+
+      //  fragmentTransaction.commit();
+
+
     private void CrearGridView() {
 
         String[] estudiantes = new String[]{"Estudiante1","Estudiante2","Estudiante1","Estudiante2","Estudiante1","Estudiante2","Estudiante1","Estudiante2","Estudiante1","Estudiante2"};
         String[] estudiantes2 = new String[]{"Estu1","Estu2","Estu1","Estu2","Estu1","Estu2","Estu1","Estu2","Estu1","Estu2","Estu1","Estu2",};
->>>>>>> refs/remotes/origin/master
+
 
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes, estudiantes2);

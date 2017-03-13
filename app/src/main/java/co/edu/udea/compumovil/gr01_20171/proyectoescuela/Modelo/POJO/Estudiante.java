@@ -4,11 +4,19 @@ public class Estudiante {
     private int identificacion;
     private String nombres;
     private String apellidos;
-    private String foto;
+    private byte[] foto;
     private int curso;
     private String grupo;
     private int posFila;
     private int posColumna;
+
+    public Estudiante(String nombres, String apellidos,byte[] foto,int identificacion){
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.identificacion = identificacion;
+        this.foto = foto;
+
+    }
 
     public int getIdentificacion() {
         return identificacion;
@@ -34,11 +42,11 @@ public class Estudiante {
         this.apellidos = apellidos;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 

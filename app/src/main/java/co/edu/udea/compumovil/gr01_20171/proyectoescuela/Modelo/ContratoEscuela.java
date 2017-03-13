@@ -3,7 +3,9 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo;
 import java.util.UUID;
 
 /**
- * Created by Alejandro on 27/02/2017.
+ * CLASE ENCARGADA DE GUARDAR LOS METADATOS CORRESPONDIENTEAS A LAS TABLAS DE LA DB
+ * ES IMPORTANTE UTILIZAR EL METODO QUE GENERA ID PARA AQUELLAS CLASES QUE TIENEN ESTE MÉTODO
+ * DISPONIBLE
  */
 
 public class ContratoEscuela {
@@ -87,16 +89,12 @@ public class ContratoEscuela {
     }
 
 
-    public static class Estudiante implements ColumnasEstudiante{
-        public static String generarIdentificacionEstudiante(){
-            return "EST-" + UUID.randomUUID().toString();
-        }
+    public static class Estudiantes implements ColumnasEstudiante{
+
     }
 
-    public static class Grupo implements ColumnasGrupo{
-        public static String generarIdGrupo(){
-            return "GRP"+ UUID.randomUUID().toString();
-        }
+    public static class Grupos implements ColumnasGrupo{
+
     }
 
     public static class Materias implements ColumnasMaterias{
@@ -106,9 +104,7 @@ public class ContratoEscuela {
     }
 
     public static class MateriaEstudiante implements ColumnasMateriasEstudiantes{
-        public static String generarIdMateriaEstudiante(){
-            return "MEST"+ UUID.randomUUID().toString();
-        }
+
     }
 
     public static class Asistencia implements ColumnasAsistencia{
@@ -154,9 +150,7 @@ public class ContratoEscuela {
     }
 
     public static class ListaGrupoEstudiantes implements ColumnasListaGrupoEstudiantes{
-        public static String generarIdCategorias(){
-            return "GPLISTEST-" + UUID.randomUUID().toString();
-        }
+
     }
 
     private ContratoEscuela(){}
