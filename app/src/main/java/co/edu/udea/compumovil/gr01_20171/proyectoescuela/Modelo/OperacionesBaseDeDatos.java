@@ -15,7 +15,7 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.EstudianteAdapter
  * Clase auxiliar que implementa a {@link ManejaSQL} para llevar a cabo el CRUD
  * sobre las entidades existentes.
  * ¡¡¡¡¡¡IMPORTANTE FALTA IMPLEMENTAR LAS OPERACIONES CORRESPONDIENTES A LAS TABLAS DE
- * GRUPO LISTA ESTUDIANTES , MATERIASXESTUDIANTE Y METAS!!!!!!!
+ *  MATERIASXESTUDIANTE!!!!!!!
  */
 
 
@@ -117,14 +117,28 @@ public final class OperacionesBaseDeDatos {
     }
 
     /**
-     * Método para inserta una meta en la lista de metas
+     * Método para agregar una nueva meta a la lista de metas (tbl_lista_metas)
      * */
-    public void insertarTablaListaDeMetas(ListaMetas listaMetas){
+    public void agregarMeta(ListaMetas nuevaMeta){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,listaMetas.getId());
-        valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,listaMetas.getNombre());
+        valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,nuevaMeta.getId());
+        valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,nuevaMeta.getNombre());
         db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS,null,valores);
+    }
+
+    /**
+     * Método para asignar una meta a un estudiante (tbl_metas)
+     */
+    public void asignarMeta(Meta meta){
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Metas.MET_ID, meta.getId());
+        valores.put(ContratoEscuela.Metas.EST_ID, meta.getEstudianteId());
+        valores.put(ContratoEscuela.Metas.LISTMETA_ID, meta.getListaMetasId());
+        valores.put(ContratoEscuela.Metas.MET_FECHA_INICIO, String.valueOf(meta.getFechaInicio()));
+        valores.put(ContratoEscuela.Metas.MET_DURACION, meta.getDuracion());
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_METAS,null,valores);
     }
 
     /**
@@ -139,18 +153,6 @@ public final class OperacionesBaseDeDatos {
         valores.put(ContratoEscuela.Seguimiento.SEG_ESTADO,seguimiento.getEstado());
         valores.put(ContratoEscuela.Seguimiento.SEG_FECHA,seguimiento.getFecha().toString());
         valores.put(ContratoEscuela.Seguimiento.SEG_TIPO,seguimiento.getTipo());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO,null,valores);
-    }
-
-    /**
-     * Método para insertar un grupo de estudiantes en la tabla correspondiente
-     * */
-
-    public void insertarGruposEstudiante(GrupoEstudiantes grupoEstudiantes){
-        SQLiteDatabase db = baseDatos.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.GrupoEstudiantes.GPEST_ID,grupoEstudiantes.getId());
-        valores.put(ContratoEscuela.GrupoEstudiantes.GPEST_NOMBRE,grupoEstudiantes.getNombre());
         db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO,null,valores);
     }
 
