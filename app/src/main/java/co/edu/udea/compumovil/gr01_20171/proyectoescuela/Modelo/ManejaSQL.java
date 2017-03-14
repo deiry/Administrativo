@@ -34,6 +34,7 @@ public class ManejaSQL extends SQLiteOpenHelper {
         String TBL_LISTA_METAS = "tbl_lista_metas";
         String TBL_GRUPOS_LISTA_ESTUDIANTES = "tbl_grupos_lista_estudiantes";
         String TBL_GRUPOS_ESTUDIANTES = "tbl_grupos_estudiantes";
+        String TBL_CUMPLIMIENTO_METAS = "tbl_cumplimiento_metas";
     }
 
     /**
@@ -122,11 +123,10 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //METAS**
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s INTEGER,%s INTEGER,%s DATE,%s DATE,%s INTEGER,%s BOOLEAN  )",
+                        "%s INTEGER,%s INTEGER,%s DATE,%s INTEGER )",
                 Tablas.TBL_META, ContratoEscuela.Metas.MET_ID, ContratoEscuela.Metas.MET_LISTMET_ID
                 , ContratoEscuela.Metas.MET_ID_GPEST_ID, ContratoEscuela.Metas.MET_FECHA_INICIO,
-                ContratoEscuela.Metas.MET_FECHA_CUMPLIMIENTO,ContratoEscuela.Metas.MET_DURACION,
-                ContratoEscuela.Metas.MET_ESTADO));
+                ContratoEscuela.Metas.MET_DURACION));
 
         //ASISTENCIA
         db.execSQL(String.format("CREATE TABLE %s ( %s DATE ," +
@@ -151,6 +151,8 @@ public class ManejaSQL extends SQLiteOpenHelper {
                         "%s INTEGER)",
                 Tablas.TBL_MATERIAS_ESTUDIANTE, ContratoEscuela.MateriaEstudiante.MEST_MTA_ID,
                 ContratoEscuela.MateriaEstudiante.MEST_EST_ID));
+
+
     }
 
     @Override

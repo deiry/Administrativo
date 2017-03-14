@@ -4,6 +4,11 @@ public class Grupo {
     private int curso;
     private String grupo;
 
+    public Grupo(int curso, String grupo) {
+        this.curso = curso;
+        this.grupo = grupo;
+    }
+
     public int getCurso() {
         return curso;
     }

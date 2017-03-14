@@ -18,6 +18,17 @@ public class Estudiante {
 
     }
 
+    public Estudiante(int identificacion, String nombres, String apellidos, byte[] foto, int curso, String grupo, int posFila, int posColumna) {
+        this.identificacion = identificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.foto = foto;
+        this.curso = curso;
+        this.grupo = grupo;
+        this.posFila = posFila;
+        this.posColumna = posColumna;
+    }
+
     public int getIdentificacion() {
         return identificacion;
     }
