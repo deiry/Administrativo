@@ -48,6 +48,13 @@ public class AgregarEstudiantes extends AppCompatActivity {
                 ,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE_GALLERY);
             }
         });
+        returnbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(AgregarEstudiantes.this,PantallaProfesor.class);
+                startActivity(ingresar);
+            }
+        });
 
         addEst.setOnClickListener(new View.OnClickListener() {
             @Override

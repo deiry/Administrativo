@@ -68,9 +68,15 @@ public class ContratoEscuela {
         String MET_LISTMET_ID = "met_listmet_id";
         String MET_ID_GPEST_ID = "met_id_gpest_id";
         String MET_FECHA_INICIO = "met_fecha_inicio";
-        String MET_FECHA_CUMPLIMIENTO = "met_fecha_cumplimiento";
         String MET_DURACION = "met_duracion";
+
+    }
+
+    interface ColumnasCumplimientoMetas{
+        String CUMPLIMIENTO_ID = "cumplimiento_id";
+        String MET_FECHA = "met_fecha";
         String MET_ESTADO = "met_estado";
+        String MET_ID = "met_id";
     }
 
     interface ColumnasGrupoEstudiantes{
@@ -150,6 +156,10 @@ public class ContratoEscuela {
     }
 
     public static class ListaGrupoEstudiantes implements ColumnasListaGrupoEstudiantes{
+
+    }
+
+    public static class CumplimientoMetas implements ColumnasCumplimientoMetas{
 
     }
 
