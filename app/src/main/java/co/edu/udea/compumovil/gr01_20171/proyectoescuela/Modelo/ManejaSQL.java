@@ -30,17 +30,18 @@ public class ManejaSQL extends SQLiteOpenHelper {
         String TBL_SUBCATEGORIAS = "tbl_subcategorias";
         String TBL_CATEGORIAS = "tbl_categorias";
         String TBL_ASISTENCIA = "tbl_asistencia";
-        String TBL_META = "tbl_meta";
+        String TBL_METAS = "tbl_meta";
         String TBL_LISTA_METAS = "tbl_lista_metas";
-        String TBL_GRUPOS_LISTA_ESTUDIANTES = "tbl_grupos_lista_estudiantes";
-        String TBL_GRUPOS_ESTUDIANTES = "tbl_grupos_estudiantes";
         String TBL_CUMPLIMIENTO_METAS = "tbl_cumplimiento_metas";
     }
 
     /**
      * CLASE QUE GENERA LAS REFERENCIAS DE LAS LLAVES FORANEAS
      * */
-   /* interface Referencias{
+   /**interface Referencias{
+
+        String ID_ESTUDIANTE = String.format("REFERENCES %s(%s)",
+                Tablas.TBL_ESTUDIANTE, ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
 
         String ID_CATEGORIAS = String.format("REFERENCES %s(%s)",
                 Tablas.TBL_CATEGORIAS, ContratoEscuela.Categorias.CAT_ID);
@@ -52,13 +53,10 @@ public class ManejaSQL extends SQLiteOpenHelper {
                 Tablas.TBL_SEGUIMIENTO, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Seguimiento.SEG_ID);
 
         String ID_LISTA_METAS = String.format("REFERENCES %s(%s)",
-                Tablas.TBL_LISTA_METAS, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas.LISTMET_ID);
+                Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID );
 
-        String ID_METAS = String.format("REFERENCES %s(%s)",
+        String ID_META = String.format("REFERENCES %s(%s)",
                 Tablas.TBL_META, ContratoEscuela.Metas.MET_ID);
-
-        String ID_GRUPOS_ESTUDIANTES = String.format("REFERENCES %s(%s)",
-                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.GrupoEstudiantes.GPEST_ID);
 
         String ID_MATERIAS = String.format("REFERENCES %s(%s)",
                 Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID);
@@ -111,34 +109,29 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //LISTAMETAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50))",
+                        "%s VARCHAR(50)),%s BOOLEAN",
                 Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID,
-                ContratoEscuela.ListaMetas.LISTMET_NOMBRE));
+                ContratoEscuela.ListaMetas.LISTMET_NOMBRE, ContratoEscuela.ListaMetas.MET_TIPO));
 
-        //GRUPOSESTUDIANTES
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50))",
-                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.GrupoEstudiantes.GPEST_ID,
-                ContratoEscuela.GrupoEstudiantes.GPEST_NOMBRE));
-
-        //METAS**
+        //METAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
                         "%s INTEGER,%s INTEGER,%s DATE,%s INTEGER )",
-                Tablas.TBL_META, ContratoEscuela.Metas.MET_ID, ContratoEscuela.Metas.MET_LISTMET_ID
-                , ContratoEscuela.Metas.MET_ID_GPEST_ID, ContratoEscuela.Metas.MET_FECHA_INICIO,
+                Tablas.TBL_METAS, ContratoEscuela.Metas.MET_ID, ContratoEscuela.Metas.EST_ID
+                , ContratoEscuela.Metas.LISTMETA_ID, ContratoEscuela.Metas.MET_FECHA_INICIO,
                 ContratoEscuela.Metas.MET_DURACION));
+
+        //CUMPLIMIENTOMETAS
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                        "%s INTEGER,%s DATE,%s BOOLEAN)",
+                Tablas.TBL_CUMPLIMIENTO_METAS,ContratoEscuela.ColumnasCumplimientoMetas.CUMPLIMIENTO_ID,
+                ContratoEscuela.ColumnasCumplimientoMetas.MET_ID,
+                ContratoEscuela.CumplimientoMetas.MET_FECHA, ContratoEscuela.ColumnasCumplimientoMetas.MET_ESTADO));
 
         //ASISTENCIA
         db.execSQL(String.format("CREATE TABLE %s ( %s DATE ," +
                         "%s INTEGER, %s VARCHAR(20) )",
                 Tablas.TBL_ASISTENCIA, ContratoEscuela.Asistencia.AST_FECHA, ContratoEscuela.Asistencia.AST_EST_ID,
                 ContratoEscuela.Asistencia.AST_ASISTENCIA));
-
-        //GRUPOSLISTAESTUDIANTES
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER  ," +
-                        "%s INTEGER)",
-                Tablas.TBL_GRUPOS_LISTA_ESTUDIANTES, ContratoEscuela.ListaGrupoEstudiantes.GPELISTEST_EST_IDENTIFICACION,
-                ContratoEscuela.ListaGrupoEstudiantes.GPLISTEST_GPEST_ID));
 
         //MATERIAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -162,12 +155,11 @@ public class ManejaSQL extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_CATEGORIAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_ESTUDIANTE);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPO);
-        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPOS_ESTUDIANTES);
-        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPOS_LISTA_ESTUDIANTES);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_LISTA_METAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_METAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_CUMPLIMIENTO_METAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS_ESTUDIANTE);
-        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_META);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SEGUIMIENTO);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SUBCATEGORIAS);
 
