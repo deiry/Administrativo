@@ -31,6 +31,7 @@ public class DialogAgregarGrupos extends AppCompatActivity {
             }
         });
 
+
         guardarGp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
