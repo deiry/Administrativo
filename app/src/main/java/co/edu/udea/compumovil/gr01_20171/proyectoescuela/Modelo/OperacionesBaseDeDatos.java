@@ -193,7 +193,7 @@ public final class OperacionesBaseDeDatos {
         ArrayList<Grupo> grupoAL = new ArrayList<>();
         if(grupos.moveToFirst()){
             do{
-                grupo = new Grupo(grupos.getInt(1),grupos.getString(2));
+                grupo = new Grupo(grupos.getInt(0),grupos.getString(1));
                 grupoAL.add(grupo);
             }while(grupos.moveToNext());
         }
