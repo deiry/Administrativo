@@ -122,6 +122,7 @@ public final class OperacionesBaseDeDatos {
      * */
     public void insertarTablaListaDeMetas(ListaMetas listaMetas){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String id = ContratoEscuela.ListaMetas.generarIdListaMetas();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,listaMetas.getId());
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,listaMetas.getNombre());
