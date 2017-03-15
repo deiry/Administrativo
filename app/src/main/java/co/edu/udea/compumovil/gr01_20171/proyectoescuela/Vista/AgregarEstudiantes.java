@@ -83,7 +83,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
         Bitmap bitmap = ((BitmapDrawable)imgEst.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         //SI ALGO MALO SUCEDE CAMBIAR .PNG,100
-        bitmap.compress(Bitmap.CompressFormat.JPEG,0,stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }

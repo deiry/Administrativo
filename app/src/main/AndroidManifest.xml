@@ -31,8 +31,8 @@
         <activity android:name=".Vista.SegCogEstudiante" />
         <activity android:name=".Vista.PantallaConfiguracion" />
         <activity android:name=".Vista.PantallaProfesor" />
-        <activity android:name=".Vista.SegCogEstudiante" />
-        <activity android:name=".Vista.DialogAgregarGrupos"></activity>
+        <activity android:name=".Vista.DialogAgregarGrupos" />
+        <activity android:name=".Vista.ListarEstudiantes"></activity>
     </application>
 
 </manifest>
