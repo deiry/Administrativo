@@ -23,5 +23,13 @@ public class PantallaConfiguracion extends AppCompatActivity {
                 startActivity(vistaProfe);
             }
         });
+        Button prueba = (Button) findViewById(R.id.pruebita);
+        prueba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent vistaPrueba = new Intent(PantallaConfiguracion.this,ListarEstudiantes.class);
+                startActivity(vistaPrueba);
+            }
+        });
     }
 }

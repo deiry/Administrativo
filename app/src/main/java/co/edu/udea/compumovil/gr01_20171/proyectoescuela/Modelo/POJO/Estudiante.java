@@ -29,6 +29,15 @@ public class Estudiante {
         this.posColumna = posColumna;
     }
 
+    public Estudiante(int identificacion, String nombres, String apellidos, byte[] foto, int curso, String grupo) {
+        this.identificacion = identificacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.foto = foto;
+        this.curso = curso;
+        this.grupo = grupo;
+    }
+
     public int getIdentificacion() {
         return identificacion;
     }

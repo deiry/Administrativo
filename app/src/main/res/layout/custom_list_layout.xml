@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imgEst"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"        
+/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Estudiante"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/txtApellido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellido Estudiante"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/txtIde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Identificación"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/eliminarEst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="eliminar estudiante"/>
+        <Button
+            android:id="@+id/modEst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="modificar estudiante" />
+    </LinearLayout>
+
+</LinearLayout>
+
