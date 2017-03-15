@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.sql.SQLInput;
 import java.text.DateFormat;
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public final class OperacionesBaseDeDatos {
     public void insertarEstudiante(co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante estudiante ){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Estudiantes.EST_IDENTIFICACION, Integer.toString(estudiante.getIdentificacion()));
+        valores.put(ContratoEscuela.Estudiantes.EST_IDENTIFICACION,estudiante.getIdentificacion());
         valores.put(ContratoEscuela.Estudiantes.EST_NOMBRES,estudiante.getNombres());
         valores.put(ContratoEscuela.Estudiantes.EST_APELLIDOS,estudiante.getApellidos());
         valores.put(ContratoEscuela.Estudiantes.EST_FOTO,estudiante.getFoto());
@@ -164,17 +165,23 @@ public final class OperacionesBaseDeDatos {
     }
 
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo){
-        String consulta = String.format("SELECT FROM tbl_estudiantes WHERE (curso = %s AND grupo= %s)",grupo.getCurso(),grupo.getGrupo());
+        String consulta;
+        if(grupo != null){
+        consulta = String.format("SELECT FROM tbl_estudiantes WHERE (curso = %s AND grupo= %s)",grupo.getCurso(),grupo.getGrupo());
+        }else{
+         consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
+        }
         Cursor estudiantes = obtenerDataDB(consulta);
+        estudiantes.getCount();
         Estudiante estudiante;
         ArrayList<Estudiante> estudiantesAL = new ArrayList<>();
-        if(estudiantes.moveToFirst()){
-            do{
-                estudiante = new Estudiante(estudiantes.getInt(1),estudiantes.getString(2),estudiantes.getString(3),
-                        estudiantes.getBlob(4),estudiantes.getInt(5),estudiantes.getString(6),estudiantes.getInt(7),
-                        estudiantes.getInt(8));
-                estudiantesAL.add(estudiante);
-            }while(estudiantes.moveToNext());
+        estudiantesAL.clear();
+        while (estudiantes.moveToNext()){
+            estudiante = new Estudiante(estudiantes.getInt(0),estudiantes.getString(1),estudiantes.getString(2),
+                    estudiantes.getBlob(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
+                    estudiantes.getInt(7));
+            estudiantesAL.add(estudiante);
+
         }
         return estudiantesAL;
     }
@@ -191,6 +198,14 @@ public final class OperacionesBaseDeDatos {
             }while(grupos.moveToNext());
         }
         return grupoAL;
+    }
+
+    public boolean borrarEstudiante(String idEstudiante){
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
+        String[] whereArgs = {idEstudiante};
+        int resultado = db.delete(ManejaSQL.Tablas.TBL_ESTUDIANTE, whereClause, whereArgs);
+        return resultado > 0;
     }
 
 
