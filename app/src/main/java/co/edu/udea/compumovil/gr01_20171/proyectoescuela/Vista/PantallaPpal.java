@@ -21,22 +21,14 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        setContentView(R.layout.activity_pantalla_ppal);
-
-
-        setContentView(R.layout.activity_pantalla_ppal);
-
         setContentView(R.layout.activity_pantalla_ppal);
 
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
-        Button asistencia = (Button)findViewById(R.id.btn_asistencia);
+        Button asistencia = (Button) findViewById(R.id.btn_asistencia);
         asistencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
+                Intent ingresar = new Intent(PantallaPpal.this, PantallaConfiguracion.class);
                 startActivity(ingresar);
             }
         });
@@ -67,10 +59,7 @@ public class PantallaPpal extends AppCompatActivity {
     }
 
 
-
-
-
-    }
+}
 
 
 
