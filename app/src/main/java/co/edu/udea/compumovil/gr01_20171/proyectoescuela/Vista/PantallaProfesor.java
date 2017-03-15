@@ -115,8 +115,9 @@ public class PantallaProfesor extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent ingresar = new Intent(PantallaProfesor.this,AgregarEstudiantes.class);
-                ingresar.putExtra("GRADO",grupos.get(which).getCurso());
-                ingresar.putExtra("GRUPO",grupos.get(which).getGrupo());
+                /*ingresar.putExtra("GRADO",grupos.get(which).getCurso());
+                ingresar.putExtra("GRUPO",grupos.get(which).getGrupo());*/
+                ingresar.putExtra("GRUPO",grupos.get(which));
                 startActivity(ingresar);
             }
         });

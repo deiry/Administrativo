@@ -71,7 +71,9 @@ public class AgregarEstudiantes extends AppCompatActivity {
                     bundle = intent.getExtras();
                     //En caso de tener un grupo
                     if(bundle != null){
-                        grupo = new Grupo((int) bundle.get("GRADO"),(String) bundle.get("GRUPO"));
+                        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+
+//                        grupo = new Grupo((int) bundle.get("GRADO"),(String) bundle.get("GRUPO"));
 
                         estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
                                 nombreEstudiante.getText().toString(),apellidoEstudiante.getText().toString(),

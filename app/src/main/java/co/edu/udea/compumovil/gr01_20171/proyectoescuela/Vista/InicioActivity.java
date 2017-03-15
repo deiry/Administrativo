@@ -66,8 +66,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         builder.setTitle("Grupos actuales").setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                intent.putExtra("GRUPO",grupos.get(which).getGrupo());
-                intent.putExtra("GRADO",grupos.get(which).getCurso());
+                intent.putExtra("GRUPO",grupos.get(which));
                 startActivity(intent);
             }
         });
