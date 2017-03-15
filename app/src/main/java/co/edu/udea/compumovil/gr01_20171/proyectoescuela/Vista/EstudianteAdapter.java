@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.Collection;
 public class EstudianteAdapter extends BaseAdapter
 {
     private Context context;
-    //private ArrayList<Estudiante>;
+    private ArrayList<Estudiante> estudiantes;
 
     /*variable temporales*/
     private String[] nombres;
@@ -37,26 +37,32 @@ public class EstudianteAdapter extends BaseAdapter
      * @param apellidos
      */
 
-    //public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
-    public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
+    public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
+    {
+    //public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
         this.context = context;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
+        this.estudiantes = estudiantes;
+        /*this.nombres = nombres;
+        this.apellidos = apellidos;*/
     }
 
     @Override
-    public int getCount() {
-        return nombres.length;
+    public int getCount()
+    {
+        //return nombres.length;
+        return estudiantes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return nombres[position];
+        //return nombres[position];
+        return estudiantes.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return nombres[position].hashCode();
+        //return nombres[position].hashCode();
+        return ((long) estudiantes.get(position).getIdentificacion());
     }
 
     @Override
@@ -71,8 +77,11 @@ public class EstudianteAdapter extends BaseAdapter
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_item_estudiante_nombre);
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
 
-        tvNombre.setText(this.nombres[position]);
-        tvApellido.setText(this.apellidos[position]);
+       //tvNombre.setText(this.nombres[position]);
+        //tvApellido.setText(this.apellidos[position]);
+
+        tvNombre.setText(this.estudiantes.get(position).getNombres());
+        tvApellido.setText(this.estudiantes.get(position).getApellidos());
 
         return convertView;
     }
