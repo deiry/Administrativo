@@ -23,22 +23,23 @@
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
         android:layout_alignBaseline="@+id/textMateria"
         android:layout_alignBottom="@+id/textMateria"
-        android:layout_toRightOf="@+id/textMateria" />
+        android:layout_toRightOf="@+id/textMateria"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btn_seleccionar_grupos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:text="Seleccionar grupos"
-        android:layout_below="@+id/textView15"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4" />
+        android:layout_alignBaseline="@+id/editText4"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp" />
 
     <TextView
         android:id="@+id/textView15"
@@ -50,16 +51,27 @@
         android:layout_marginLeft="11dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="8dp"
-        android:text="A continuación seleecione los grupos relacionados con la materia:"
+        android:text="A continuación seleccione los grupos relacionados con la materia:"
         android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/text_mostrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_seleccionar_grupos"
-        android:layout_marginTop="14dp"
-        android:layout_toStartOf="@+id/btn_seleccionar_grupos"
-        android:text="TextView" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/relativeLayout3">
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lista_grupos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15"
+        android:layout_alignTop="@+id/relativeLayout3"
+        android:layout_marginTop="11dp" />
 
 </RelativeLayout>

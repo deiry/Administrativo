@@ -121,6 +121,7 @@ public final class OperacionesBaseDeDatos {
      * */
     public void insertarTablaListaDeMetas(ListaMetas listaMetas){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String id = ContratoEscuela.ListaMetas.generarIdListaMetas();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,listaMetas.getId());
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,listaMetas.getNombre());
@@ -186,7 +187,7 @@ public final class OperacionesBaseDeDatos {
         ArrayList<Grupo> grupoAL = new ArrayList<>();
         if(grupos.moveToFirst()){
             do{
-                grupo = new Grupo(grupos.getInt(1),grupos.getString(2));
+                grupo = new Grupo(grupos.getInt(0),grupos.getString(1));
                 grupoAL.add(grupo);
             }while(grupos.moveToNext());
         }

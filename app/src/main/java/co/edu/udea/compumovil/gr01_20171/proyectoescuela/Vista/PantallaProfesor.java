@@ -32,7 +32,8 @@ public class PantallaProfesor extends AppCompatActivity {
     EditText grado ;
     EditText ngrupo;
 
-    ArrayList<String> grupos = new ArrayList<>();
+    ArrayList<String> gruposString = new ArrayList<>();
+    ArrayList<Grupo> grupos = new ArrayList<>();
 
 
     @Override
@@ -65,9 +66,8 @@ public class PantallaProfesor extends AppCompatActivity {
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
-       // grupos=toGrupos(datos.obtenerGruposDB());
-            grupos.add("2-A");
-            grupos.add("3-B");
+
+
 
         //Funcionalidad del botón para agregar grupo.
         FloatingActionButton mostrarDialogGrupo = (FloatingActionButton) findViewById(R.id.btn_agregarGrupo);
@@ -83,8 +83,9 @@ public class PantallaProfesor extends AppCompatActivity {
         subirEstudiantes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog dialog = listarGrupos(grupos);
+                grupos= datos.obtenerGruposDB();
+                gruposString=convertirGrupos(grupos);
+                AlertDialog dialog = listarGrupos(gruposString);
                 dialog.show();
             }
         });
@@ -93,12 +94,9 @@ public class PantallaProfesor extends AppCompatActivity {
         mostrarDialogMateria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder mtBuilder = new AlertDialog.Builder(PantallaProfesor.this);
-                View mtView = getLayoutInflater().inflate(R.layout.activity_dialog_agregar_materia, null);
-                mtBuilder.setView(mtView);
-                AlertDialog dialogo = mtBuilder.create();
-                dialogo.show();
 
+                Intent ingresar = new Intent(PantallaProfesor.this,DialogAgregarMateria.class);
+                startActivity(ingresar);
 
             }
         });
@@ -117,6 +115,8 @@ public class PantallaProfesor extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent ingresar = new Intent(PantallaProfesor.this,AgregarEstudiantes.class);
+                ingresar.putExtra("GRADO",grupos.get(which).getCurso());
+                ingresar.putExtra("GRUPO",grupos.get(which).getGrupo());
                 startActivity(ingresar);
             }
         });
@@ -124,7 +124,7 @@ public class PantallaProfesor extends AppCompatActivity {
         return builder.create();
     }
 
-    public ArrayList<String> toGrupos (ArrayList<Grupo> a){
+    public ArrayList<String> convertirGrupos (ArrayList<Grupo> a){
         ArrayList<String> gruposs = new ArrayList<>();
         Grupo aux;
         for (int i = 0; i < a.size(); i++){
