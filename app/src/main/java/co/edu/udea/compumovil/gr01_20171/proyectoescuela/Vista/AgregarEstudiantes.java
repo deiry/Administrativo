@@ -41,6 +41,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
         init();
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+
         addFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
