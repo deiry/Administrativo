@@ -5,6 +5,7 @@
     <color name="colorAccent">#ff4081</color>
 
     <color name="titulo_categoria_cognitivo">#ffffff</color>
+    <color name="transparente">#00fefefe</color>
 
 
 </resources>

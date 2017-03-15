@@ -24,6 +24,7 @@ import java.io.InputStream;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class AgregarEstudiantes extends AppCompatActivity {
@@ -32,6 +33,10 @@ public class AgregarEstudiantes extends AppCompatActivity {
     Button returnbtn, addEst, addFoto;
     ImageView imgEst;
     OperacionesBaseDeDatos datos;
+    Grupo grupo;
+    Estudiante estudiante;
+    Intent intent;
+    Bundle bundle;
     final int REQUEST_CODE_GALLERY = 999;
 
     @Override
@@ -41,6 +46,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
         init();
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+
         addFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +67,22 @@ public class AgregarEstudiantes extends AppCompatActivity {
             public void onClick(View v) {
                 try{
                     datos.getDb().beginTransaction();
-                    Estudiante estudiante = new Estudiante(nombreEstudiante.getText().toString(),apellidoEstudiante.getText().toString(),
-                    imageViewToByte(imgEst),Integer.parseInt(idEstudiante.getText().toString()));
+                    intent = getIntent();
+                    bundle = intent.getExtras();
+                    //En caso de tener un grupo
+                    if(bundle != null){
+                        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+
+//                        grupo = new Grupo((int) bundle.get("GRADO"),(String) bundle.get("GRUPO"));
+
+                        estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
+                                nombreEstudiante.getText().toString(),apellidoEstudiante.getText().toString(),
+                                imageViewToByte(imgEst),grupo.getCurso(),grupo.getGrupo());
+                    }else{
+                        estudiante = new Estudiante(nombreEstudiante.getText().toString(),
+                                apellidoEstudiante.getText().toString(),
+                                imageViewToByte(imgEst),Integer.parseInt(idEstudiante.getText().toString()));
+                    }
                     datos.insertarEstudiante(estudiante);
                     datos.getDb().setTransactionSuccessful();
                     Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
@@ -82,7 +102,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
         Bitmap bitmap = ((BitmapDrawable)imgEst.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         //SI ALGO MALO SUCEDE CAMBIAR .PNG,100
-        bitmap.compress(Bitmap.CompressFormat.JPEG,0,stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }

@@ -1,6 +1,8 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO;
 
-public class Grupo {
+import java.io.Serializable;
+
+public class Grupo implements Serializable{
     private int curso;
     private String grupo;
 
