@@ -22,12 +22,15 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 
         setContentView(R.layout.activity_pantalla_ppal);
 
 
         setContentView(R.layout.activity_pantalla_ppal);
 
+=======
+>>>>>>> refs/remotes/origin/master
         setContentView(R.layout.activity_pantalla_ppal);
 
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
@@ -40,6 +43,35 @@ public class PantallaPpal extends AppCompatActivity {
             }
         });
     }
+
+<<<<<<< HEAD
+}
+=======
+    public void ClckIrSeguimientoCognitivo(View view)
+    {
+        Intent intent = new Intent(this,SeguimientoCognitivo.class);
+        startActivity(intent);
+    }
+
+    public void ClckIrSeguimientoEtico(View view)
+    {
+        //se crea la intencion
+        //DE LA VISTA SE ASIGNA EL ONCLICK
+    }
+
+    public void ClckIrAsistencia(View view)
+    {
+        //se crea la intencion
+//DE LA VISTA SE ASIGNA EL ONCLICK
+    }
+
+    public void ClckIrMetas(View view)
+    {
+        //se crea la intencion
+//DE LA VISTA SE ASIGNA EL ONCLICK
+    }
+>>>>>>> refs/remotes/origin/master
+
 
 }
 
