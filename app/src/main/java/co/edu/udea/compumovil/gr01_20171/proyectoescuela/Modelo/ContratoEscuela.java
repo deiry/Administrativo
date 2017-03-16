@@ -61,6 +61,7 @@ public class ContratoEscuela {
     interface ColumnasCategorias{
         String CAT_ID = "cat_id";
         String CAT_NOMBRE = "cat_nombre";
+        String CAT_TIPO = "cat_tipo";
     }
 
     interface ColumnasMetas{

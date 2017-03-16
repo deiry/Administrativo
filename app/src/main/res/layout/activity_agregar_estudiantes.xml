@@ -33,8 +33,13 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:ems="10"
+<<<<<<< HEAD
                 android:inputType="textPersonName"
                 android:hint="Identificacion"
+=======
+                android:hint="Identificación"
+                android:inputType="textCapWords|textPersonName"
+>>>>>>> cognitivo
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -52,8 +57,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+<<<<<<< HEAD
                 android:inputType="textPersonName"
                 android:hint="Apellido"
+=======
+                android:hint="Apellido"
+                android:inputType="textCapWords|textPersonName"
+>>>>>>> cognitivo
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -72,8 +82,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:ems="10"
+<<<<<<< HEAD
                 android:inputType="textPersonName"
                 android:hint="Nombre"
+=======
+                android:hint="Nombre"
+                android:inputType="textCapWords|textPersonName"
+>>>>>>> cognitivo
                 android:textSize="14sp" />
 
         </RelativeLayout>

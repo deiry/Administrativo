@@ -1,6 +1,8 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO;
 
-public class Estudiante {
+import java.io.Serializable;
+
+public class Estudiante implements Serializable{
     private int identificacion;
     private String nombres;
     private String apellidos;
