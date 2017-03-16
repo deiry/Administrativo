@@ -59,6 +59,11 @@ public class AgregarEstudiantes extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ingresar = new Intent(AgregarEstudiantes.this,PantallaProfesor.class);
                 startActivity(ingresar);
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
             }
         });
 
@@ -69,20 +74,10 @@ public class AgregarEstudiantes extends AppCompatActivity {
                     datos.getDb().beginTransaction();
                     intent = getIntent();
                     bundle = intent.getExtras();
-                    //En caso de tener un grupo
-                    if(bundle != null){
-                        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
-
-//                        grupo = new Grupo((int) bundle.get("GRADO"),(String) bundle.get("GRUPO"));
-
-                        estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
+                    grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+                    estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
                                 nombreEstudiante.getText().toString(),apellidoEstudiante.getText().toString(),
                                 imageViewToByte(imgEst),grupo.getCurso(),grupo.getGrupo());
-                    }else{
-                        estudiante = new Estudiante(nombreEstudiante.getText().toString(),
-                                apellidoEstudiante.getText().toString(),
-                                imageViewToByte(imgEst),Integer.parseInt(idEstudiante.getText().toString()));
-                    }
                     datos.insertarEstudiante(estudiante);
                     datos.getDb().setTransactionSuccessful();
                     Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
