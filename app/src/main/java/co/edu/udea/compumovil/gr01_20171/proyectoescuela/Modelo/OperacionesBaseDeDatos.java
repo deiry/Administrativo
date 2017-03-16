@@ -167,28 +167,26 @@ public final class OperacionesBaseDeDatos {
 
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo){
         String consulta;
-        if(grupo != null){
         consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ESTUDIANTE
                 ,ManejaSQL.Tablas.TBL_ESTUDIANTE,
                 ContratoEscuela.Estudiantes.EST_GRP_CURSO,grupo.getCurso(),
                 ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo());
-        }else{
-         consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
-        }
         Cursor estudiantes = obtenerDataDB(consulta);
+
         estudiantes.getCount();
         Estudiante estudiante;
         ArrayList<Estudiante> estudiantesAL = new ArrayList<>();
         estudiantesAL.clear();
-        while (estudiantes.moveToNext()){
+        if(estudiantes.moveToFirst()){
+            do{
             estudiante = new Estudiante(estudiantes.getInt(0),estudiantes.getString(1),estudiantes.getString(2),
                     estudiantes.getBlob(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
                     estudiantes.getInt(7));
             estudiantesAL.add(estudiante);
-
+            }while(estudiantes.moveToNext());
         }
-        return estudiantesAL;
-    }
+          return estudiantesAL;
+        }
 
     public ArrayList<Grupo> obtenerGruposDB(){
         String consulta = "SELECT * FROM tbl_grupo";
