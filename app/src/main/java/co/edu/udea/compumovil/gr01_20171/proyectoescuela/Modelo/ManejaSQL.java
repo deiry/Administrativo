@@ -1,10 +1,14 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.provider.BaseColumns;
+
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 /**
  * CLASE ENCARGA DE LA CREACIÓN DE LA DB
@@ -154,7 +158,39 @@ public class ManejaSQL extends SQLiteOpenHelper {
                 Tablas.TBL_MATERIAS_ESTUDIANTE, ContratoEscuela.MateriaEstudiante.MEST_MTA_ID,
                 ContratoEscuela.MateriaEstudiante.MEST_EST_ID));
 
-
+        /**
+        *INSERTANDO CATEGORIAS DE COGNITIVO
+        */
+        //APLICAR
+        ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.aplicar));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+        //ANALIZAR
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.analizar));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+        //COMPRENDER
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.comprender));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+        //CREAR
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.crear));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+        //RECORDAR
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.recordar));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+        //EVALUAR
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.evaluar));
+        valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
+        db.insert(Tablas.TBL_CATEGORIAS,null,valores);
     }
 
     @Override

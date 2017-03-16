@@ -83,7 +83,7 @@ public final class OperacionesBaseDeDatos {
             valores.put(ContratoEscuela.Categorias.CAT_TIPO,categoria.getTipo());
             //db.insertOrThrow(ManejaSQL.Tablas.TBL_CATEGORIAS, null, valores);
             long l = db.insert(ManejaSQL.Tablas.TBL_CATEGORIAS,null,valores);
-
+            long d = l;
         }
 
 
@@ -271,7 +271,9 @@ public final class OperacionesBaseDeDatos {
 
     public Categoria obtenerCategoria(int tipo, String nombre) {
         String consulta;
+
         consulta = String.format("SELECT * FROM %s WHERE (%s = %s AND %s = '%s')",
+
                 ManejaSQL.Tablas.TBL_CATEGORIAS,
                 ContratoEscuela.Categorias.CAT_TIPO,
                 tipo,
@@ -290,8 +292,32 @@ public final class OperacionesBaseDeDatos {
             categoria = null;
         }
 
-
         return categoria;
+    }
+
+    public ArrayList<Categoria> obtenerCategorias() {
+        String consulta;
+        consulta = String.format("SELECT * FROM %s",
+
+                ManejaSQL.Tablas.TBL_CATEGORIAS);
+
+        Cursor cursor = obtenerDataDB(consulta);
+
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount();i++)
+        {
+            Categoria categoria = new Categoria(cursor.getString(1),cursor.getInt(2),cursor.getInt(0));
+            categorias.add(categoria);
+            if (!cursor.isLast())
+            {
+                cursor.moveToNext();
+            }
+
+        }
+
+
+        return categorias;
     }
 
 

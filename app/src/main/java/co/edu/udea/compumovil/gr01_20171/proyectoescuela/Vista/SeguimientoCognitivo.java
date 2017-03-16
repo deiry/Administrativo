@@ -77,10 +77,13 @@ public class SeguimientoCognitivo extends Activity {
     }
 
     private void insertarCategoriasCognitivas() {
-        Categoria aplicar = new Categoria(getResources().getString(R.string.aplicar),1);
-        manager.insertarCategorias(aplicar);
+        //Categoria aplicar = new Categoria(getResources().getString(R.string.aplicar),1);
+        //manager.insertarCategorias(aplicar);
 
-        aplicar = manager.obtenerCategoria(1,getResources().getString(R.string.aplicar));
+        ArrayList<Categoria> categorias = manager.obtenerCategorias();
+
+        Categoria categoria = categorias.get(0);
+
     }
 
 }
