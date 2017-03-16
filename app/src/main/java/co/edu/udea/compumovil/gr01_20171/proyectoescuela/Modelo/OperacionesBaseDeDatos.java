@@ -168,7 +168,10 @@ public final class OperacionesBaseDeDatos {
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo){
         String consulta;
         if(grupo != null){
-        consulta = String.format("SELECT FROM tbl_estudiantes WHERE (curso = %s AND grupo= %s)",grupo.getCurso(),grupo.getGrupo());
+        consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ESTUDIANTE
+                ,ManejaSQL.Tablas.TBL_ESTUDIANTE,
+                ContratoEscuela.Estudiantes.EST_GRP_CURSO,grupo.getCurso(),
+                ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo());
         }else{
          consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
         }
