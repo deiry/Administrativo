@@ -91,9 +91,11 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //CATEGORIA
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50))",
-                Tablas.TBL_CATEGORIAS, ContratoEscuela.Categorias.CAT_ID,
-                ContratoEscuela.Categorias.CAT_NOMBRE));
+                        "%s VARCHAR(50), %s INTEGER)",
+                Tablas.TBL_CATEGORIAS,
+                ContratoEscuela.Categorias.CAT_ID,
+                ContratoEscuela.Categorias.CAT_NOMBRE,
+                ContratoEscuela.Categorias.CAT_TIPO));
 
         //SUBCATEGORIAS**
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
