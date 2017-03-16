@@ -19,7 +19,7 @@ public class DialogAgregarGrupos extends AppCompatActivity {
     OperacionesBaseDeDatos datos;
     Button guardarGp,finalizar;
     EditText grado,ngrupo;
-    TextView txtMostrarGrupos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,42 +29,12 @@ public class DialogAgregarGrupos extends AppCompatActivity {
         finalizar=(Button)findViewById(R.id.btn_finalizar_grupos);
         grado = (EditText)findViewById(R.id.numGrado);
         ngrupo = (EditText)findViewById(R.id.idenGrupo);
-        txtMostrarGrupos = (TextView)findViewById(R.id.txt_mostrar_grupos);
 
-       // FloatingActionButton subirE = (FloatingActionButton)findViewById(R.id.btn_subirEstudiantes);
+
+
        getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
-
-
-        guardarGp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!grado.getText().toString().isEmpty() && !ngrupo.getText().toString().isEmpty()) {
-                try{
-                datos.getDb().beginTransaction();
-
-                Grupo grupo = new Grupo(Integer.parseInt(grado.getText().toString()),ngrupo.getText().toString());
-                    datos.insertarGrupo(grupo);
-                    datos.getDb().setTransactionSuccessful();
-                    Toast.makeText(getApplicationContext(),"Grupo agregado",Toast.LENGTH_SHORT).show();
-
-                }
-
-                catch(Exception e){e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Se ha producido un error",Toast.LENGTH_SHORT).show();}
-                finally{
-                    datos.getDb().endTransaction();
-
-                }
-
-            }else{
-                    Toast.makeText(getApplicationContext(),"Llene todos los campos",Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
 
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,26 +43,34 @@ public class DialogAgregarGrupos extends AppCompatActivity {
             }
         });
     }
-    public ArrayList<String> recuperarGrupos (ArrayList<Grupo> g){
-        String cadena="";
-        ArrayList<String> grupos = new ArrayList<>();
-        for(int i=0; i <= g.size();i++ ){
-            Grupo gp = g.get(i);
-            cadena = Integer.toString(gp.getCurso())+"-"+gp.getGrupo();
-            grupos.add(cadena);
+
+
+    public  void clickGuardarGrupo(View v){
+        if (!grado.getText().toString().isEmpty() && !ngrupo.getText().toString().isEmpty()) {
+            try{
+                datos.getDb().beginTransaction();
+
+                Grupo grupo = new Grupo(Integer.parseInt(grado.getText().toString()),ngrupo.getText().toString());
+                datos.insertarGrupo(grupo);
+                datos.getDb().setTransactionSuccessful();
+                Toast.makeText(getApplicationContext(),"Grupo agregado",Toast.LENGTH_SHORT).show();
+
+            }
+
+            catch(Exception e){e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Se ha producido un error",Toast.LENGTH_SHORT).show();}
+            finally{
+                datos.getDb().endTransaction();
+
+            }
+
+        }else{
+            Toast.makeText(getApplicationContext(),"Llene todos los campos",Toast.LENGTH_SHORT).show();
         }
-            return grupos;
+
     }
 
-    public void mostrarGrupos(){
-        ArrayList<String> grupos = recuperarGrupos(datos.obtenerGruposDB());
-        String items="";
-        for(int i=0; i <= grupos.size();i++ ){
-            String item = grupos.get(i);
-            items+=""+item+"\n";
-        }
-        Toast.makeText(getApplicationContext(),"tienes seleccionado \n"+items,Toast.LENGTH_LONG).show();
-    }
+
 
 
 }
