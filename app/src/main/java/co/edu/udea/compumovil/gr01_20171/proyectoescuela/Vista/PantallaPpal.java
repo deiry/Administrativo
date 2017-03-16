@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaSQL;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
@@ -21,8 +22,6 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
         setContentView(R.layout.activity_pantalla_ppal);
 
@@ -32,21 +31,17 @@ public class PantallaPpal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_ppal);
 
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
-        Button asistencia = (Button)findViewById(R.id.btn_asistencia);
+        Button asistencia = (Button) findViewById(R.id.btn_asistencia);
         asistencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaPpal.this,PantallaConfiguracion.class);
+                Intent ingresar = new Intent(PantallaPpal.this, PantallaConfiguracion.class);
                 startActivity(ingresar);
             }
         });
     }
 
-
-
-
-
-    }
+}
 
 
 
