@@ -2,6 +2,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
@@ -65,8 +68,12 @@ public class SegCogEstudiante extends Activity {
         setDataListView(lv_evaluar,datos);
 
         tv_nombre_apellido.setText(estudiante.getNombres()+" "+ estudiante.getApellidos());
-        byte[] bytes = estudiante.getFoto();
-        iv_foto.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
+        Uri uri = pathToUri(estudiante.getFoto());
+        if (!uri.equals(Uri.EMPTY)){
+            iv_foto.setImageURI(pathToUri(estudiante.getFoto()));
+        }else{
+            iv_foto.setImageResource(R.mipmap.ic_launcher);
+        }
     }
 
 
@@ -108,6 +115,15 @@ public class SegCogEstudiante extends Activity {
 
     }
 
+    private Uri pathToUri(String imgPath){
+        File imgFile = new File(imgPath);
+        if(imgFile.exists())
+        {
+            return Uri.fromFile(imgFile);
+
+        }
+        return Uri.EMPTY;
+    }
 
 
 }

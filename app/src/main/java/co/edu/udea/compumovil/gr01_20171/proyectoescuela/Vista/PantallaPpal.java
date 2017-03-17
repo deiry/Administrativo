@@ -1,6 +1,7 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,8 +24,10 @@ public class PantallaPpal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
+
 
         //obtener extra del grupo que esta seleccionado
         Intent intent = getIntent();
@@ -39,6 +42,7 @@ public class PantallaPpal extends AppCompatActivity {
                 startActivity(ingresar);
             }
         });
+
     }
 
     public void ClckIrSeguimientoCognitivo(View view)
@@ -54,10 +58,10 @@ public class PantallaPpal extends AppCompatActivity {
         //DE LA VISTA SE ASIGNA EL ONCLICK
     }
 
-    public void ClckIrAsistencia(View view)
+    public void ClickIrAsistencia(View view)
     {
-        //se crea la intencion
-//DE LA VISTA SE ASIGNA EL ONCLICK
+        Intent ingresar = new Intent(PantallaPpal.this, Asistencia.class);
+        startActivity(ingresar);
     }
 
     public void ClckIrMetas(View view)
