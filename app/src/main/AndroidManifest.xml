@@ -13,7 +13,13 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
 
-        <activity android:name=".Vista.PantallaPpal"></activity>
+        <activity android:name=".Vista.PantallaPpal">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
         <activity
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
@@ -24,6 +30,7 @@
         <activity android:name=".Vista.PantallaProfesor" />
         <activity android:name=".Vista.DialogAgregarGrupos" />
         <activity android:name=".Vista.ListarEstudiantes" />
+
         <activity android:name=".Vista.InicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +38,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Vista.Asistencia"></activity>
+        <activity android:name=".Vista.PrincipalMetas"></activity>
     </application>
 
 </manifest>

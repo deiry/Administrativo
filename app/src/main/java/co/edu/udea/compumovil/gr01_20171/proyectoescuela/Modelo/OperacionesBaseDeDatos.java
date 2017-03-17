@@ -111,7 +111,6 @@ public final class OperacionesBaseDeDatos {
         }
     }
 
-
     /**
      * Método para materias a la base de datos
      */
@@ -136,19 +135,13 @@ public final class OperacionesBaseDeDatos {
         db.insertOrThrow(ManejaSQL.Tablas.TBL_ASISTENCIA, null, valores);
     }
 
-    /**
-<<<<<<< HEAD
-     * Método para agregar una nueva meta a la lista de metas (tbl_lista_metas)
-     * */
-    public void agregarMeta(ListaMetas nuevaMeta){
-=======
-     * Método para inserta una meta en la lista de metas
+    /*
+     *Método para agregar una nueva meta a la lista de metas (tbl_lista_metas)
      */
-    public void insertarTablaListaDeMetas(ListaMetas listaMetas) {
->>>>>>> refs/remotes/origin/master
+    public void agregarMeta(ListaMetas nuevaMeta) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String id = ContratoEscuela.ListaMetas.generarIdListaMetas();
         ContentValues valores = new ContentValues();
-<<<<<<< HEAD
         valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,nuevaMeta.getId());
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,nuevaMeta.getNombre());
         valores.put(ContratoEscuela.ListaMetas.MET_TIPO, nuevaMeta.getTipo());
@@ -170,20 +163,9 @@ public final class OperacionesBaseDeDatos {
     }
 
     /**
-     *  Método para insertar seguimiento en la tabla de seguimiento
-     * */
-    public void insertarSeguimiento(Seguimiento seguimiento){
-=======
-        valores.put(ContratoEscuela.ListaMetas.LISTMET_ID, listaMetas.getId());
-        valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE, listaMetas.getNombre());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS, null, valores);
-    }
-
-    /**
      * Método para insertar seguimiento en la tabla de seguimiento
      */
     public void insertarSeguimiento(Seguimiento seguimiento) {
->>>>>>> refs/remotes/origin/master
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.Seguimiento.SEG_ID, seguimiento.getIdSeg());
@@ -196,29 +178,10 @@ public final class OperacionesBaseDeDatos {
     }
 
     /**
-<<<<<<< HEAD
-     *  Método para obtener datos de la base de datos es necesario pasar por parametro
-     *  la secuencia que indica que datos se deberían retornar.
-     * */
-    public Cursor obtenerDataDB(String sentence){
-=======
-     * Método para insertar un grupo de estudiantes en la tabla correspondiente
-     */
-
-    public void insertarGruposEstudiante(GrupoEstudiantes grupoEstudiantes) {
-        SQLiteDatabase db = baseDatos.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.GrupoEstudiantes.GPEST_ID, grupoEstudiantes.getId());
-        valores.put(ContratoEscuela.GrupoEstudiantes.GPEST_NOMBRE, grupoEstudiantes.getNombre());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
-    }
-
-    /**
      * Método para obtener datos de la base de datos es necesario pasar por parametro
      * la secuencia que indica que datos se deberían retornar.
      */
     public Cursor obtenerDataDB(String sentence) {
->>>>>>> refs/remotes/origin/master
         SQLiteDatabase db = baseDatos.getReadableDatabase();
         return db.rawQuery(sentence, null);
     }

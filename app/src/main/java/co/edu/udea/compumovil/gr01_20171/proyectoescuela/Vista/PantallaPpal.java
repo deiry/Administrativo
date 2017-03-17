@@ -17,13 +17,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
-<<<<<<< HEAD
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaSQL;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas;
-=======
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
->>>>>>> refs/remotes/origin/master
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
@@ -74,8 +71,8 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClckIrMetas(View view)
     {
-        //se crea la intencion
-//DE LA VISTA SE ASIGNA EL ONCLICK
+        Intent intencion = new Intent(this, PrincipalMetas.class);
+        startActivity(intencion);
     }
 }
 
