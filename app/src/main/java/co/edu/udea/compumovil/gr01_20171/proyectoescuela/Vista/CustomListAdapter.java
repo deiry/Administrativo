@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,10 +87,18 @@ public class CustomListAdapter extends ArrayAdapter<Estudiante> {
         TextView nombreEst;
         TextView apellidoEst;
         TextView idEst;
+        Uri uri = pathToUri(estudiante.getFoto());
         imageEst = (ImageView)convertView.findViewById(R.id.imgEst);
-        imageEst.setImageBitmap(byteToImageView(estudiante.getFoto()));
+
+        if (!uri.equals(Uri.EMPTY)){
+        imageEst.setImageURI(pathToUri(estudiante.getFoto()));
+        }else{
+            imageEst.setImageResource(R.mipmap.ic_launcher);
+        }
+
         nombreEst = (TextView)convertView.findViewById(R.id.txtNombre);
         nombreEst.setText(estudiante.getNombres());
+
         apellidoEst = (TextView)convertView.findViewById(R.id.txtApellido);
         apellidoEst.setText(estudiante.getApellidos());
         idEst = (TextView)convertView.findViewById(R.id.txtIde);
@@ -99,7 +109,13 @@ public class CustomListAdapter extends ArrayAdapter<Estudiante> {
         return convertView;
     }
 
-    private Bitmap byteToImageView(byte[] bytes){
-         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    private Uri pathToUri(String imgPath){
+        File imgFile = new File(imgPath);
+        if(imgFile.exists())
+        {
+            return Uri.fromFile(imgFile);
+
+        }
+        return Uri.EMPTY;
     }
 }

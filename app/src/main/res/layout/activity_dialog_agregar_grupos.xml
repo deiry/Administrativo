@@ -38,7 +38,8 @@
         android:layout_toEndOf="@+id/textView6"
         android:layout_toRightOf="@+id/textView6"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="number"
+        android:maxLength="2" />
 
     <EditText
         android:id="@+id/idenGrupo"
@@ -49,7 +50,8 @@
         android:layout_below="@+id/numGrado"
         android:layout_marginTop="21dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textCapSentences|textPersonName"
+        android:maxLength="1" />
 
     <Button
         android:id="@+id/btn_agregarGrupo"
@@ -61,6 +63,7 @@
         android:layout_marginStart="72dp"
         android:layout_toEndOf="@+id/numGrado"
         android:layout_toRightOf="@+id/numGrado"
+        android:onClick="clickGuardarGrupo"
         android:text="Agregar" />
 
     <Button

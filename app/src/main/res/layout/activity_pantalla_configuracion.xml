@@ -10,17 +10,17 @@
         android:id="@+id/pruebita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp" />
+        android:layout_marginTop="85dp"
+        android:text="Ver grupos" />
 
     <Button
         android:id="@+id/btn_ingreso_profe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="177dp"
-        android:text="Ingresar profesor"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="177dp"
+        android:text="Agregar elementos" />
 </RelativeLayout>
