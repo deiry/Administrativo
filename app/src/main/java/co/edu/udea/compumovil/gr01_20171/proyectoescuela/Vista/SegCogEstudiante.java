@@ -1,7 +1,8 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.app.Activity;
-import android.graphics.BitmapFactory;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.io.File;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
@@ -69,9 +71,12 @@ public class SegCogEstudiante extends Activity {
 
         tv_nombre_apellido.setText(estudiante.getNombres()+" "+ estudiante.getApellidos());
         Uri uri = pathToUri(estudiante.getFoto());
-        if (!uri.equals(Uri.EMPTY)){
+        if (!uri.equals(Uri.EMPTY))
+        {
             iv_foto.setImageURI(pathToUri(estudiante.getFoto()));
-        }else{
+        }
+        else
+        {
             iv_foto.setImageResource(R.mipmap.ic_launcher);
         }
     }
@@ -87,32 +92,33 @@ public class SegCogEstudiante extends Activity {
     /*eventos de agregar subcategoria*/
     public void clickAgregarSubAplicar(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.aplicar));
     }
+
 
     public void clickAgregarSubAnalizar(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.analizar));
     }
 
     public void clickAgregarSubComprender(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.comprender));
     }
 
     public void clickAgregarSubCrear(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.crear));
     }
 
     public void clickAgregarSubRecordar(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.recordar));
     }
 
     public void clickAgregarSubEvaluar(View view)
     {
-
+        OpenDialogSubCategorias(getResources().getString(R.string.evaluar));
     }
 
     private Uri pathToUri(String imgPath){
@@ -124,6 +130,27 @@ public class SegCogEstudiante extends Activity {
         }
         return Uri.EMPTY;
     }
+
+    /**
+     *
+     * @param nombreCategoria
+     */
+    private void OpenDialogSubCategorias(String nombreCategoria) {
+        //obtenemos el id de la categoria
+        Categoria categoria = manager.obtenerCategoria(1,nombreCategoria);
+        int id = categoria.getId();
+
+        //creamos los argumentos y le inyectamos el id de la categoria para enviarla al dialog
+        Bundle args = new Bundle();
+        args.putInt("idCategoria",id);
+        args.putString("titulo",nombreCategoria);
+
+        FragmentManager fm = getFragmentManager();
+        DialogFragment dialogFragment = new DialogSubCategoria();
+        dialogFragment.setArguments(args);
+        dialogFragment.show(fm,"dialogAplicar");
+    }
+
 
 
 }
