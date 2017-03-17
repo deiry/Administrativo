@@ -27,44 +27,32 @@ public class EstudianteAdapter extends BaseAdapter
     private Context context;
     private ArrayList<Estudiante> estudiantes;
 
-    /*variable temporales*/
-    private String[] nombres;
-    private String[] apellidos;
-    private String[] fotos;
 
     /**
-     * la idea es trabajar con una clase estudiante que ya tendria como atributos nombre apellido y
-     * fotos
+     * la idea es trabajar con una clase estudiante que ya tendria como atributos nombre apellido
+     * y  fotos
      * @param context
-     * @param nombres
-     * @param apellidos
+     * @param estudiantes Coleccion de estudiantes que se quieren listar en la cuadricula
      */
-
     public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
     {
-    //public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
         this.context = context;
         this.estudiantes = estudiantes;
-        /*this.nombres = nombres;
-        this.apellidos = apellidos;*/
     }
 
     @Override
     public int getCount()
     {
-        //return nombres.length;
         return estudiantes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        //return nombres[position];
         return estudiantes.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        //return nombres[position].hashCode();
         return ((long) estudiantes.get(position).getIdentificacion());
     }
 
@@ -81,15 +69,18 @@ public class EstudianteAdapter extends BaseAdapter
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
         ImageView ivFoto = (ImageView) convertView.findViewById(R.id.iv_item_estudiante_foto);
 
-       //tvNombre.setText(this.nombres[position]);
-        //tvApellido.setText(this.apellidos[position]);
         Estudiante estudiante = estudiantes.get(position);
         Uri uri = pathToUri(estudiante.getFoto());
-        if (!uri.equals(Uri.EMPTY)){
+
+        if (!uri.equals(Uri.EMPTY))
+        {
             ivFoto.setImageURI(pathToUri(estudiante.getFoto()));
-        }else{
+        }
+        else
+        {
             ivFoto.setImageResource(R.mipmap.ic_launcher);
         }
+
         tvNombre.setText(estudiante.getNombres());
         tvApellido.setText(estudiante.getApellidos());
 

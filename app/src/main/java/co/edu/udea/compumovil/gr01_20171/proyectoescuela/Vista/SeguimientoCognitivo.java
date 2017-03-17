@@ -2,6 +2,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,8 +30,11 @@ public class SeguimientoCognitivo extends Activity {
     private OperacionesBaseDeDatos manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
+
+
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
@@ -38,9 +42,7 @@ public class SeguimientoCognitivo extends Activity {
         getApplicationContext().deleteDatabase("pedidos.db");
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
-        estudiantes = manager.obtenerEstudiantesDB(grupo);
 
-        crearGridView();
         insertarCategoriasCognitivas();
     }
 
@@ -81,13 +83,20 @@ public class SeguimientoCognitivo extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        estudiantes = manager.obtenerEstudiantesDB(grupo);
+
+        crearGridView();
+        super.onResume();
+    }
+
     private void insertarCategoriasCognitivas() {
         //Categoria aplicar = new Categoria(getResources().getString(R.string.aplicar),1);
         //manager.insertarCategorias(aplicar);
 
         ArrayList<Categoria> categorias = manager.obtenerCategorias();
 
-        Categoria categoria = categorias.get(0);
 
     }
 
