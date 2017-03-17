@@ -31,14 +31,13 @@ public class SeguimientoCognitivo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
-<<<<<<< HEAD
+
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
-=======
         Grupo grupo = new Grupo(1,"A");
         getApplicationContext().deleteDatabase("pedidos.db");
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
->>>>>>> configuracion
+
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
         crearGridView();

@@ -179,63 +179,36 @@ public final class OperacionesBaseDeDatos {
 
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo) {
         String consulta;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         if(grupo != null){
-=======
->>>>>>> configuracion
+
         consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ESTUDIANTE
                 ,ManejaSQL.Tablas.TBL_ESTUDIANTE,
                 ContratoEscuela.Estudiantes.EST_GRP_CURSO,grupo.getCurso(),
                 ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo());
-<<<<<<< HEAD
+
         }else{
-         consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
-=======
-        if (grupo != null)
-        {
-            //consulta = "SELECT"
-            consulta = String.format("SELECT * FROM tbl_estudiante WHERE ("+
-                    ContratoEscuela.ColumnasEstudiante.EST_GRP_CURSO+" = %s AND "+
-                    ContratoEscuela.ColumnasEstudiante.EST_GRP_GRUPO+" = '%s')", grupo.getCurso(), grupo.getGrupo());
-        }
-        else
-        {
-            consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
->>>>>>> cognitivo
-        }
-=======
->>>>>>> configuracion
+         consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);}
+
         Cursor estudiantes = obtenerDataDB(consulta);
 
         estudiantes.getCount();
         Estudiante estudiante;
         ArrayList<Estudiante> estudiantesAL = new ArrayList<>();
         estudiantesAL.clear();
-<<<<<<< HEAD
-        while (estudiantes.moveToNext()) {
 
-            byte[] b = estudiantes.getBlob(3);
-            estudiante = new Estudiante(
-                    estudiantes.getInt(0),
-                    estudiantes.getString(1),
-                    estudiantes.getString(2),
-                    b,
-                    estudiantes.getInt(4),
-                    estudiantes.getString(5),
-                    estudiantes.getInt(6),
-=======
         if(estudiantes.moveToFirst()){
             do{
             estudiante = new Estudiante(estudiantes.getInt(0),estudiantes.getString(1),estudiantes.getString(2),
                     estudiantes.getString(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
->>>>>>> configuracion
+
                     estudiantes.getInt(7));
             estudiantesAL.add(estudiante);
             }while(estudiantes.moveToNext());
         }
           return estudiantesAL;
         }
+
 
     public ArrayList<Grupo> obtenerGruposDB() {
         String consulta = "SELECT * FROM tbl_grupo";
@@ -278,7 +251,7 @@ public final class OperacionesBaseDeDatos {
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getBlob(3),
+                    cursor.getString(3),
                     cursor.getInt(4),
                     cursor.getString(5),
                     cursor.getInt(6),

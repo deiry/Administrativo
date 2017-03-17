@@ -88,8 +88,8 @@ public class CustomListAdapter extends ArrayAdapter<Estudiante> {
         TextView apellidoEst;
         TextView idEst;
         Uri uri = pathToUri(estudiante.getFoto());
-
         imageEst = (ImageView)convertView.findViewById(R.id.imgEst);
+
         if (!uri.equals(Uri.EMPTY)){
         imageEst.setImageURI(pathToUri(estudiante.getFoto()));
         }else{

@@ -26,7 +26,7 @@ public class PantallaPpal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
 
-<<<<<<< HEAD
+
         //obtener extra del grupo que esta seleccionado
         Intent intent = getIntent();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
@@ -40,8 +40,7 @@ public class PantallaPpal extends AppCompatActivity {
                 startActivity(ingresar);
             }
         });
-=======
->>>>>>> configuracion
+
     }
 
     public void ClckIrSeguimientoCognitivo(View view)

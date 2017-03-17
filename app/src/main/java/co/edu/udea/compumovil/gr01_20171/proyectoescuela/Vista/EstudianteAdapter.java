@@ -3,6 +3,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -82,12 +84,25 @@ public class EstudianteAdapter extends BaseAdapter
        //tvNombre.setText(this.nombres[position]);
         //tvApellido.setText(this.apellidos[position]);
         Estudiante estudiante = estudiantes.get(position);
-        byte[] bytes = estudiante.getFoto();
-
+        Uri uri = pathToUri(estudiante.getFoto());
+        if (!uri.equals(Uri.EMPTY)){
+            ivFoto.setImageURI(pathToUri(estudiante.getFoto()));
+        }else{
+            ivFoto.setImageResource(R.mipmap.ic_launcher);
+        }
         tvNombre.setText(estudiante.getNombres());
         tvApellido.setText(estudiante.getApellidos());
-        ivFoto.setImageBitmap(BitmapFactory.decodeByteArray(bytes,0,bytes.length));
 
         return convertView;
+    }
+
+    private Uri pathToUri(String imgPath){
+        File imgFile = new File(imgPath);
+        if(imgFile.exists())
+        {
+            return Uri.fromFile(imgFile);
+
+        }
+        return Uri.EMPTY;
     }
 }
