@@ -129,7 +129,7 @@ public class ManejaSQL extends SQLiteOpenHelper {
                 ContratoEscuela.Metas.MET_DURACION));
 
         //ASISTENCIA
-        db.execSQL(String.format("CREATE TABLE %s ( %s DATE ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s VARCHAR(40) ," +
                         "%s INTEGER, %s VARCHAR(20) )",
                 Tablas.TBL_ASISTENCIA, ContratoEscuela.Asistencia.AST_FECHA, ContratoEscuela.Asistencia.AST_EST_ID,
                 ContratoEscuela.Asistencia.AST_ASISTENCIA));
