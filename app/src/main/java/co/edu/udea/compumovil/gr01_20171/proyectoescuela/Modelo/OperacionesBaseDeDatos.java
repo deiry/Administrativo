@@ -122,10 +122,10 @@ public final class OperacionesBaseDeDatos {
      * */
     public void agregarMeta(ListaMetas nuevaMeta){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
-        String id = ContratoEscuela.ListaMetas.generarIdListaMetas();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,nuevaMeta.getId());
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,nuevaMeta.getNombre());
+        valores.put(ContratoEscuela.ListaMetas.MET_TIPO, nuevaMeta.getTipo());
         db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS,null,valores);
     }
 
@@ -214,6 +214,20 @@ public final class OperacionesBaseDeDatos {
         return resultado > 0;
     }
 
+    // Probando Metodos
+    public ArrayList<ListaMetas> listarMetas(){
+        String consulta = "SELECT * FROM tbl_lista_metas";
+        Cursor cursor = obtenerDataDB(consulta);
+        ListaMetas meta;
+        ArrayList<ListaMetas> lista = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                meta = new ListaMetas(cursor.getInt(0),cursor.getString(1), cursor.getString(2));
+                lista.add(meta);
+            }while(cursor.moveToNext());
+        }
+        return lista;
+    }
 
     public SQLiteDatabase getDb() {
         return baseDatos.getWritableDatabase();

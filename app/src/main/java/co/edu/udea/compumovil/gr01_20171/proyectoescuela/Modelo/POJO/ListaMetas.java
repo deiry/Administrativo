@@ -3,7 +3,13 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO;
 public class ListaMetas {
     private int id;
     private String nombre;
-    private boolean tipo;
+    private String tipo;
+
+    public ListaMetas(int id, String nombre, String tipo){
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+    }
 
     public int getId() {
         return id;
@@ -21,11 +27,11 @@ public class ListaMetas {
         this.nombre = nombre;
     }
 
-    public boolean isTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(boolean tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

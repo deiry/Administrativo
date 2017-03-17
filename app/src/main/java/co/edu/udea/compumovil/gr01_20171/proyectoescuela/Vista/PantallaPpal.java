@@ -13,8 +13,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
+
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaSQL;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
@@ -22,15 +26,6 @@ public class PantallaPpal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-
-        setContentView(R.layout.activity_pantalla_ppal);
-
-
-        setContentView(R.layout.activity_pantalla_ppal);
-
-=======
->>>>>>> refs/remotes/origin/master
         setContentView(R.layout.activity_pantalla_ppal);
 
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
@@ -44,9 +39,6 @@ public class PantallaPpal extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-}
-=======
     public void ClckIrSeguimientoCognitivo(View view)
     {
         Intent intent = new Intent(this,SeguimientoCognitivo.class);
@@ -70,9 +62,6 @@ public class PantallaPpal extends AppCompatActivity {
         //se crea la intencion
 //DE LA VISTA SE ASIGNA EL ONCLICK
     }
->>>>>>> refs/remotes/origin/master
-
-
 }
 
 

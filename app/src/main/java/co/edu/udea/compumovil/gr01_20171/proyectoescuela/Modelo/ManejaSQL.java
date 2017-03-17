@@ -109,7 +109,7 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //LISTAMETAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50)),%s BOOLEAN",
+                        "%s VARCHAR(50)),%s VARCHAR (16) )",
                 Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID,
                 ContratoEscuela.ListaMetas.LISTMET_NOMBRE, ContratoEscuela.ListaMetas.MET_TIPO));
 
