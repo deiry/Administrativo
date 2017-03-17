@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,8 +19,12 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class Asistencia extends AppCompatActivity {
-    ArrayList<Estudiante> estudiantes;
-    private OperacionesBaseDeDatos manager;
+
+    private ArrayList<Estudiante> estudiantes;
+    private Grupo grupo;
+    private int[] contadores;
+    OperacionesBaseDeDatos manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +46,14 @@ public class Asistencia extends AppCompatActivity {
 
     private void CrearGridView() {
 
+        contadores = new int[estudiantes.size()];
+        for (int i = 0; i < contadores.length;i++)
+        {
+            contadores[i] = 0;
+        }
 
         final AsistenciaEstudianteAdapter adapte = new AsistenciaEstudianteAdapter(this,estudiantes);
 
-        //ArrayAdapter<String> adapter;
-
-        //adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,estudiantes);/**/
-        // adapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.item_estudiante,estudiantes);
 
         final GridView gridEstudiante = (GridView) findViewById(R.id.grid_view_ubicacion);
 
@@ -59,6 +65,28 @@ public class Asistencia extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Asistencia.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                contadores[position]++;
+                LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
+                switch (contadores[position])
+                {
+                    case 1:
+                    {
+                        ll.setBackground(getDrawable(R.color.colorAccent));
+                        break;
+                    }
+                    case 2:
+                    {
+                        ll.setBackground(getDrawable(R.drawable.yellow_color));
+                        break;
+                    }
+                    case 3:
+                    {
+                        ll.setBackground(getDrawable(R.color.transparente));
+                        contadores[position] = 0;
+                        break;
+                    }
+                }
+
 
 
 
