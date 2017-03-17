@@ -26,6 +26,7 @@ public class PantallaPpal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
 
+<<<<<<< HEAD
         //obtener extra del grupo que esta seleccionado
         Intent intent = getIntent();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
@@ -39,6 +40,8 @@ public class PantallaPpal extends AppCompatActivity {
                 startActivity(ingresar);
             }
         });
+=======
+>>>>>>> configuracion
     }
 
     public void ClckIrSeguimientoCognitivo(View view)
@@ -54,10 +57,10 @@ public class PantallaPpal extends AppCompatActivity {
         //DE LA VISTA SE ASIGNA EL ONCLICK
     }
 
-    public void ClckIrAsistencia(View view)
+    public void ClickIrAsistencia(View view)
     {
-        //se crea la intencion
-//DE LA VISTA SE ASIGNA EL ONCLICK
+        Intent ingresar = new Intent(PantallaPpal.this, Asistencia.class);
+        startActivity(ingresar);
     }
 
     public void ClckIrMetas(View view)

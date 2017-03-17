@@ -180,11 +180,15 @@ public final class OperacionesBaseDeDatos {
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo) {
         String consulta;
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(grupo != null){
+=======
+>>>>>>> configuracion
         consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ESTUDIANTE
                 ,ManejaSQL.Tablas.TBL_ESTUDIANTE,
                 ContratoEscuela.Estudiantes.EST_GRP_CURSO,grupo.getCurso(),
                 ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo());
+<<<<<<< HEAD
         }else{
          consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
 =======
@@ -200,11 +204,15 @@ public final class OperacionesBaseDeDatos {
             consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);
 >>>>>>> cognitivo
         }
+=======
+>>>>>>> configuracion
         Cursor estudiantes = obtenerDataDB(consulta);
+
         estudiantes.getCount();
         Estudiante estudiante;
         ArrayList<Estudiante> estudiantesAL = new ArrayList<>();
         estudiantesAL.clear();
+<<<<<<< HEAD
         while (estudiantes.moveToNext()) {
 
             byte[] b = estudiantes.getBlob(3);
@@ -216,12 +224,18 @@ public final class OperacionesBaseDeDatos {
                     estudiantes.getInt(4),
                     estudiantes.getString(5),
                     estudiantes.getInt(6),
+=======
+        if(estudiantes.moveToFirst()){
+            do{
+            estudiante = new Estudiante(estudiantes.getInt(0),estudiantes.getString(1),estudiantes.getString(2),
+                    estudiantes.getString(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
+>>>>>>> configuracion
                     estudiantes.getInt(7));
             estudiantesAL.add(estudiante);
-
+            }while(estudiantes.moveToNext());
         }
-        return estudiantesAL;
-    }
+          return estudiantesAL;
+        }
 
     public ArrayList<Grupo> obtenerGruposDB() {
         String consulta = "SELECT * FROM tbl_grupo";
