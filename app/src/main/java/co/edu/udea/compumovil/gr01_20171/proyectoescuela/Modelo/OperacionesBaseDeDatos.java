@@ -180,7 +180,7 @@ public final class OperacionesBaseDeDatos {
         if(estudiantes.moveToFirst()){
             do{
             estudiante = new Estudiante(estudiantes.getInt(0),estudiantes.getString(1),estudiantes.getString(2),
-                    estudiantes.getBlob(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
+                    estudiantes.getString(3),estudiantes.getInt(4),estudiantes.getString(5),estudiantes.getInt(6),
                     estudiantes.getInt(7));
             estudiantesAL.add(estudiante);
             }while(estudiantes.moveToNext());

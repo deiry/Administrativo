@@ -81,7 +81,7 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //ESTUDIANTE**
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY ," +
-                        "%s VARCHAR(20),%s VARCHAR(20),%s BLOB,%s INTEGER,%s VARCHAR(2)" +
+                        "%s VARCHAR(20),%s VARCHAR(20),%s VARCHAR(50),%s INTEGER,%s VARCHAR(2)" +
                         ",%s INTEGER,%s INTEGER )",
                 Tablas.TBL_ESTUDIANTE, ContratoEscuela.Estudiantes.EST_IDENTIFICACION,
                 ContratoEscuela.Estudiantes.EST_NOMBRES,ContratoEscuela.Estudiantes.EST_APELLIDOS,

@@ -27,6 +27,8 @@ public class SeguimientoCognitivo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
         Grupo grupo = new Grupo(1,"A");
+        getApplicationContext().deleteDatabase("pedidos.db");
+        manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
         CrearGridView();

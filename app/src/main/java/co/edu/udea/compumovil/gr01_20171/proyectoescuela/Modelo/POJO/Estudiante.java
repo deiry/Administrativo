@@ -4,13 +4,13 @@ public class Estudiante {
     private int identificacion;
     private String nombres;
     private String apellidos;
-    private byte[] foto;
+    private String foto;
     private int curso;
     private String grupo;
     private int posFila;
     private int posColumna;
 
-    public Estudiante(String nombres, String apellidos,byte[] foto,int identificacion){
+    public Estudiante(String nombres, String apellidos,String foto,int identificacion){
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.identificacion = identificacion;
@@ -18,7 +18,7 @@ public class Estudiante {
 
     }
 
-    public Estudiante(int identificacion, String nombres, String apellidos, byte[] foto, int curso, String grupo, int posFila, int posColumna) {
+    public Estudiante(int identificacion, String nombres, String apellidos, String foto, int curso, String grupo, int posFila, int posColumna) {
         this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -29,7 +29,7 @@ public class Estudiante {
         this.posColumna = posColumna;
     }
 
-    public Estudiante(int identificacion, String nombres, String apellidos, byte[] foto, int curso, String grupo) {
+    public Estudiante(int identificacion, String nombres, String apellidos,String foto, int curso, String grupo) {
         this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -62,11 +62,11 @@ public class Estudiante {
         this.apellidos = apellidos;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
