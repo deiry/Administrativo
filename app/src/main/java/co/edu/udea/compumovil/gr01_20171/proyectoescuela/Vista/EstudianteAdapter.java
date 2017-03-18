@@ -35,12 +35,13 @@ public class EstudianteAdapter extends BaseAdapter
      * @param context
      * @param nombres
      * @param apellidos
-     * @param fotos
      */
 
     //public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
     public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
         this.context = context;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 
     @Override

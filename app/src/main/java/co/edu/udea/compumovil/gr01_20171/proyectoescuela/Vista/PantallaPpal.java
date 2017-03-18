@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -20,40 +22,26 @@ public class PantallaPpal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
+
+        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
+        Button asistencia = (Button) findViewById(R.id.btn_asistencia);
+        asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(PantallaPpal.this, PantallaConfiguracion.class);
+                startActivity(ingresar);
+            }
+        });
     }
-
-
-
-    public void clickSeguimientoCognitivo(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoEtico(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoAsistencia(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoMetas(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickConfiguracion(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
 
 
 }
+
+
+
+
+
+
+
+
+
