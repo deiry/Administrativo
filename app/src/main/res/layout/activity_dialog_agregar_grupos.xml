@@ -52,33 +52,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6">
 
-<<<<<<< HEAD
-    <EditText
-        android:id="@+id/numGrado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="34dp"
-        android:layout_toEndOf="@+id/textView6"
-        android:layout_toRightOf="@+id/textView6"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="2" />
-
-    <EditText
-        android:id="@+id/idenGrupo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/numGrado"
-        android:layout_alignRight="@+id/numGrado"
-        android:layout_below="@+id/numGrado"
-        android:layout_marginTop="21dp"
-        android:ems="10"
-        android:inputType="textCapSentences|textPersonName"
-        android:maxLength="1" />
-=======
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
@@ -93,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName" />
->>>>>>> configuracion
+
 
             </LinearLayout>
 
