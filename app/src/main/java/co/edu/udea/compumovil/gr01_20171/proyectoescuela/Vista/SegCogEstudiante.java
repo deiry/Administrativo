@@ -3,20 +3,26 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.File;
+import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Subcategoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class SegCogEstudiante extends Activity {
@@ -50,7 +56,7 @@ public class SegCogEstudiante extends Activity {
     private void incializarComponente() {
 
 
-        String[] datos = {"1","2","3","4","5","1","2","3","4","5","1","2","3","4","5"};
+       String[] datos = {"1","2","3","4","5","1","2","3","4","5","1","2","3","4","5"};
 
         lv_aplicar  = (ListView) findViewById(R.id.lv_aplicar);
         lv_analizar  = (ListView) findViewById(R.id.lv_analizar);
@@ -62,12 +68,8 @@ public class SegCogEstudiante extends Activity {
         iv_foto = (ImageView) findViewById(R.id.iv_seg_cog_foto_estudiante);
         tv_nombre_apellido = (TextView) findViewById(R.id.tv_seg_cog_nombre_estudiante);
 
-        setDataListView(lv_aplicar,datos);
-        setDataListView(lv_analizar,datos);
-        setDataListView(lv_comprender,datos);
-        setDataListView(lv_crear,datos);
-        setDataListView(lv_recordar,datos);
-        setDataListView(lv_evaluar,datos);
+        crearListView(getResources().getString(R.string.aplicar),R.id.contenedor_seg_cog_aplicar,lv_aplicar);
+
 
         tv_nombre_apellido.setText(estudiante.getNombres()+" "+ estudiante.getApellidos());
         Uri uri = pathToUri(estudiante.getFoto());
@@ -149,6 +151,17 @@ public class SegCogEstudiante extends Activity {
         DialogFragment dialogFragment = new DialogSubCategoria();
         dialogFragment.setArguments(args);
         dialogFragment.show(fm,"dialogAplicar");
+    }
+
+    private void crearListView(String nombreCategoria, int idContenedor, ListView lv)
+    {
+        Categoria categoria = manager.obtenerCategoria(1,nombreCategoria);
+        int id = categoria.getId();
+        ArrayList<Subcategoria> subcategorias = manager.obtenerSubCategoriasFromCategoriaId(id);
+
+        SubCategoriaAdapter adapter = new SubCategoriaAdapter(this, subcategorias);
+
+        lv.setAdapter(adapter);
     }
 
 
