@@ -15,15 +15,18 @@
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"></LinearLayout>
+            android:layout_weight="0.4">
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"></LinearLayout>
 
@@ -33,27 +36,61 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Ver grupos" />
+=======
+                android:layout_height="0dp"
+                android:layout_weight="1"></LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6"></LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/pruebita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Ver grupos" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_ingreso_profe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Agregar elementos" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"></LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="0.6">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btn_ingreso_profe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Agregar elementos" />
+            </LinearLayout>
+
+
+>>>>>>> 6fc39837eff157ddabbd8641199ba4dc26cc10b9
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.4"></LinearLayout>
+            android:layout_weight="0.4">
+
+        </LinearLayout>
 
     </LinearLayout>
 
