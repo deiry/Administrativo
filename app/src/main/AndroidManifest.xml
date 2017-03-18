@@ -10,15 +10,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-<<<<<<< HEAD
         android:theme="@style/AppTheme"
         android:largeHeap="true">
-
         <activity android:name=".Vista.PantallaPpal"></activity>
-=======
         android:theme="@style/AppTheme">
-        <activity android:name=".Vista.PantallaPpal" />
->>>>>>> configuracion
+
         <activity
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
