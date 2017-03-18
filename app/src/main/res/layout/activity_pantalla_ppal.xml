@@ -37,9 +37,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:labelFor="@+id/btn_asistencia"
-                android:onClick="clickSeguimientoCognitivo"
-                android:text="@string/seguimiento_cognitivo"
-                />
+                android:onClick="ClckIrSeguimientoCognitivo"
+                android:text="@string/seguimiento_cognitivo" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,8 +62,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/asistencia"
-                />
+                android:onClick="ClickIrAsistencia"
+                android:text="@string/asistencia" />
         </LinearLayout>
 
 

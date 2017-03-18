@@ -2,6 +2,11 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 
 import android.content.Context;
+<<<<<<< HEAD
+import android.graphics.BitmapFactory;
+=======
+>>>>>>> configuracion
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +14,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,42 +28,35 @@ import java.util.Collection;
 public class EstudianteAdapter extends BaseAdapter
 {
     private Context context;
-    //private ArrayList<Estudiante>;
+    private ArrayList<Estudiante> estudiantes;
 
-    /*variable temporales*/
-    private String[] nombres;
-    private String[] apellidos;
-    private String[] fotos;
 
     /**
-     * la idea es trabajar con una clase estudiante que ya tendria como atributos nombre apellido y
-     * fotos
+     * la idea es trabajar con una clase estudiante que ya tendria como atributos nombre apellido
+     * y  fotos
      * @param context
-     * @param nombres
-     * @param apellidos
-     * @param fotos
+     * @param estudiantes Coleccion de estudiantes que se quieren listar en la cuadricula
      */
-
-    //public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
-    public EstudianteAdapter(Context context, String[] nombres, String[] apellidos) {
+    public EstudianteAdapter(Context context, ArrayList<Estudiante> estudiantes)
+    {
         this.context = context;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
+        this.estudiantes = estudiantes;
     }
 
     @Override
-    public int getCount() {
-        return nombres.length;
+    public int getCount()
+    {
+        return estudiantes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return nombres[position];
+        return estudiantes.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return nombres[position].hashCode();
+        return ((long) estudiantes.get(position).getIdentificacion());
     }
 
     @Override
@@ -69,12 +68,50 @@ public class EstudianteAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.item_estudiante,parent,false);
         }
 
+
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_item_estudiante_nombre);
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
+<<<<<<< HEAD
+        ImageView ivFoto = (ImageView) convertView.findViewById(R.id.iv_item_estudiante_foto);
 
-        tvNombre.setText(this.nombres[position]);
-        tvApellido.setText(this.apellidos[position]);
+        Estudiante estudiante = estudiantes.get(position);
+        Uri uri = pathToUri(estudiante.getFoto());
+
+        if (!uri.equals(Uri.EMPTY))
+        {
+            ivFoto.setImageURI(pathToUri(estudiante.getFoto()));
+        }
+        else
+        {
+            ivFoto.setImageResource(R.mipmap.ic_launcher);
+        }
+=======
+        Uri uri = pathToUri(this.estudiantes.get(position).getFoto());
+        ImageView imageEst;
+
+        imageEst = (ImageView)convertView.findViewById(R.id.iv_item_estudiante_foto);
+        if (!uri.equals(Uri.EMPTY)){
+            imageEst.setImageURI(uri);
+        }else{
+            imageEst.setImageResource(R.mipmap.ic_launcher);
+        }
+       //tvNombre.setText(this.nombres[position]);
+        //tvApellido.setText(this.apellidos[position]);
+>>>>>>> configuracion
+
+        tvNombre.setText(estudiante.getNombres());
+        tvApellido.setText(estudiante.getApellidos());
 
         return convertView;
+    }
+
+    private Uri pathToUri(String imgPath){
+        File imgFile = new File(imgPath);
+        if(imgFile.exists())
+        {
+            return Uri.fromFile(imgFile);
+
+        }
+        return Uri.EMPTY;
     }
 }
