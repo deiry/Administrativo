@@ -9,12 +9,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
-        <activity android:name=".Vista.PantallaPpal"></activity>
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Vista.PantallaPpal" />
         <activity
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
@@ -23,8 +21,10 @@
         <activity android:name=".Vista.SegCogEstudiante" />
         <activity android:name=".Vista.PantallaConfiguracion" />
         <activity android:name=".Vista.PantallaProfesor" />
+        <activity android:name=".Vista.Estadistica" />
         <activity android:name=".Vista.DialogAgregarGrupos" />
         <activity android:name=".Vista.ListarEstudiantes" />
+
         <activity android:name=".Vista.InicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vista.Asistencia" />
-        <activity android:name=".Vista.AsistenciaEstudianteAdapter"></activity>
+        <activity android:name=".Vista.AsistenciaEstudianteAdapter" />
+        <activity
+            android:name=".Vista.EstadisticaModel"
+            android:label="@string/title_activity_estadistica_model"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

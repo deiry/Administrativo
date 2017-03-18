@@ -19,15 +19,11 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
-<<<<<<< HEAD
 
-    private Grupo grupo;
-
-=======
     Grupo grupo;
     Intent intent;
     Bundle bundle;
->>>>>>> configuracion
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

@@ -29,14 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
-                android:hint="Identificación"
-                android:inputType="textCapWords|textPersonName"
-
-=======
                 android:inputType="textPersonName"
                 android:hint="Nombre"
->>>>>>> configuracion
                 android:textSize="14sp" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,15 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-<<<<<<< HEAD
 
                 android:hint="Nombre"
                 android:inputType="textCapWords|textPersonName"
-
-=======
-                android:inputType="textPersonName"
-                android:hint="Identificacion"
->>>>>>> configuracion
                 android:textSize="14sp" />
         </LinearLayout>
 
