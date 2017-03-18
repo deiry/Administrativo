@@ -24,10 +24,8 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaProfesor extends AppCompatActivity {
-    RadioButton especifico;
+
     OperacionesBaseDeDatos datos;
-    RadioButton director;
-    TextView agregarMateria;
     FloatingActionButton agregar;
     EditText grado ;
     EditText ngrupo;
@@ -40,66 +38,12 @@ public class PantallaProfesor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_profesor);
+
         grado = (EditText)findViewById(R.id.numGrado);
         ngrupo = (EditText)findViewById(R.id.idenGrupo);
-        especifico = (RadioButton) findViewById(R.id.p_especif);
-        director = (RadioButton) findViewById(R.id.p_director);
-        agregarMateria = (TextView) findViewById(R.id.agregar_m);
-        agregar = (FloatingActionButton) findViewById(R.id.btn_agregarMateria);
-        agregar.setVisibility(View.INVISIBLE);
-        agregarMateria.setVisibility(View.INVISIBLE);
-        //Activar RadioButtons
-        especifico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                agregar.setVisibility(View.VISIBLE);
-                agregarMateria.setVisibility(View.VISIBLE);
-            }
-        });
-        director.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                agregar.setVisibility(View.INVISIBLE);
-                agregarMateria.setVisibility(View.INVISIBLE);
-            }
-        });
+
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
-
-
-
-
-        //Funcionalidad del botón para agregar grupo.
-        FloatingActionButton mostrarDialogGrupo = (FloatingActionButton) findViewById(R.id.btn_agregarGrupo);
-        mostrarDialogGrupo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaProfesor.this,DialogAgregarGrupos.class);
-                  startActivity(ingresar);
-            }
-        });
-        //Funcionalidad del botón subir estudiantes
-        FloatingActionButton subirEstudiantes = (FloatingActionButton) findViewById(R.id.btn_subirEstudiantes);
-        subirEstudiantes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                grupos= datos.obtenerGruposDB();
-                gruposString=convertirGrupos(grupos);
-                AlertDialog dialog = listarGrupos(gruposString);
-                dialog.show();
-            }
-        });
-        //Funcionalidad del botón agregar materia
-        FloatingActionButton mostrarDialogMateria = (FloatingActionButton) findViewById(R.id.btn_agregarMateria);
-        mostrarDialogMateria.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent ingresar = new Intent(PantallaProfesor.this,DialogAgregarMateria.class);
-                startActivity(ingresar);
-
-            }
-        });
 
 
     }
@@ -115,8 +59,6 @@ public class PantallaProfesor extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent ingresar = new Intent(PantallaProfesor.this,AgregarEstudiantes.class);
-                /*ingresar.putExtra("GRADO",grupos.get(which).getCurso());
-                ingresar.putExtra("GRUPO",grupos.get(which).getGrupo());*/
                 ingresar.putExtra("GRUPO",grupos.get(which));
                 startActivity(ingresar);
             }
@@ -134,5 +76,19 @@ public class PantallaProfesor extends AppCompatActivity {
         }
         return gruposs;
     }
+
+    public void clickAgregarGrupo(View v){
+        Intent ingresar = new Intent(PantallaProfesor.this,DialogAgregarGrupos.class);
+        startActivity(ingresar);
+    }
+
+    public void clickSubirEstudiantes(View v){
+        grupos= datos.obtenerGruposDB();
+        gruposString=convertirGrupos(grupos);
+        AlertDialog dialog = listarGrupos(gruposString);
+        dialog.show();
+    }
+
+
 
 }

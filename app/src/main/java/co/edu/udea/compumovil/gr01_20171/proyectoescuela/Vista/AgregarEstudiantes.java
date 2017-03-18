@@ -3,11 +3,14 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +22,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
@@ -35,6 +40,8 @@ public class AgregarEstudiantes extends AppCompatActivity {
     OperacionesBaseDeDatos datos;
     Grupo grupo;
     Estudiante estudiante;
+    //
+    String picturePath="";
     Intent intent;
     Bundle bundle;
     final int REQUEST_CODE_GALLERY = 999;
@@ -59,6 +66,11 @@ public class AgregarEstudiantes extends AppCompatActivity {
             public void onClick(View v) {
                 Intent ingresar = new Intent(AgregarEstudiantes.this,PantallaProfesor.class);
                 startActivity(ingresar);
+                try {
+                    this.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
             }
         });
 
@@ -69,20 +81,10 @@ public class AgregarEstudiantes extends AppCompatActivity {
                     datos.getDb().beginTransaction();
                     intent = getIntent();
                     bundle = intent.getExtras();
-                    //En caso de tener un grupo
-                    if(bundle != null){
-                        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
-
-//                        grupo = new Grupo((int) bundle.get("GRADO"),(String) bundle.get("GRUPO"));
-
-                        estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
+                    grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+                    estudiante = new Estudiante(Integer.parseInt(idEstudiante.getText().toString()),
                                 nombreEstudiante.getText().toString(),apellidoEstudiante.getText().toString(),
-                                imageViewToByte(imgEst),grupo.getCurso(),grupo.getGrupo());
-                    }else{
-                        estudiante = new Estudiante(nombreEstudiante.getText().toString(),
-                                apellidoEstudiante.getText().toString(),
-                                imageViewToByte(imgEst),Integer.parseInt(idEstudiante.getText().toString()));
-                    }
+                                picturePath,grupo.getCurso(),grupo.getGrupo());
                     datos.insertarEstudiante(estudiante);
                     datos.getDb().setTransactionSuccessful();
                     Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
@@ -129,16 +131,45 @@ public class AgregarEstudiantes extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null){
             Uri uri = data.getData();
-            try {
+            /*try {
                 InputStream inputStream = getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imgEst.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            }*/
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(uri,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView imageView = (ImageView) findViewById(R.id.imgEstudiante);
+
+            Bitmap bmp = null;
+            try {
+                bmp = getBitmapFromUri(uri);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
+            imageView.setImageBitmap(bmp);
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor =
+                getContentResolver().openFileDescriptor(uri, "r");
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        parcelFileDescriptor.close();
+        return image;
     }
 
     private void init(){
