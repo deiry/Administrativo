@@ -20,35 +20,15 @@ public class PantallaPpal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
+
     }
 
+    private void agregarFragmentNombreGrupo() {
 
+
+    }
 
     public void clickSeguimientoCognitivo(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoEtico(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoAsistencia(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickSeguimientoMetas(View v)
-    {
-        Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
-        startActivity(intent);
-    }
-
-    public void clickConfiguracion(View v)
     {
         Intent intent = new Intent(getApplicationContext(), SeguimientoCognitivo.class);
         startActivity(intent);
