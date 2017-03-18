@@ -90,9 +90,6 @@ public final class OperacionesBaseDeDatos {
 
     }
 
-    /**
-     * Método para insertar subcategorias en la tabla correspondiente
-     */
     public boolean insertarSubCategorias(Subcategoria subcategoria) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -116,14 +113,21 @@ public final class OperacionesBaseDeDatos {
      * Método para materias a la base de datos
      */
 
-    public void insertarMaterias(Materia materia) {
+    public boolean insertarMaterias(Materia materia) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Materias.MTA_ID, materia.getId());
         valores.put(ContratoEscuela.Materias.MTA_NOMBRE, materia.getNombre());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
-    }
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
 
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     /**
      * Método para agregar asistencia a la tlaba de asistencia
      */
@@ -151,16 +155,24 @@ public final class OperacionesBaseDeDatos {
     /**
      * Método para insertar seguimiento en la tabla de seguimiento
      */
-    public void insertarSeguimiento(Seguimiento seguimiento) {
+    public boolean insertarSeguimiento(Seguimiento seguimiento) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Seguimiento.SEG_ID, seguimiento.getIdSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_SUBC_ID, seguimiento.getIdSubSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_EST_ID, seguimiento.getIdEst());
         valores.put(ContratoEscuela.Seguimiento.SEG_ESTADO, seguimiento.getEstado());
         valores.put(ContratoEscuela.Seguimiento.SEG_FECHA, seguimiento.getFecha().toString());
         valores.put(ContratoEscuela.Seguimiento.SEG_TIPO, seguimiento.getTipo());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
+        valores.put(ContratoEscuela.Seguimiento.SEG_MAT_ID, seguimiento.getIdMateria());
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
