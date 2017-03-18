@@ -24,12 +24,16 @@ public class Asistencia extends AppCompatActivity {
     private Grupo grupo;
     private int[] contadores;
     OperacionesBaseDeDatos manager;
+    Intent intent;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
-        Grupo grupo = new Grupo(1,"A");
+        intent = getIntent();
+        bundle = intent.getExtras();
+        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         getApplicationContext().deleteDatabase("pedidos.db");
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         estudiantes = manager.obtenerEstudiantesDB(grupo);

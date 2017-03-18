@@ -14,14 +14,20 @@ import android.widget.Toast;
 
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
-
+    Grupo grupo;
+    Intent intent;
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
+        intent = getIntent();
+        bundle = intent.getExtras();
+        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
 
     }
 
@@ -39,8 +45,9 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClickIrAsistencia(View view)
     {
-        Intent ingresar = new Intent(PantallaPpal.this, Asistencia.class);
-        startActivity(ingresar);
+        intent = new Intent(this,Asistencia.class);
+        intent.putExtra("GRUPO",grupo);
+        startActivity(intent);
     }
 
     public void ClckIrMetas(View view)

@@ -1,12 +1,15 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
@@ -62,6 +65,15 @@ public class AsistenciaEstudianteAdapter extends BaseAdapter {
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_item_estudiante_nombre);
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
 
+        Uri uri = pathToUri(this.estudiantes.get(position).getFoto());
+        ImageView imageEst;
+
+        imageEst = (ImageView)convertView.findViewById(R.id.iv_item_estudiante_foto);
+        if (!uri.equals(Uri.EMPTY)){
+            imageEst.setImageURI(uri);
+        }else{
+            imageEst.setImageResource(R.mipmap.ic_launcher);
+        }
         //tvNombre.setText(this.nombres[position]);
         //tvApellido.setText(this.apellidos[position]);
 
@@ -69,5 +81,15 @@ public class AsistenciaEstudianteAdapter extends BaseAdapter {
         tvApellido.setText(this.estudiantes.get(position).getApellidos());
 
         return convertView;
+    }
+
+    private Uri pathToUri(String imgPath){
+        File imgFile = new File(imgPath);
+        if(imgFile.exists())
+        {
+            return Uri.fromFile(imgFile);
+
+        }
+        return Uri.EMPTY;
     }
 }
