@@ -230,10 +230,11 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/contenedor_seg_cog_aplicar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lv_aplicar"
