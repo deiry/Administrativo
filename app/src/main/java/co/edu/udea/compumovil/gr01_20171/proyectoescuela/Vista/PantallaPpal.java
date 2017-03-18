@@ -45,7 +45,7 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClickIrAsistencia(View view)
     {
-        intent = new Intent(this,Asistencia.class);
+        intent = new Intent(this,AsistenciaV.class);
         intent.putExtra("GRUPO",grupo);
         startActivity(intent);
     }

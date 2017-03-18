@@ -67,7 +67,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
                 Intent ingresar = new Intent(AgregarEstudiantes.this,PantallaProfesor.class);
                 startActivity(ingresar);
                 try {
-                    this.finalize();
+                    finish();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }

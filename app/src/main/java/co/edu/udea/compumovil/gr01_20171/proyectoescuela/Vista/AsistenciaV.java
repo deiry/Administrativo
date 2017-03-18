@@ -11,14 +11,20 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia;
+
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
-public class Asistencia extends AppCompatActivity {
+public class AsistenciaV extends AppCompatActivity {
 
     private ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
@@ -26,6 +32,7 @@ public class Asistencia extends AppCompatActivity {
     OperacionesBaseDeDatos manager;
     Intent intent;
     Bundle bundle;
+    OperacionesBaseDeDatos datos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,7 @@ public class Asistencia extends AppCompatActivity {
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(Asistencia.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AsistenciaV.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                 contadores[position]++;
                 LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
                 switch (contadores[position])
@@ -99,6 +106,42 @@ public class Asistencia extends AppCompatActivity {
 
 
     }
+    public String giveDate() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+        return sdf.format(cal.getTime());
+    }
 
+    public void agregarAsistencia(int indicador,int posicionEst){
+        co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia asistencia;
 
+        String estado = "";
+
+        String date = giveDate();
+
+        switch (indicador){
+            case 1:
+                estado = "faltó";
+                break;
+            case 2:
+                estado = "tarde";
+                break;
+        }
+        asistencia = new co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia(date,
+                estudiantes.get(posicionEst).getIdentificacion(),estado );
+        datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        try{
+            datos.getDb().beginTransaction();
+            datos.insertarAsistencia(asistencia);
+            datos.getDb().setTransactionSuccessful();
+            Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Se ha producido un error",Toast.LENGTH_SHORT).show();
+        }finally{
+            datos.getDb().endTransaction();
+        }
+
+    }
 }

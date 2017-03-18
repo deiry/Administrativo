@@ -29,8 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vista.Asistencia" />
-        <activity android:name=".Vista.AsistenciaEstudianteAdapter"></activity>
+        <activity android:name=".Vista.AsistenciaV" />
+        <activity android:name=".Vista.AsistenciaEstudianteAdapter" />
     </application>
 
 </manifest>
