@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"></LinearLayout>
 
@@ -28,7 +28,8 @@
                 android:id="@+id/nombreEstudiante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords|textPersonName"
+                android:ems="10"
+                android:inputType="textPersonName"
                 android:hint="Nombre"
                 android:textSize="14sp" />
             <LinearLayout
@@ -40,7 +41,8 @@
                 android:id="@+id/apellidoEstudiante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido"
+                android:ems="10"
+       android:hint="Apellido"
                 android:inputType="textCapWords|textPersonName"
 
                 android:textSize="14sp" />
@@ -52,15 +54,17 @@
                 android:id="@+id/idEstudiante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ems="10"
+
                 android:hint="Nombre"
                 android:inputType="textCapWords|textPersonName"
                 android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"></LinearLayout>
+            android:layout_weight="0.3"></LinearLayout>
     </LinearLayout>
 
     <LinearLayout

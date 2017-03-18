@@ -116,20 +116,12 @@ public final class OperacionesBaseDeDatos {
      * Método para materias a la base de datos
      */
 
-    public boolean insertarMaterias(Materia materia) {
+    public void insertarMaterias(Materia materia) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Materias.MTA_ID, materia.getId());
         valores.put(ContratoEscuela.Materias.MTA_NOMBRE, materia.getNombre());
-        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
-
-        if(response != -1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
     }
 
     /**
@@ -159,24 +151,16 @@ public final class OperacionesBaseDeDatos {
     /**
      * Método para insertar seguimiento en la tabla de seguimiento
      */
-    public boolean insertarSeguimiento(Seguimiento seguimiento) {
+    public void insertarSeguimiento(Seguimiento seguimiento) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Seguimiento.SEG_ID, seguimiento.getIdSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_SUBC_ID, seguimiento.getIdSubSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_EST_ID, seguimiento.getIdEst());
         valores.put(ContratoEscuela.Seguimiento.SEG_ESTADO, seguimiento.getEstado());
         valores.put(ContratoEscuela.Seguimiento.SEG_FECHA, seguimiento.getFecha().toString());
         valores.put(ContratoEscuela.Seguimiento.SEG_TIPO, seguimiento.getTipo());
-        valores.put(ContratoEscuela.Seguimiento.SEG_MAT_ID, seguimiento.getIdMateria());
-        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
-        if(response != -1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
     }
 
     /**
@@ -262,6 +246,7 @@ public final class OperacionesBaseDeDatos {
     }
 
     public boolean borrarEstudiante(String idEstudiante){
+
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};
@@ -330,12 +315,6 @@ public final class OperacionesBaseDeDatos {
         return categoria;
     }
 
-    /**
-     * obtiene las categorias de seguiemiento de acuerdo al tipo si es 1 retorna las categorias de
-     * seguimiento cognitivo y si es 2 retorna las categorias de seguimiento etico
-     * @param id tipo de categoria 1->Seguimiento Cognitivo 2->Seguimiento Etico
-     * @return retorna el ArrayList con todas las categorias de ese tipo
-     */
     public ArrayList<Categoria> obtenerCategorias(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE %s = %s",
@@ -363,11 +342,6 @@ public final class OperacionesBaseDeDatos {
         return categorias;
     }
 
-    /**
-     * obtieene las subcategorias a partir del id de la categoria
-     * @param id es el id de las categorias
-     * @return es un ArrayList de Subcategoria con todas las subcategorias de cada categoria
-     */
     public ArrayList<Subcategoria> obtenerSubCategoriasFromCategoriaId(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE (%s = %s)",
@@ -393,6 +367,7 @@ public final class OperacionesBaseDeDatos {
         return subcategorias;
     }
 
+<<<<<<< HEAD
     /**
      * obtiene todas las materias desde la table de materias y las lleva a un ArrayList
      * @return retorna ArrayList con todas las Materias en la base de datos
@@ -463,6 +438,8 @@ public final class OperacionesBaseDeDatos {
     }
 
 
+=======
+>>>>>>> origin/AlejandroMarin
 
 
 }

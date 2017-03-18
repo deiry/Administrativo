@@ -19,7 +19,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     ImageButton btnGrupo, btnEst, btnConf;
     ArrayList<String> cadenaGrupos = new ArrayList<>();
     ArrayList<Grupo> grupos = new ArrayList<>();
-    Intent intent;
+    Intent intent, intent2;
     OperacionesBaseDeDatos datos ;
 
     @Override
@@ -47,6 +47,13 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 AlertDialog dialog = listarGrupos(cadenaGrupos);
                 dialog.show();
                 break;
+<<<<<<< HEAD
+=======
+            case R.id.btnEstadisticas:
+                intent2 = new Intent(this, EstadisticaModel.class);
+                startActivity(intent2);
+                break;
+>>>>>>> origin/AlejandroMarin
             case R.id.btnConfiguracion:
                 intent = new Intent(this,PantallaConfiguracion.class);
                 startActivity(intent);
