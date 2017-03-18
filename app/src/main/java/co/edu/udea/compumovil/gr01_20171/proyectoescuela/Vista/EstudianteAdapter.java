@@ -2,10 +2,6 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 
 import android.content.Context;
-<<<<<<< HEAD
-import android.graphics.BitmapFactory;
-=======
->>>>>>> configuracion
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +67,6 @@ public class EstudianteAdapter extends BaseAdapter
 
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_item_estudiante_nombre);
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
-<<<<<<< HEAD
         ImageView ivFoto = (ImageView) convertView.findViewById(R.id.iv_item_estudiante_foto);
 
         Estudiante estudiante = estudiantes.get(position);
@@ -85,19 +80,7 @@ public class EstudianteAdapter extends BaseAdapter
         {
             ivFoto.setImageResource(R.mipmap.ic_launcher);
         }
-=======
-        Uri uri = pathToUri(this.estudiantes.get(position).getFoto());
-        ImageView imageEst;
 
-        imageEst = (ImageView)convertView.findViewById(R.id.iv_item_estudiante_foto);
-        if (!uri.equals(Uri.EMPTY)){
-            imageEst.setImageURI(uri);
-        }else{
-            imageEst.setImageResource(R.mipmap.ic_launcher);
-        }
-       //tvNombre.setText(this.nombres[position]);
-        //tvApellido.setText(this.apellidos[position]);
->>>>>>> configuracion
 
         tvNombre.setText(estudiante.getNombres());
         tvApellido.setText(estudiante.getApellidos());

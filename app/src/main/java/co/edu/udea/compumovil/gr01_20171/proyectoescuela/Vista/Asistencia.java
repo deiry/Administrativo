@@ -43,11 +43,6 @@ public class Asistencia extends AppCompatActivity {
     }
 
 
-    //   TituloGrupoFragment fragment = new TituloGrupoFragment();
-
-    //  fragmentTransaction.commit();
-
-
     private void CrearGridView() {
 
         contadores = new int[estudiantes.size()];
