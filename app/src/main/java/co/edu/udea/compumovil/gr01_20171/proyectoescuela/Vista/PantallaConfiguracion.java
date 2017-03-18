@@ -36,7 +36,7 @@ public class PantallaConfiguracion extends AppCompatActivity {
                 startActivity(vistaProfe);
             }
         });
-        Button prueba = (Button) findViewById(R.id.pruebita);
+        Button prueba = (Button) findViewById(R.id.btn_ver_grupos);
         prueba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

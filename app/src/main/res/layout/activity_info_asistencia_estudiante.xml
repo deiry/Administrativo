@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.InfoAsistenciaEstudiante"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="111dp"
+        android:layout_height="96dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="344dp">
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="92dp"
+        android:layout_weight="1"
+        android:text="Nombre Estudiante"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Faltas:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/editText4"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_alignLeft="@+id/textView29"
+        android:layout_alignStart="@+id/textView29" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/textView26"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Llegadas tarde:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView29"
+        android:layout_alignStart="@+id/textView29"
+        android:layout_below="@+id/editText5"
+        android:layout_marginTop="21dp"
+        android:text="Faltas el último mes:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_alignBaseline="@+id/textView30"
+        android:layout_alignBottom="@+id/textView30"
+        android:layout_toRightOf="@+id/textView30"
+        android:layout_toEndOf="@+id/textView30" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView30"
+        android:layout_alignStart="@+id/textView30"
+        android:layout_centerVertical="true"
+        android:text="Llgadas tarde el último mes:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText6"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_toEndOf="@+id/textView31"
+        android:layout_toRightOf="@+id/textView31"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+</RelativeLayout>
