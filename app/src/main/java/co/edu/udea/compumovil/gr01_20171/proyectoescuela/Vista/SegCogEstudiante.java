@@ -1,11 +1,15 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -40,6 +44,7 @@ public class SegCogEstudiante extends Activity {
 
     private String APROVACION = "si";
     private String RECHAZO = "no";
+    private boolean confirmar = false;
 
     private ListView lv_aplicar;
     private ListView lv_analizar;
@@ -79,13 +84,6 @@ public class SegCogEstudiante extends Activity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        Toast.makeText(getApplicationContext(),"entro la activity",Toast.LENGTH_SHORT).show();
-    }
-
     private void incializarComponente() {
 
         lv_aplicar  = (ListView) findViewById(R.id.lv_aplicar);
@@ -118,6 +116,7 @@ public class SegCogEstudiante extends Activity {
         {
             strMaterias[i] = materias.get(i).getNombre();
         }
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, strMaterias);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,12 +138,20 @@ public class SegCogEstudiante extends Activity {
 
     }
 
+    /**
+     * evento al seleccionar la materia asigna a la variable global la materia que se seleccionó
+     */
     private void eventoSpinner() {
 
-        sp_materias.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        sp_materias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 materia = materias.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -196,7 +203,7 @@ public class SegCogEstudiante extends Activity {
 
 
 
-    private void eventosItems(View view, int position, long id)
+    private void eventosItems(final View view, int position, long id)
     {
         if(lastItemView != null)
         {
@@ -205,7 +212,7 @@ public class SegCogEstudiante extends Activity {
         }
 
 
-        LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_subcategoria);
+        final LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_subcategoria);
         ImageButton btn_si = new ImageButton(view.getContext());
         ImageButton btn_no = new ImageButton(view.getContext());
 
@@ -247,15 +254,28 @@ public class SegCogEstudiante extends Activity {
                 seguimiento.setFecha(fecha);
                 seguimiento.setIdMateria(materia.getId());
 
-                if (manager.insertarSeguimiento(seguimiento))
-                {
-                    seguimiento = null;
-                    Toast.makeText(getApplicationContext(),"Seguimiento Insertado",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Seguimiento NO Insertado",Toast.LENGTH_SHORT).show();
-                }
+                boolean response = motrarAlerta();
+
+                ll.removeAllViews();
+            }
+
+
+        });
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Date myDate = new Date();
+                String fecha = new SimpleDateFormat("dd-MM-yyyy").format(myDate);
+
+                seguimiento.setEstado(RECHAZO);
+                seguimiento.setFecha(fecha);
+                seguimiento.setIdMateria(materia.getId());
+
+                boolean response = motrarAlerta();
+
+                ll.removeAllViews();
 
             }
         });
@@ -265,11 +285,40 @@ public class SegCogEstudiante extends Activity {
     }
 
 
+
+
     private void setDataListView(ListView lv,String[] data)
     {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,data);
 
         lv.setAdapter(adapter);
+    }
+
+    private boolean motrarAlerta() {
+        new AlertDialog.Builder(SegCogEstudiante.this)
+                .setTitle("Alerta")
+                .setMessage("¿Desea continuar con la operación?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        if(manager.insertarSeguimiento(seguimiento))
+                        {
+                            seguimiento = null;
+                            Toast.makeText(getApplicationContext(),"Seguimiento Insertado",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Seguimiento NO Insertado",Toast.LENGTH_SHORT).show();
+                        }
+                    }})
+                .setNegativeButton(android.R.string.no,new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                            Toast.makeText(getApplicationContext(),"Operación Cancelada",Toast.LENGTH_SHORT).show();
+                    }}).show();
+        return confirmar;
     }
 
     /*eventos de agregar subcategoria*/
