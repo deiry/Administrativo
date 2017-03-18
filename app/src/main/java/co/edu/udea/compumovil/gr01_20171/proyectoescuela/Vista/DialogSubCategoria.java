@@ -58,7 +58,7 @@ public class DialogSubCategoria extends DialogFragment {
 
         setDataListView();
 
-        Toast.makeText(getContext(),"dialogActivo",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"dialogActivo",Toast.LENGTH_SHORT).show();
     }
 
     private void init(final View view)
@@ -81,13 +81,13 @@ public class DialogSubCategoria extends DialogFragment {
                 if(manager.insertarSubCategorias(sub))
                 {
 
-                    Toast.makeText(getContext(),"insertado",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Insertado",Toast.LENGTH_SHORT).show();
                     setDataListView();
                     et_sub_categoria.setText("");
                 }
                 else
                 {
-                    Toast.makeText(getContext(),"no insertado",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"No Insertado",Toast.LENGTH_SHORT).show();
                 }
             }
         });

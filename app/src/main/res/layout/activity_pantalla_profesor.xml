@@ -24,12 +24,14 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6"></LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="0.2">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="0.6">
                 <TextView
                     android:id="@+id/textView3"
@@ -60,7 +62,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="0.6">
 
                 <TextView
@@ -90,12 +92,48 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar Materias:"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2">
+
+                </LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btn_materias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="clickMaterias"
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/holo_green_dark"
+                    app:fabSize="mini"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    tools:onClick="clickSubirEstudiantes" />
+
+
+            </LinearLayout>
+
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"></LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="0.4">
+
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="1dp"

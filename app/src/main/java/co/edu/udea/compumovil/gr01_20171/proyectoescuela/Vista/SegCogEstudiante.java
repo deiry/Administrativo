@@ -40,6 +40,12 @@ public class SegCogEstudiante extends Activity {
     private Estudiante estudiante;
     private OperacionesBaseDeDatos manager;
 
+    private ArrayList<Subcategoria> arrayListAplicar;
+    private ArrayList<Subcategoria> arrayListAnalizar;
+    private ArrayList<Subcategoria> arrayListComprender;
+    private ArrayList<Subcategoria> arrayListCrear;
+    private ArrayList<Subcategoria> arrayListRecordar;
+    private ArrayList<Subcategoria> arrayListEvaluar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +59,14 @@ public class SegCogEstudiante extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Toast.makeText(getApplicationContext(),"entro la activity",Toast.LENGTH_SHORT).show();
+    }
+
     private void incializarComponente() {
-
-
-       String[] datos = {"1","2","3","4","5","1","2","3","4","5","1","2","3","4","5"};
 
         lv_aplicar  = (ListView) findViewById(R.id.lv_aplicar);
         lv_analizar  = (ListView) findViewById(R.id.lv_analizar);
@@ -68,9 +78,6 @@ public class SegCogEstudiante extends Activity {
         iv_foto = (ImageView) findViewById(R.id.iv_seg_cog_foto_estudiante);
         tv_nombre_apellido = (TextView) findViewById(R.id.tv_seg_cog_nombre_estudiante);
 
-        crearListView(getResources().getString(R.string.aplicar),R.id.contenedor_seg_cog_aplicar,lv_aplicar);
-
-
         tv_nombre_apellido.setText(estudiante.getNombres()+" "+ estudiante.getApellidos());
         Uri uri = pathToUri(estudiante.getFoto());
         if (!uri.equals(Uri.EMPTY))
@@ -81,6 +88,58 @@ public class SegCogEstudiante extends Activity {
         {
             iv_foto.setImageResource(R.mipmap.ic_launcher);
         }
+
+        crearListView(getResources().getString(R.string.aplicar),lv_aplicar);
+        crearListView(getResources().getString(R.string.analizar),lv_analizar);
+        crearListView(getResources().getString(R.string.comprender),lv_comprender);
+        crearListView(getResources().getString(R.string.crear),lv_crear);
+        crearListView(getResources().getString(R.string.recordar),lv_recordar);
+        crearListView(getResources().getString(R.string.evaluar),lv_evaluar);
+
+        eventosListViews();
+
+
+
+
+    }
+
+    private void eventosListViews() {
+        lv_aplicar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"pos: "+String.valueOf(position)+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
+        lv_evaluar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"pos: "+String.valueOf(position)+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
+        lv_recordar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"pos: "+String.valueOf(position)+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
+        lv_crear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"pos: "+String.valueOf(position)+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
+        lv_comprender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),arrayListComprender.get(position).getNombre()+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
+        lv_analizar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"pos: "+String.valueOf(position)+" id:"+String.valueOf(id),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
@@ -153,11 +212,37 @@ public class SegCogEstudiante extends Activity {
         dialogFragment.show(fm,"dialogAplicar");
     }
 
-    private void crearListView(String nombreCategoria, int idContenedor, ListView lv)
+    private void crearListView(String nombreCategoria, ListView lv)
     {
         Categoria categoria = manager.obtenerCategoria(1,nombreCategoria);
         int id = categoria.getId();
         ArrayList<Subcategoria> subcategorias = manager.obtenerSubCategoriasFromCategoriaId(id);
+
+        if(nombreCategoria.equals(getResources().getString(R.string.aplicar)))
+        {
+            arrayListAplicar = subcategorias;
+        }
+        else if(nombreCategoria.equals(getResources().getString(R.string.analizar)))
+        {
+            arrayListAnalizar = subcategorias;
+        }
+        else if (nombreCategoria.equals(getResources().getString(R.string.comprender)))
+        {
+            arrayListComprender = subcategorias;
+        }
+        else if (nombreCategoria.equals(getResources().getString(R.string.aplicar)))
+        {
+            arrayListCrear = subcategorias;
+        }
+        else if (nombreCategoria.equals(getResources().getString(R.string.evaluar)))
+        {
+            arrayListEvaluar = subcategorias;
+        }
+        else if (nombreCategoria.equals(getResources().getString(R.string.recordar)))
+        {
+            arrayListRecordar = subcategorias;
+        }
+
 
         SubCategoriaAdapter adapter = new SubCategoriaAdapter(this, subcategorias);
 
