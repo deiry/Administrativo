@@ -367,7 +367,7 @@ public final class OperacionesBaseDeDatos {
         return subcategorias;
     }
 
-<<<<<<< HEAD
+
     /**
      * obtiene todas las materias desde la table de materias y las lleva a un ArrayList
      * @return retorna ArrayList con todas las Materias en la base de datos
@@ -437,9 +437,6 @@ public final class OperacionesBaseDeDatos {
         return cursor.getCount();
     }
 
-
-=======
->>>>>>> origin/AlejandroMarin
 
 
 }

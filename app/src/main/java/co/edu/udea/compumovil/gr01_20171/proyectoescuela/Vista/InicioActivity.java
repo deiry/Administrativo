@@ -47,13 +47,11 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
                 AlertDialog dialog = listarGrupos(cadenaGrupos);
                 dialog.show();
                 break;
-<<<<<<< HEAD
-=======
             case R.id.btnEstadisticas:
                 intent2 = new Intent(this, EstadisticaModel.class);
                 startActivity(intent2);
                 break;
->>>>>>> origin/AlejandroMarin
+
             case R.id.btnConfiguracion:
                 intent = new Intent(this,PantallaConfiguracion.class);
                 startActivity(intent);
