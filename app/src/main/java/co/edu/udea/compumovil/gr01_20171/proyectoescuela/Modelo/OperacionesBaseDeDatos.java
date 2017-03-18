@@ -303,6 +303,7 @@ public final class OperacionesBaseDeDatos {
         return estudiante;
     }
 
+
     public Categoria obtenerCategoria(int tipo, String nombre) {
         String consulta;
 
@@ -417,6 +418,48 @@ public final class OperacionesBaseDeDatos {
         }
 
         return materias;
+    }
+
+    public ArrayList<Seguimiento> obtenerSeguimientoFromIdCategoriaIdEstudiante(int idCategoria,int idEstudiante)
+    {
+        ArrayList<Seguimiento> seguimientos = new ArrayList<Seguimiento>();
+        String query = String.format("SELECT  * FROM tbl_seguimiento  " +
+                "INNER JOIN tbl_subcategorias ON tbl_seguimiento.seg_subc_id = " +
+                "tbl_subcategorias.subc_id WHERE tbl_subcategorias.subc_cat_id = %s AND " +
+                "tbl_seguimiento.",idCategoria);
+
+        Cursor cursor = obtenerDataDB(query);
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount();i++)
+        {
+            Seguimiento seguimiento = new Seguimiento(cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6));
+            seguimientos.add(seguimiento);
+
+            if (!cursor.isLast())
+            {
+                cursor.moveToNext();
+            }
+        }
+
+        return seguimientos;
+    }
+
+    public int countSeguimientoFromIdSubcategoriIdEstudiante(int idSubCategoria,int idEstudiante)
+    {
+        String query = String.format("SELECT  * FROM %s WHERE %s = %s AND %s = %s",
+                ManejaSQL.Tablas.TBL_SEGUIMIENTO,
+                ContratoEscuela.ColumnasSeguimiento.SEG_EST_ID,
+                idEstudiante,
+                ContratoEscuela.ColumnasSeguimiento.SEG_SUBC_ID,
+                idSubCategoria);
+        Cursor cursor = obtenerDataDB(query);
+
+        return cursor.getCount();
     }
 
 
