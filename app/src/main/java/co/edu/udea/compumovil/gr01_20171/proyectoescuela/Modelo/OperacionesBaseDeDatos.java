@@ -231,7 +231,25 @@ public final class OperacionesBaseDeDatos {
         return grupoAL;
     }
 
+<<<<<<< HEAD
     public boolean borrarEstudiante(String idEstudiante) {
+=======
+    public ArrayList<Asistencia> obtenerAsistencia(){
+        String consulta = String.format("SELECT * FROM %s",ManejaSQL.Tablas.TBL_ASISTENCIA);
+        Cursor asistencia = obtenerDataDB(consulta);
+        Asistencia asist;
+        ArrayList<Asistencia> asistenciaAL = new ArrayList<>();
+        if(asistencia.moveToFirst()){
+            do{
+                asist = new Asistencia(asistencia.getString(0),asistencia.getInt(1),asistencia.getString(2));
+                asistenciaAL.add(asist);
+            }while(asistencia.moveToNext());
+        }
+        return asistenciaAL;
+    }
+
+    public boolean borrarEstudiante(String idEstudiante){
+>>>>>>> configuracion
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};

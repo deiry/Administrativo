@@ -1,69 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/grupo_tipo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.PantallaProfesor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"></LinearLayout>
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6">
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar grupo"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black"/>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"></LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btn_agregarGrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="clickAgregarGrupo"
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/holo_green_dark"
+                    app:fabSize="mini"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_input_add"
+                    tools:onClick="clickAgregarGrupo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subir estudiantes:"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black" />
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"></LinearLayout>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btn_subirEstudiantes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="clickSubirEstudiantes"
+                    android:clickable="true"
+                    app:backgroundTint="@android:color/holo_green_dark"
+                    app:fabSize="mini"
+                    android:layout_gravity="center"
+                    app:srcCompat="@android:drawable/ic_menu_upload"
+                    tools:onClick="clickSubirEstudiantes" />
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar grupo"
-        android:textColor="@android:color/black"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp" />
+            </LinearLayout>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_agregarGrupo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickAgregarGrupo"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_green_dark"
-        app:fabSize="mini"
-        app:srcCompat="@android:drawable/ic_input_add"
-        tools:onClick="clickAgregarGrupo" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Subir estudiantes:"
-        android:textColor="@android:color/black"
-        android:layout_marginRight="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/btn_subirEstudiantes"
-        android:layout_alignEnd="@+id/btn_subirEstudiantes" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"></LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"></LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_subirEstudiantes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:onClick="clickSubirEstudiantes"
-        android:layout_alignTop="@+id/btn_agregarGrupo"
-        android:layout_marginEnd="115dp"
-        android:layout_marginRight="115dp"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_green_dark"
-        app:fabSize="mini"
-        app:srcCompat="@android:drawable/ic_menu_upload"
-        tools:onClick="clickSubirEstudiantes" />
-
-
-</RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
