@@ -93,6 +93,12 @@ public class DialogSubCategoria extends DialogFragment {
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().recreate();
+    }
+
     private void setDataListView()
     {
         subcategorias = manager.obtenerSubCategoriasFromCategoriaId(idCategoria);

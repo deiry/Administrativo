@@ -115,10 +115,11 @@ public class ManejaSQL extends SQLiteOpenHelper {
 
         //SEGUIMIENTO**
         s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s VARCHAR(10) )",
+                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s INTEGER(1),%s INTEGER(2) )",
                 Tablas.TBL_SEGUIMIENTO, ContratoEscuela.Seguimiento.SEG_ID, ContratoEscuela.Seguimiento.SEG_SUBC_ID,
                 ContratoEscuela.Seguimiento.SEG_EST_ID, ContratoEscuela.Seguimiento.SEG_ESTADO,
-                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO);
+                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO,
+                ContratoEscuela.Seguimiento.SEG_MAT_ID);
         db.execSQL(s);
 
         //LISTAMETAS
