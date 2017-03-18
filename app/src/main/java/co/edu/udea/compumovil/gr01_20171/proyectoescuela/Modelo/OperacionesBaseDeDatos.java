@@ -90,9 +90,6 @@ public final class OperacionesBaseDeDatos {
 
     }
 
-    /**
-     * Método para insertar subcategorias en la tabla correspondiente
-     */
     public boolean insertarSubCategorias(Subcategoria subcategoria) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -131,7 +128,6 @@ public final class OperacionesBaseDeDatos {
             return false;
         }
     }
-
     /**
      * Método para agregar asistencia a la tlaba de asistencia
      */
@@ -262,6 +258,7 @@ public final class OperacionesBaseDeDatos {
     }
 
     public boolean borrarEstudiante(String idEstudiante){
+
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};
@@ -303,6 +300,7 @@ public final class OperacionesBaseDeDatos {
         return estudiante;
     }
 
+
     public Categoria obtenerCategoria(int tipo, String nombre) {
         String consulta;
 
@@ -329,12 +327,6 @@ public final class OperacionesBaseDeDatos {
         return categoria;
     }
 
-    /**
-     * obtiene las categorias de seguiemiento de acuerdo al tipo si es 1 retorna las categorias de
-     * seguimiento cognitivo y si es 2 retorna las categorias de seguimiento etico
-     * @param id tipo de categoria 1->Seguimiento Cognitivo 2->Seguimiento Etico
-     * @return retorna el ArrayList con todas las categorias de ese tipo
-     */
     public ArrayList<Categoria> obtenerCategorias(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE %s = %s",
@@ -362,11 +354,6 @@ public final class OperacionesBaseDeDatos {
         return categorias;
     }
 
-    /**
-     * obtieene las subcategorias a partir del id de la categoria
-     * @param id es el id de las categorias
-     * @return es un ArrayList de Subcategoria con todas las subcategorias de cada categoria
-     */
     public ArrayList<Subcategoria> obtenerSubCategoriasFromCategoriaId(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE (%s = %s)",
@@ -391,6 +378,7 @@ public final class OperacionesBaseDeDatos {
 
         return subcategorias;
     }
+
 
     /**
      * obtiene todas las materias desde la table de materias y las lleva a un ArrayList
@@ -419,6 +407,47 @@ public final class OperacionesBaseDeDatos {
         return materias;
     }
 
+    public ArrayList<Seguimiento> obtenerSeguimientoFromIdCategoriaIdEstudiante(int idCategoria,int idEstudiante)
+    {
+        ArrayList<Seguimiento> seguimientos = new ArrayList<Seguimiento>();
+        String query = String.format("SELECT  * FROM tbl_seguimiento  " +
+                "INNER JOIN tbl_subcategorias ON tbl_seguimiento.seg_subc_id = " +
+                "tbl_subcategorias.subc_id WHERE tbl_subcategorias.subc_cat_id = %s AND " +
+                "tbl_seguimiento.",idCategoria);
+
+        Cursor cursor = obtenerDataDB(query);
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount();i++)
+        {
+            Seguimiento seguimiento = new Seguimiento(cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getInt(5),
+                    cursor.getInt(6));
+            seguimientos.add(seguimiento);
+
+            if (!cursor.isLast())
+            {
+                cursor.moveToNext();
+            }
+        }
+
+        return seguimientos;
+    }
+
+    public int countSeguimientoFromIdSubcategoriIdEstudiante(int idSubCategoria,int idEstudiante)
+    {
+        String query = String.format("SELECT  * FROM %s WHERE %s = %s AND %s = %s",
+                ManejaSQL.Tablas.TBL_SEGUIMIENTO,
+                ContratoEscuela.ColumnasSeguimiento.SEG_EST_ID,
+                idEstudiante,
+                ContratoEscuela.ColumnasSeguimiento.SEG_SUBC_ID,
+                idSubCategoria);
+        Cursor cursor = obtenerDataDB(query);
+
+        return cursor.getCount();
+    }
 
 
 

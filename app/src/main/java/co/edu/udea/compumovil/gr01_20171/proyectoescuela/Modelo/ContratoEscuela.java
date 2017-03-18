@@ -96,6 +96,12 @@ public class ContratoEscuela {
         String GPELISTEST_EST_IDENTIFICACION = "gplistest_est_identificacion";
     }
 
+    interface ColumnasConfiguracion{
+        String CONF_ID = "conf_id";
+        String CONF_NOMBRE = "conf_nombre";
+        String CONF_VALOR = "conf_valor";
+    }
+
 
     public static class Estudiantes implements ColumnasEstudiante{
 

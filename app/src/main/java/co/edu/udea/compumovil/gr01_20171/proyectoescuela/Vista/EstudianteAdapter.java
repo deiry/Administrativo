@@ -81,6 +81,18 @@ public class EstudianteAdapter extends BaseAdapter
             ivFoto.setImageResource(R.mipmap.ic_launcher);
         }
 
+        uri = pathToUri(this.estudiantes.get(position).getFoto());
+        ImageView imageEst;
+
+        imageEst = (ImageView)convertView.findViewById(R.id.iv_item_estudiante_foto);
+        if (!uri.equals(Uri.EMPTY)){
+            imageEst.setImageURI(uri);
+        }else{
+            imageEst.setImageResource(R.mipmap.ic_launcher);
+        }
+       //tvNombre.setText(this.nombres[position]);
+        //tvApellido.setText(this.apellidos[position]);
+
 
         tvNombre.setText(estudiante.getNombres());
         tvApellido.setText(estudiante.getApellidos());

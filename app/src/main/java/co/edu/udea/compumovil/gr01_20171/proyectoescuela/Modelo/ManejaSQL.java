@@ -39,6 +39,7 @@ public class ManejaSQL extends SQLiteOpenHelper {
         String TBL_GRUPOS_LISTA_ESTUDIANTES = "tbl_grupos_lista_estudiantes";
         String TBL_GRUPOS_ESTUDIANTES = "tbl_grupos_estudiantes";
         String TBL_CUMPLIMIENTO_METAS = "tbl_cumplimiento_metas";
+        String TBL_CONFIGURACION = "tbl_configuracion";
     }
 
     /**
@@ -163,6 +164,13 @@ public class ManejaSQL extends SQLiteOpenHelper {
                         "%s VARCHAR(20))",
                 Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID,
                 ContratoEscuela.Materias.MTA_NOMBRE);
+        db.execSQL(s);
+
+        //MATERIASESTUDIANTES
+        s=String.format("CREATE TABLE %s ( %s INTEGER ," +
+                        "%s INTEGER)",
+                Tablas.TBL_MATERIAS_ESTUDIANTE, ContratoEscuela.MateriaEstudiante.MEST_MTA_ID,
+                ContratoEscuela.MateriaEstudiante.MEST_EST_ID);
         db.execSQL(s);
 
         //MATERIASESTUDIANTES
