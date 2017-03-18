@@ -12,7 +12,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vista.PantallaPpal" />
+        <activity android:name=".Vista.PantallaPpal"
+            android:parentActivityName=".Vista.InicioActivity"/>
         <activity
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"

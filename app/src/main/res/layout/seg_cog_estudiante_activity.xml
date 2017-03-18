@@ -13,24 +13,24 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-<LinearLayout
-    android:layout_width="0dp"
-    android:layout_height="match_parent"
-    android:layout_weight="1.5">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5">
 
-    <ImageView
-        android:id="@+id/iv_seg_cog_foto_estudiante"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+            <ImageView
+                android:id="@+id/iv_seg_cog_foto_estudiante"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@mipmap/ic_launcher" />
 
-</LinearLayout>
+        </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:orientation="vertical">
 
             <TextView
@@ -43,6 +43,28 @@
                 android:text="TextView"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Materia"
+                android:textSize="@dimen/titulo_1_size"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"/>
+
+            <Spinner
+                android:id="@+id/sp_seg_cog_materias"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
