@@ -72,6 +72,7 @@ public class PantallaPpal extends AppCompatActivity {
     public void ClckIrMetas(View view)
     {
         Intent intencion = new Intent(this, PrincipalMetas.class);
+        intencion.putExtra("GRUPO",grupo);
         startActivity(intencion);
     }
 }

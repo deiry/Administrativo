@@ -27,6 +27,8 @@
     <string name="metas">Metas</string>
     <string name="asistencia">Asistencia</string>
 
+    <!-- String Metas-->
+    <string name="seleccionGrupo">GRUPOS</string>
 
 </resources>
 
