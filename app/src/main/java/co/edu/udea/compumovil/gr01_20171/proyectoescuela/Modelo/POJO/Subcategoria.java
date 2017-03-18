@@ -14,6 +14,11 @@ public class Subcategoria {
     private String nombre;
     private String icono;
 
+    public Subcategoria(int idCat, String nombre) {
+        this.idCat = idCat;
+        this.nombre = nombre;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,5 +50,6 @@ public class Subcategoria {
     public void setIcono(String icono) {
         this.icono = icono;
     }
+
     
 }

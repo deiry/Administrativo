@@ -93,15 +93,22 @@ public final class OperacionesBaseDeDatos {
     /**
      * Método para insertar subcategorias en la tabla correspondiente
      */
-    public void insertarSubCategorias(Subcategoria subcategoria) {
+    public boolean insertarSubCategorias(Subcategoria subcategoria) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Subcategorias.SUBC_ID, subcategoria.getId());
         valores.put(ContratoEscuela.Subcategorias.SUBC_CAT_ID, subcategoria.getIdCat());
         valores.put(ContratoEscuela.Subcategorias.SUBC_NOMBRE, subcategoria.getNombre());
-        valores.put(ContratoEscuela.Subcategorias.SUBC_CAT_ID, subcategoria.getId());
         valores.put(ContratoEscuela.Subcategorias.SUBC_ICONO, subcategoria.getIcono());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_SUBCATEGORIAS, null, valores);
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_SUBCATEGORIAS, null, valores);
+
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
@@ -224,7 +231,25 @@ public final class OperacionesBaseDeDatos {
         return grupoAL;
     }
 
+<<<<<<< HEAD
     public boolean borrarEstudiante(String idEstudiante) {
+=======
+    public ArrayList<Asistencia> obtenerAsistencia(){
+        String consulta = String.format("SELECT * FROM %s",ManejaSQL.Tablas.TBL_ASISTENCIA);
+        Cursor asistencia = obtenerDataDB(consulta);
+        Asistencia asist;
+        ArrayList<Asistencia> asistenciaAL = new ArrayList<>();
+        if(asistencia.moveToFirst()){
+            do{
+                asist = new Asistencia(asistencia.getString(0),asistencia.getInt(1),asistencia.getString(2));
+                asistenciaAL.add(asist);
+            }while(asistencia.moveToNext());
+        }
+        return asistenciaAL;
+    }
+
+    public boolean borrarEstudiante(String idEstudiante){
+>>>>>>> configuracion
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};
@@ -292,11 +317,13 @@ public final class OperacionesBaseDeDatos {
         return categoria;
     }
 
-    public ArrayList<Categoria> obtenerCategorias() {
+    public ArrayList<Categoria> obtenerCategorias(int id) {
         String consulta;
-        consulta = String.format("SELECT * FROM %s",
+        consulta = String.format("SELECT * FROM %s WHERE %s = %s",
 
-                ManejaSQL.Tablas.TBL_CATEGORIAS);
+                ManejaSQL.Tablas.TBL_CATEGORIAS,
+                ContratoEscuela.ColumnasCategorias.CAT_TIPO,
+                id);
 
         Cursor cursor = obtenerDataDB(consulta);
 
@@ -315,6 +342,31 @@ public final class OperacionesBaseDeDatos {
 
 
         return categorias;
+    }
+
+    public ArrayList<Subcategoria> obtenerSubCategoriasFromCategoriaId(int id) {
+        String consulta;
+        consulta = String.format("SELECT * FROM %s WHERE (%s = %s)",
+                ManejaSQL.Tablas.TBL_SUBCATEGORIAS,
+                ContratoEscuela.ColumnasSubcategorias.SUBC_CAT_ID,
+                id);
+
+        Cursor cursor = obtenerDataDB(consulta);
+
+        ArrayList<Subcategoria> subcategorias = new ArrayList<Subcategoria>();
+        cursor.moveToFirst();
+        for(int i = 0; i < cursor.getCount();i++)
+        {
+            Subcategoria subcategoria = new Subcategoria(cursor.getInt(1),cursor.getString(2));
+            subcategoria.setId(cursor.getInt(0));
+            subcategorias.add(subcategoria);
+            if (!cursor.isLast())
+            {
+                cursor.moveToNext();
+            }
+        }
+
+        return subcategorias;
     }
 
 

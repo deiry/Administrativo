@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/contenedor_item_estudiante"
+<<<<<<< HEAD
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+=======
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>>>>>>> configuracion
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
+        android:id="@+id/id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        app:cardElevation="7dp"
-        app:cardUseCompatPadding="true">
+        android:layout_margin="7dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/iv_item_estudiante_foto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_item_estudiante_nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_column="0"
+            android:layout_row="1"
+            android:gravity="center_vertical|center"
+            android:text="Pepito"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/iv_item_estudiante_foto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:srcCompat="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/tv_item_estudiante_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_row="1"
-                android:gravity="center_vertical|center"
-                android:text="Pepito"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_item_estudiante_apellido"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_row="1"
-                android:gravity="center_vertical|center"
-                android:text="Perez Gomez"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/tv_item_estudiante_apellido"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:gravity="center_vertical|center"
+            android:text="Perez Gomez"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

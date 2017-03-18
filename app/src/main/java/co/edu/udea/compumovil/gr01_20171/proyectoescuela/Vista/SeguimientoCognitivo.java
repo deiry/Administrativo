@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -26,11 +27,13 @@ public class SeguimientoCognitivo extends Activity {
 
     private ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
+    private int hola = 0;
+    private int[] contadores;
 
     private OperacionesBaseDeDatos manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
 
@@ -38,25 +41,20 @@ public class SeguimientoCognitivo extends Activity {
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
-        Grupo grupo = new Grupo(1,"A");
-        getApplicationContext().deleteDatabase("pedidos.db");
-        manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
-
-        insertarCategoriasCognitivas();
     }
 
 
+    private void crearGridView()
+    {
+        estudiantes = manager.obtenerEstudiantesDB(grupo);
 
+        contadores = new int[estudiantes.size()];
 
-
-     //   TituloGrupoFragment fragment = new TituloGrupoFragment();
-
-      //  fragmentTransaction.commit();
-
-
-    private void crearGridView() {
-
+        for (int i = 0; i < contadores.length;i++)
+        {
+            contadores[i] = 0;
+        }
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes);
 
@@ -69,18 +67,37 @@ public class SeguimientoCognitivo extends Activity {
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                contadores[position]++;
+                LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
+                switch (contadores[position])
+                {
+                    case 1:
+                    {
+                        ll.setBackground(getDrawable(R.color.colorAccent));
+                        break;
+                    }
+                    case 2:
+                    {
+                        ll.setBackground(getDrawable(R.color.colorPrimary));
+                        break;
+                    }
+                    case 3:
+                    {
+                        ll.setBackground(getDrawable(R.color.cardview_light_background));
+                        contadores[position] = 0;
+                        break;
+                    }
+                }
+
 
                 Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
                 intent.putExtra("id",estudiantes.get(position).getIdentificacion());
-                startActivity(intent);
+                //startActivity(intent);
+
 
             }
         });
-
-
-
-
     }
 
     @Override
@@ -91,13 +108,5 @@ public class SeguimientoCognitivo extends Activity {
         super.onResume();
     }
 
-    private void insertarCategoriasCognitivas() {
-        //Categoria aplicar = new Categoria(getResources().getString(R.string.aplicar),1);
-        //manager.insertarCategorias(aplicar);
-
-        ArrayList<Categoria> categorias = manager.obtenerCategorias();
-
-
-    }
 
 }
