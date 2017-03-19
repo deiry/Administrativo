@@ -103,10 +103,10 @@ public class AsistenciaV extends AppCompatActivity {
     }
     public String giveDate() {
         Calendar cal = Calendar.getInstance();
-<<<<<<< HEAD
+/*
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        return sdf.format(cal.getTime());
-=======
+        return sdf.format(cal.getTime());*/
+
         /*SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
         return sdf.format(cal.getTime());*/
 
@@ -115,8 +115,7 @@ public class AsistenciaV extends AppCompatActivity {
         int año = cal.get(Calendar.YEAR);
         String fecha = dia+"/"+mes+"/"+año;
         return fecha;
->>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
-    }
+}
 
     public void modificarAsistencia(int indicador,int posicionEst){
         co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia asistencia;
