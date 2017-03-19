@@ -37,7 +37,7 @@ public class AsistenciaV extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seguimiento_cognitivo);
+        setContentView(R.layout.activity_asistencia_v);
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
@@ -103,19 +103,12 @@ public class AsistenciaV extends AppCompatActivity {
     }
     public String giveDate() {
         Calendar cal = Calendar.getInstance();
-/*
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        return sdf.format(cal.getTime());*/
 
-        /*SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
-        return sdf.format(cal.getTime());*/
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(cal.getTime());
 
-        int dia =cal.get(Calendar.DAY_OF_MONTH);
-        int mes = cal.get(Calendar.MONTH)+1;
-        int año = cal.get(Calendar.YEAR);
-        String fecha = dia+"/"+mes+"/"+año;
-        return fecha;
-}
+    }
+
 
     public void modificarAsistencia(int indicador,int posicionEst){
         co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia asistencia;
