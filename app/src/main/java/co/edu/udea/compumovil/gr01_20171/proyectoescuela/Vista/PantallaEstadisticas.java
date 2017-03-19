@@ -31,7 +31,7 @@ public class PantallaEstadisticas extends AppCompatActivity {
     }
 
     public void clickEstadAsistencia(View v){
-        intent = new Intent(this,EstadisticasAsistencia.class);
+        intent = new Intent(this,ListarEstudiantesAsistencia.class);
         intent.putExtra("GRUPO",grupo);
         startActivity(intent);
 
