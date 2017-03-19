@@ -67,7 +67,11 @@ public class ListarEstudiantesAsistencia extends AppCompatActivity {
         }
         return estudiantes;
     }
-
+        public void clickGrupales(View view){
+            intent = new Intent(this,InfoAsistenciaGrupo.class);
+            intent.putExtra("GRUPO",grupo);
+            startActivity(intent);
+        }
  }
 
 

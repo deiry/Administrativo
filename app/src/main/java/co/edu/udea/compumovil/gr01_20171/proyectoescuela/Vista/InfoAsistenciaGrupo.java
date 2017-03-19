@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
@@ -19,42 +21,52 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     Intent intent;
     Bundle bundle;
     Grupo grupo;
-    OperacionesBaseDeDatos manager;
+    OperacionesBaseDeDatos datos;
     EditText faltasMes;
     EditText diaMayorFaltas;
+    ArrayList<Asistencia>faltasa;
+    ArrayList<Asistencia> faltasmes;
 
 
-    private ArrayList<Estudiante> estudiantes;
+     ArrayList<Estudiante> estudiantes;
      ArrayList<Asistencia> asistencia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_asistencia_grupo);
-        /*intent = getIntent();
+        getApplicationContext().deleteDatabase("pedidos.db");
+        datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
-        getApplicationContext().deleteDatabase("pedidos.db");
-        manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
-        estudiantes = manager.obtenerEstudiantesDB(grupo);*/
-
-      /*  Asistencia ramiro = new Asistencia("18-03-2017",1234,"faltó");
-        Asistencia ruperta= new Asistencia("15-03-2017",1523,"faltó");
-        Asistencia pepito = new Asistencia("12-03-2017",id,"tarde");
-        Asistencia pepito2 = new Asistencia("12-04-2017",id,"faltó");
-        asistencia.add(pepito);
-       asistencia.add(ramiro);
-        asistencia.add(ruperta);
-        asistencia.add(pepito2);*/
+        estudiantes = datos.obtenerEstudiantesDB(grupo);
         faltasMes= (EditText)findViewById(R.id.falta_utm_mes);
         diaMayorFaltas=(EditText)findViewById(R.id.dia_mayor_faltas);
-        //prueba
-      /*ArrayList<Asistencia>faltas=faltas(asistencia);
-        ArrayList<Asistencia> faltasmes= faltasUltimoMes(faltas);
-        faltasMes.setText(faltasmes.size());
+       asistencia=obtenerAsistenciaGrupo(estudiantes);
+       /* if (asistencia!=null) {
+            faltasa = faltas(asistencia);
+            faltasmes = faltasUltimoMes(faltasa);
+            faltasMes.setText(faltasmes.size());
 
-        diaMayorFaltas.setText(diaMayorFaltas(faltasmes));*/
-
+            diaMayorFaltas.setText(diaMayorFaltas(faltasmes));
+        }*/
     }
+
+    public ArrayList<Asistencia> obtenerAsistenciaGrupo(ArrayList<Estudiante> estudiantes){
+        ArrayList<Asistencia> asistenciaGrupo = new ArrayList<>();
+        for(int i=0;i<estudiantes.size();i++){
+            Estudiante estudiante=estudiantes.get(i);
+            ArrayList<Asistencia> asistenciaEstudiante;
+            asistenciaEstudiante= datos.obtenerAsistenciaEstudiante(Integer.toString(estudiante.getIdentificacion()));
+            if(asistenciaEstudiante!=null) {
+                for (int j = 0; j < asistenciaEstudiante.size(); j++) {
+                    asistenciaGrupo.add(asistenciaEstudiante.get(i));
+                }
+            }
+        }
+        return asistenciaGrupo;
+    }
+
  //Arroja todas las faltas del array de asistencia
 
     public ArrayList<Asistencia> faltas(ArrayList<Asistencia> asistencia){
@@ -85,39 +97,42 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     public ArrayList<Asistencia> faltasUltimoMes(ArrayList<Asistencia> asistenciaFaltas){
         Calendar cal = Calendar.getInstance();
         ArrayList<Asistencia> faltasUltimomes = faltas(asistenciaFaltas);
-        int mesActual = cal.get(Calendar.MONTH)+1;
-        int mesFecha;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        String mesActual= sdf.format(cal.getTime());
+        String mesFecha;
         String fecha="";
         for (int i=0; i<asistenciaFaltas.size();i++) {
             fecha = asistenciaFaltas.get(i).getFecha();
-            mesFecha = fecha.charAt(3) + fecha.charAt(4);
-            if(mesFecha==mesActual){
+            mesFecha = ""+fecha.charAt(3) + fecha.charAt(4);
+            if(mesFecha.equals(mesActual)){
                 faltasUltimomes.add(asistenciaFaltas.get(i));
             }
         }
         return faltasUltimomes;
     }
     //Le pasa por parámetro lo que arrojó el metodo llegadas tarde
-    public ArrayList<Asistencia> llegadasTardeUltimoMes(ArrayList<Asistencia> asisLlegadasTarde){
+    public  ArrayList<Asistencia> llegadasTardeUltimoMes(ArrayList<Asistencia> asisLlegadasTarde){
         Calendar cal = Calendar.getInstance();
         ArrayList<Asistencia> llegadasTarde = llegadasTarde(asisLlegadasTarde);
-        int mesActual = cal.get(Calendar.MONTH)+1;
-        int mesFecha;
+        SimpleDateFormat sdf = new SimpleDateFormat("MM");
+        String mesActual= sdf.format(cal.getTime());
+        String mesFecha="";
         String fecha="";
         for (int i=0; i<asisLlegadasTarde.size();i++) {
             fecha = asisLlegadasTarde.get(i).getFecha();
-            mesFecha = fecha.charAt(3) + fecha.charAt(4);
-            if(mesFecha==mesActual){
+            mesFecha = ""+fecha.charAt(3)+fecha.charAt(4);
+            if(mesFecha.equals(mesActual)){
                 llegadasTarde.add(asisLlegadasTarde.get(i));
             }
         }
         return llegadasTarde;
     }
     //el array del parametro es el de faltas ultimo mes
-    public int diaMayorFaltas(ArrayList<Asistencia> faltas){
+    public  int diaMayorFaltas(ArrayList<Asistencia> faltas){
         Calendar cal = Calendar.getInstance();
-        int dia= cal.get(Calendar.DAY_OF_MONTH);
-        int[] faltasdias = new int[dia];
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        String dia= sdf.format(cal.getTime());
+        int[] faltasdias = new int[Integer.parseInt(dia)];
         for(int i=0;i< faltasdias.length;i++){
             faltasdias[i]=0;
         }
