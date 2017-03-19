@@ -27,6 +27,8 @@ public class SeguimientoCognitivo extends Activity {
 
     private ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
+    private int hola = 0;
+    private int[] contadores;
 
     private OperacionesBaseDeDatos manager;
     @Override
@@ -34,6 +36,8 @@ public class SeguimientoCognitivo extends Activity {
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seguimiento_cognitivo);
+
+
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
@@ -45,6 +49,12 @@ public class SeguimientoCognitivo extends Activity {
     {
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
+        contadores = new int[estudiantes.size()];
+
+        for (int i = 0; i < contadores.length;i++)
+        {
+            contadores[i] = 0;
+        }
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes);
 
@@ -58,10 +68,32 @@ public class SeguimientoCognitivo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                contadores[position]++;
+                LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
+                switch (contadores[position])
+                {
+                    case 1:
+                    {
+                        ll.setBackground(getDrawable(R.color.colorAccent));
+                        break;
+                    }
+                    case 2:
+                    {
+                        ll.setBackground(getDrawable(R.color.colorPrimary));
+                        break;
+                    }
+                    case 3:
+                    {
+                        ll.setBackground(getDrawable(R.color.cardview_light_background));
+                        contadores[position] = 0;
+                        break;
+                    }
+                }
+
 
                 Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
                 intent.putExtra("id",estudiantes.get(position).getIdentificacion());
-                startActivity(intent);
+                //startActivity(intent);
 
 
             }

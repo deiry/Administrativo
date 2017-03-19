@@ -1,42 +1,25 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 
-import java.util.ArrayList;
-
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaSQL;
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.vistasMetas.PrincipalMetas;
 
 public class PantallaPpal extends AppCompatActivity {
 
-    Grupo grupo;
-    Intent intent;
-    Bundle bundle;
+    private Grupo grupo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
-        intent = getIntent();
-        bundle = intent.getExtras();
-        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
 
 
         //obtener extra del grupo que esta seleccionado
@@ -70,9 +53,8 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClickIrAsistencia(View view)
     {
-        intent = new Intent(this,Asistencia.class);
-        intent.putExtra("GRUPO",grupo);
-        startActivity(intent);
+        Intent ingresar = new Intent(PantallaPpal.this, Asistencia.class);
+        startActivity(ingresar);
     }
 
     public void ClckIrMetas(View view)

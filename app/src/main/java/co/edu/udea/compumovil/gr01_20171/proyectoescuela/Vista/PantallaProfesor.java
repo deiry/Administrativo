@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
@@ -88,12 +87,6 @@ public class PantallaProfesor extends AppCompatActivity {
         gruposString=convertirGrupos(grupos);
         AlertDialog dialog = listarGrupos(gruposString);
         dialog.show();
-    }
-
-    public void clickMaterias(View view)
-    {
-        Intent intent = new Intent(this, MateriaAdicion.class);
-        startActivity(intent);
     }
 
 
