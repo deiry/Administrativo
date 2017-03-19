@@ -103,19 +103,19 @@ public class AsistenciaV extends AppCompatActivity {
     }
     public String giveDate() {
         Calendar cal = Calendar.getInstance();
-<<<<<<< HEAD
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(cal.getTime());
-=======
+
         /*SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
         return sdf.format(cal.getTime());*/
-
+/*
         int dia =cal.get(Calendar.DAY_OF_MONTH);
         int mes = cal.get(Calendar.MONTH)+1;
         int año = cal.get(Calendar.YEAR);
         String fecha = dia+"/"+mes+"/"+año;
-        return fecha;
->>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
+        return fecha;*/
+
     }
 
     public void modificarAsistencia(int indicador,int posicionEst){

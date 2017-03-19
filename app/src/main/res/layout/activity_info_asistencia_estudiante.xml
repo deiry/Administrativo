@@ -138,7 +138,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
-<<<<<<< HEAD
 
     <ListView
         android:layout_width="match_parent"
@@ -177,6 +176,5 @@
         android:text="Fecha lllegadas tarde" />
 
 </RelativeLayout>
-=======
-</RelativeLayout>
->>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
+
+
