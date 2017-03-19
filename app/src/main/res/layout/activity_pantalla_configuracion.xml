@@ -24,7 +24,27 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:orientation="vertical">
+<<<<<<< HEAD
 
+=======
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"></LinearLayout>
+
+            <Button
+                android:id="@+id/btn_ver_grupos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Ver grupos"/>
+
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+        </LinearLayout>
+>>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -56,7 +76,10 @@
             </LinearLayout>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -80,4 +103,3 @@
 
     </LinearLayout>
 
-</LinearLayout>

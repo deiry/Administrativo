@@ -37,17 +37,28 @@
             </intent-filter>
         </activity>
         <activity android:name=".Vista.AsistenciaV" />
+<<<<<<< HEAD
         <activity android:name=".Vista.AsistenciaEstudianteAdapter" />
         <activity android:name=".Vista.PantallaEstadisticas" />
         <activity android:name=".Vista.EstadisticasAsistencia" />
         <activity android:name=".Vista.InfoAsistenciaEstudiante" />
         <activity android:name=".Vista.Asistencia" />
+=======
+        <activity android:name=".Vista.PantallaEstadisticas" />
+        <activity android:name=".Vista.EstadisticasAsistencia" />
+        <activity android:name=".Vista.InfoAsistenciaEstudiante" />
+
+>>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
         <!-- <activity android:name=".Vista.AsistenciaEstudianteAdapter" /> -->
         <activity
             android:name=".Vista.MateriaAdicion"
             android:parentActivityName=".Vista.PantallaProfesor" />
+<<<<<<< HEAD
         <activity android:name=".Vista.AdapterListaEstudiantesAsistencia" />
         <activity android:name=".Vista.ListarEstudiantesAsistencia"></activity>
+=======
+        <activity android:name=".Vista.InfoAsistenciaGrupo"></activity>
+>>>>>>> 5224b77ea7ffd8d2696736438aa9e0dcf03a6ea4
     </application>
 
 </manifest>

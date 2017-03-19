@@ -15,6 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:onClick="clickResultadosGrupo"
         android:text="resultados grupo "
         tools:layout_editor_absoluteX="-7dp"
         tools:layout_editor_absoluteY="-6dp" />

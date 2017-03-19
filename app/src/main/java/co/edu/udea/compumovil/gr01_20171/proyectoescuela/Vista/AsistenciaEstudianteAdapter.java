@@ -16,11 +16,10 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 /**
- * Created by ACER on 17/03/2017.
+ * Created by ACER on 18/03/2017.
  */
 
 public class AsistenciaEstudianteAdapter extends BaseAdapter {
-
     private Context context;
     private ArrayList<Estudiante> estudiantes;
 
@@ -36,6 +35,7 @@ public class AsistenciaEstudianteAdapter extends BaseAdapter {
         /*this.nombres = nombres;
         this.apellidos = apellidos;*/
     }
+
     @Override
     public int getCount() {
         //return nombres.length;
