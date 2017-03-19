@@ -77,17 +77,17 @@ public class AsistenciaV extends AppCompatActivity {
                 {
                     case 1:
                     {
-                        ll.setBackground(getDrawable(R.color.colorAccent));
+                        ll.setBackgroundColor(Color.RED);
                         break;
                     }
                     case 2:
                     {
-                        ll.setBackground(getDrawable(R.drawable.yellow_color));
+                        ll.setBackgroundColor(Color.YELLOW);
                         break;
                     }
                     case 3:
                     {
-                        ll.setBackground(getDrawable(R.color.transparente));
+                        ll.setBackgroundColor(Color.TRANSPARENT);
                         contadores[position] = 0;
                         break;
                     }
@@ -103,8 +103,40 @@ public class AsistenciaV extends AppCompatActivity {
     }
     public String giveDate() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         return sdf.format(cal.getTime());
+    }
+
+    public void modificarAsistencia(int indicador,int posicionEst){
+        co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia asistencia;
+
+        String estado = "";
+
+        String date = giveDate();
+
+        switch (indicador){
+            case 1:
+                estado = "faltó";
+                break;
+            case 2:
+                estado = "tarde";
+                break;
+        }
+        asistencia = new co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia(date,
+                estudiantes.get(posicionEst).getIdentificacion(),estado );
+        datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        try{
+            datos.getDb().beginTransaction();
+            datos.actualizarAsistencia(asistencia);
+            datos.getDb().setTransactionSuccessful();
+            Toast.makeText(getApplicationContext(),"Registros modificados",Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Se ha producido un error",Toast.LENGTH_SHORT).show();
+        }finally{
+            datos.getDb().endTransaction();
+        }
     }
 
     public void agregarAsistencia(int indicador,int posicionEst){
@@ -129,7 +161,7 @@ public class AsistenciaV extends AppCompatActivity {
             datos.getDb().beginTransaction();
             datos.insertarAsistencia(asistencia);
             datos.getDb().setTransactionSuccessful();
-            Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Registros ingresados",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             e.printStackTrace();

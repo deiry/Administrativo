@@ -43,7 +43,7 @@ public class PantallaPpal extends AppCompatActivity {
         asistencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaPpal.this, PantallaConfiguracion.class);
+                Intent ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
                 startActivity(ingresar);
             }
         });

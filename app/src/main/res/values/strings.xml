@@ -27,6 +27,11 @@
     <string name="metas">Metas</string>
     <string name="asistencia">Asistencia</string>
 
+    <string-array name="filtros">
+        <item>Asistencia</item>
+        <item>Falta</item>
+    </string-array>
+
 
 </resources>
 
