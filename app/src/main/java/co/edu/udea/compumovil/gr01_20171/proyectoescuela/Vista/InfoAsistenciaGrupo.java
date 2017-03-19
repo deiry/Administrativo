@@ -40,16 +40,16 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         estudiantes = datos.obtenerEstudiantesDB(grupo);
-        faltasMes= (EditText)findViewById(R.id.falta_utm_mes);
-        diaMayorFaltas=(EditText)findViewById(R.id.dia_mayor_faltas);
-       asistencia=obtenerAsistenciaGrupo(estudiantes);
-       /* if (asistencia!=null) {
+        faltasMes = (EditText)findViewById(R.id.falta_utm_mes);
+        diaMayorFaltas =(EditText)findViewById(R.id.dia_mayor_faltas);
+        asistencia = obtenerAsistenciaGrupo(estudiantes);
+       if (asistencia!=null) {
             faltasa = faltas(asistencia);
             faltasmes = faltasUltimoMes(faltasa);
-            faltasMes.setText(faltasmes.size());
+            faltasMes.setText(String.valueOf(faltasmes.size()));
 
-            diaMayorFaltas.setText(diaMayorFaltas(faltasmes));
-        }*/
+            diaMayorFaltas.setText(String.valueOf(diaMayorFaltas(faltasmes)));
+        }
     }
 
     public ArrayList<Asistencia> obtenerAsistenciaGrupo(ArrayList<Estudiante> estudiantes){
