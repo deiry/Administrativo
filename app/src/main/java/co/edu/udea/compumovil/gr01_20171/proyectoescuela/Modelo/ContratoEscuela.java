@@ -49,6 +49,7 @@ public class ContratoEscuela {
         String SEG_ESTADO = "seg_estado";
         String SEG_FECHA = "seg_fecha";
         String SEG_TIPO = "seg_tipo";
+        String SEG_MAT_ID = "seg_mat_id";
     }
 
     interface ColumnasSubcategorias{
