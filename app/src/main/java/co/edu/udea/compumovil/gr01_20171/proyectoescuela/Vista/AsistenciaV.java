@@ -37,7 +37,7 @@ public class AsistenciaV extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seguimiento_cognitivo);
+        setContentView(R.layout.activity_asistencia_v);
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
