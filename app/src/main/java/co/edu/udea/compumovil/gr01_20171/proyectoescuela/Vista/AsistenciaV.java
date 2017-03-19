@@ -103,8 +103,14 @@ public class AsistenciaV extends AppCompatActivity {
     }
     public String giveDate() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
-        return sdf.format(cal.getTime());
+        /*SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+        return sdf.format(cal.getTime());*/
+
+        int dia =cal.get(Calendar.DAY_OF_MONTH);
+        int mes = cal.get(Calendar.MONTH)+1;
+        int año = cal.get(Calendar.YEAR);
+        String fecha = dia+"/"+mes+"/"+año;
+        return fecha;
     }
 
     public void agregarAsistencia(int indicador,int posicionEst){

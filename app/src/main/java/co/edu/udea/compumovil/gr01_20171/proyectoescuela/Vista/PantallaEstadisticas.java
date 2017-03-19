@@ -17,17 +17,24 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaEstadisticas extends AppCompatActivity {
 
-    Intent ingresar;
+    Intent intent;
+    Bundle bundle;
+    Grupo grupo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_estadisticas);
+        intent = getIntent();
+        bundle = intent.getExtras();
+        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
 
     }
 
     public void clickEstadAsistencia(View v){
-        ingresar = new Intent(this,EstadisticasAsistencia.class);
-        startActivity(ingresar);
+        intent = new Intent(this,EstadisticasAsistencia.class);
+        intent.putExtra("GRUPO",grupo);
+        startActivity(intent);
+
     }
 
 }

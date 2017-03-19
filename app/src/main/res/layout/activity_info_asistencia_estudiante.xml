@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.InfoAsistenciaEstudiante"
-    android:weightSum="1">
+    android:weightSum="1"
+    tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.InfoAsistenciaEstudiante">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="111dp"
         android:layout_height="96dp"
         android:orientation="vertical"
-        android:weightSum="1"
-        android:id="@+id/linearLayout">
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -32,61 +32,61 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="92dp"
-        android:layout_weight="1"
-        android:text="Nombre Estudiante"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/linearLayout"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/linearLayout" />
+        android:layout_weight="1"
+        android:text="Nombre Estudiante" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Faltas:"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
         android:layout_alignBaseline="@+id/editText4"
         android:layout_alignBottom="@+id/editText4"
         android:layout_alignLeft="@+id/textView29"
-        android:layout_alignStart="@+id/textView29" />
+        android:layout_alignStart="@+id/textView29"
+        android:text="Faltas:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView26"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_below="@+id/textView26"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText4"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:text="Llegadas tarde:"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:layout_below="@+id/editText4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp" />
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editText4"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_below="@+id/editText4"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView30"
@@ -104,15 +104,15 @@
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp"
         android:layout_alignBaseline="@+id/textView30"
         android:layout_alignBottom="@+id/textView30"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_toEndOf="@+id/textView30"
         android:layout_toRightOf="@+id/textView30"
-        android:layout_toEndOf="@+id/textView30" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
     <TextView
         android:id="@+id/textView31"
