@@ -60,21 +60,21 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) getContext()
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.custom_list_layout, null, true);
+            convertView = layoutInflater.inflate(R.layout.activity_adapter_lista_estudiantes_asistencia, null, true);
         }
 
         Estudiante estudiante = getItem(position);
-        ImageView imageEst;
+        ImageView imaEstA;
         TextView nombreEst;
         TextView apellidoEst;
         TextView idEst;
         Uri uri = pathToUri(estudiante.getFoto());
-        imageEst = (ImageView)convertView.findViewById(R.id.imgEstA);
+        imaEstA = (ImageView)convertView.findViewById(R.id.imaEstA);
 
         if (!uri.equals(Uri.EMPTY)){
-            imageEst.setImageURI(pathToUri(estudiante.getFoto()));
+            imaEstA.setImageURI(pathToUri(estudiante.getFoto()));
         }else{
-            imageEst.setImageResource(R.mipmap.ic_launcher);
+            imaEstA.setImageResource(R.mipmap.ic_launcher);
         }
 
         nombreEst = (TextView)convertView.findViewById(R.id.txtNombreA);
@@ -82,7 +82,7 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
 
         apellidoEst = (TextView)convertView.findViewById(R.id.txtApellidoA);
         apellidoEst.setText(estudiante.getApellidos());
-        idEst = (TextView)convertView.findViewById(R.id.txtIde);
+        idEst = (TextView)convertView.findViewById(R.id.txtIdeA);
         idEst.setText(Integer.toString(estudiante.getIdentificacion()));
         nombreEst.setTextColor(Color.BLACK);
         apellidoEst.setTextColor(Color.BLACK);
