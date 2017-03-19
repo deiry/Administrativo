@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -46,6 +47,59 @@ public class AsistenciaV extends AppCompatActivity {
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
         CrearGridView();
+        Button addRegistros = (Button) findViewById(R.id.btnAddRegistros);
+        Button modRegistros = (Button) findViewById(R.id.btnModRegistros);
+
+        addRegistros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i = 0 ; i<estudiantes.size();i++){
+                    switch (contadores[i]){
+                        case 1:
+                        {
+                            agregarAsistencia(1,i);
+                            break;
+                        }
+                        case 2:
+                        {
+                            agregarAsistencia(2,i);
+                            break;
+                        }
+                        case 3:
+                        {
+                            break;
+                        }
+                    }
+
+                }
+            }
+        });
+
+
+        modRegistros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i = 0 ; i<estudiantes.size();i++){
+                    switch (contadores[i]){
+                        case 1:
+                        {
+                            modificarAsistencia(1,i);
+                            break;
+                        }
+                        case 2:
+                        {
+                            modificarAsistencia(2,i);
+                            break;
+                        }
+                        case 3:
+                        {
+                            break;
+                        }
+                    }
+
+                }
+            }
+        });
 
     }
 
@@ -92,16 +146,13 @@ public class AsistenciaV extends AppCompatActivity {
                         break;
                     }
                 }
-
-
-
-
             }
         });
 
 
     }
-    public String giveDate() {
+
+    public static String giveDate() {
         Calendar cal = Calendar.getInstance();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
