@@ -3,21 +3,15 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO;
 import java.util.Date;
 
 public class Asistencia {
-    private String fecha;
+    private Date fecha;
     private int idEstudiante;
     private String asistencia;
 
-    public Asistencia(String fecha, int idEstudiante, String asistencia) {
-        this.fecha = fecha;
-        this.idEstudiante = idEstudiante;
-        this.asistencia = asistencia;
-    }
-
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

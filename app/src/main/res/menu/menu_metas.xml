@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Vista.vistasMetas.PrincipalMetas">
+
+    <item
+        android:id="@+id/opcionCrear"
+        android:title="CREAR META" />
+    <item
+        android:id="@+id/opcionBorrar"
+        android:title="BORRAR META" />
+    <item
+        android:id="@+id/opcionAsignar"
+        android:title="ASIGNAR META" />
+    <item
+        android:id="@+id/opcionCumplimiento"
+        android:title="CUMPLIMIENTO" />
+    <item
+        android:id="@+id/opcionEstadistica"
+        android:title="MIRAR ESTADISTICAS" />
+</menu>

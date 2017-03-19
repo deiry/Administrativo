@@ -49,7 +49,6 @@ public class ContratoEscuela {
         String SEG_ESTADO = "seg_estado";
         String SEG_FECHA = "seg_fecha";
         String SEG_TIPO = "seg_tipo";
-        String SEG_MAT_ID = "seg_mat_id";
     }
 
     interface ColumnasSubcategorias{
@@ -65,10 +64,16 @@ public class ContratoEscuela {
         String CAT_TIPO = "cat_tipo";
     }
 
+    interface ColumnasListaMetas{
+        String LISTMET_ID = "listmet_id";
+        String LISTMET_NOMBRE = "listmet_nombre";
+        String MET_TIPO = "met_tipo";
+    }
+
     interface ColumnasMetas{
         String MET_ID = "met_id";
-        String MET_LISTMET_ID = "met_listmet_id";
-        String MET_ID_GPEST_ID = "met_id_gpest_id";
+        String EST_ID = "est_id";
+        String LISTMETA_ID = "met_listmet_id";
         String MET_FECHA_INICIO = "met_fecha_inicio";
         String MET_DURACION = "met_duracion";
 
@@ -76,24 +81,9 @@ public class ContratoEscuela {
 
     interface ColumnasCumplimientoMetas{
         String CUMPLIMIENTO_ID = "cumplimiento_id";
+        String MET_ID = "met_id";
         String MET_FECHA = "met_fecha";
         String MET_ESTADO = "met_estado";
-        String MET_ID = "met_id";
-    }
-
-    interface ColumnasGrupoEstudiantes{
-        String GPEST_ID = "gpest_id";
-        String GPEST_NOMBRE = "gpest_nombre";
-    }
-
-    interface ColumnasListaMetas{
-        String LISTMET_ID = "listmet_id";
-        String LISTMET_NOMBRE = "listmet_nombre";
-    }
-
-    interface ColumnasListaGrupoEstudiantes{
-        String GPLISTEST_GPEST_ID = "gplistest_gpest_id";
-        String GPELISTEST_EST_IDENTIFICACION = "gplistest_est_identificacion";
     }
 
 
@@ -133,21 +123,21 @@ public class ContratoEscuela {
         }
     }
 
-    public static class Metas implements ColumnasMetas{
-        public static String generarIdMetas(){
-            return "MET-" + UUID.randomUUID().toString();
-        }
-    }
-
     public static class ListaMetas implements ColumnasListaMetas{
         public static String generarIdListaMetas(){
             return "LISTMET-" + UUID.randomUUID().toString();
         }
     }
 
-    public static class GrupoEstudiantes implements ColumnasGrupoEstudiantes{
-        public static String generarIdGrupoEstudiantes(){
-            return "GPEST-" + UUID.randomUUID().toString();
+    public static class Metas implements ColumnasMetas{
+        public static String generarIdMetas(){
+            return "MET-" + UUID.randomUUID().toString();
+        }
+    }
+
+    public static class CumplimientoMetas implements ColumnasCumplimientoMetas{
+        public static String generarIdListaMetas(){
+            return "CUMPMET-" + UUID.randomUUID().toString();
         }
     }
 
@@ -157,15 +147,6 @@ public class ContratoEscuela {
         }
     }
 
-    public static class ListaGrupoEstudiantes implements ColumnasListaGrupoEstudiantes{
-
-    }
-
-    public static class CumplimientoMetas implements ColumnasCumplimientoMetas{
-
-    }
-
     private ContratoEscuela(){}
-
 
 }

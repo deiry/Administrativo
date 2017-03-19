@@ -2,6 +2,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +65,6 @@ public class EstudianteAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.item_estudiante,parent,false);
         }
 
-
         TextView tvNombre = (TextView) convertView.findViewById(R.id.tv_item_estudiante_nombre);
         TextView tvApellido = (TextView) convertView.findViewById(R.id.tv_item_estudiante_apellido);
         ImageView ivFoto = (ImageView) convertView.findViewById(R.id.iv_item_estudiante_foto);
@@ -80,7 +80,6 @@ public class EstudianteAdapter extends BaseAdapter
         {
             ivFoto.setImageResource(R.mipmap.ic_launcher);
         }
-
 
         tvNombre.setText(estudiante.getNombres());
         tvApellido.setText(estudiante.getApellidos());
