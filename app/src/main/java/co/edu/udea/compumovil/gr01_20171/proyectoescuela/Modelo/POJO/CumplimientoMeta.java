@@ -7,7 +7,7 @@ public class CumplimientoMeta {
     private int id;
     private int metaId;
     private Date fecha;
-    private boolean estado;
+    private int estado;
 
     public int getId() {
         return id;
@@ -33,11 +33,11 @@ public class CumplimientoMeta {
         this.fecha = fecha;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 }

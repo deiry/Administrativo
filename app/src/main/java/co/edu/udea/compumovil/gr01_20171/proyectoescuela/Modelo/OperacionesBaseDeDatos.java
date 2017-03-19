@@ -87,7 +87,6 @@ public final class OperacionesBaseDeDatos {
         }
 
 
-
     }
 
     /**
@@ -115,20 +114,12 @@ public final class OperacionesBaseDeDatos {
      * Método para materias a la base de datos
      */
 
-    public boolean insertarMaterias(Materia materia) {
+    public void insertarMaterias(Materia materia) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Materias.MTA_ID, materia.getId());
         valores.put(ContratoEscuela.Materias.MTA_NOMBRE, materia.getNombre());
-        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
-
-        if(response != -1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
     }
 
     /**
@@ -148,9 +139,7 @@ public final class OperacionesBaseDeDatos {
      */
     public void agregarMeta(ListaMetas nuevaMeta) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
-        String id = ContratoEscuela.ListaMetas.generarIdListaMetas();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.ListaMetas.LISTMET_ID,nuevaMeta.getId());
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,nuevaMeta.getNombre());
         valores.put(ContratoEscuela.ListaMetas.MET_TIPO, nuevaMeta.getTipo());
         db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS,null,valores);
@@ -162,7 +151,6 @@ public final class OperacionesBaseDeDatos {
     public void asignarMeta(Meta meta){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Metas.MET_ID, meta.getId());
         valores.put(ContratoEscuela.Metas.EST_ID, meta.getEstudianteId());
         valores.put(ContratoEscuela.Metas.LISTMETA_ID, meta.getListaMetasId());
         valores.put(ContratoEscuela.Metas.MET_FECHA_INICIO, String.valueOf(meta.getFechaInicio()));
@@ -171,26 +159,30 @@ public final class OperacionesBaseDeDatos {
     }
 
     /**
-     * Método para insertar seguimiento en la tabla de seguimiento
+     * Método para asignar un cumplimiento a una meta
      */
-    public boolean insertarSeguimiento(Seguimiento seguimiento) {
+    public void asignarCumplimiento(CumplimientoMeta cumplimiento){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.CumplimientoMetas.MET_ID, cumplimiento.getMetaId());
+        valores.put(ContratoEscuela.CumplimientoMetas.MET_FECHA, String.valueOf(cumplimiento.getFecha()));
+        valores.put(ContratoEscuela.CumplimientoMetas.MET_ESTADO, cumplimiento.getEstado());
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_CUMPLIMIENTO_METAS,null,valores);
+    }
+
+    /**
+     * Método para insertar seguimiento en la tabla de seguimiento
+     */
+    public void insertarSeguimiento(Seguimiento seguimiento) {
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Seguimiento.SEG_ID, seguimiento.getIdSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_SUBC_ID, seguimiento.getIdSubSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_EST_ID, seguimiento.getIdEst());
         valores.put(ContratoEscuela.Seguimiento.SEG_ESTADO, seguimiento.getEstado());
         valores.put(ContratoEscuela.Seguimiento.SEG_FECHA, seguimiento.getFecha().toString());
         valores.put(ContratoEscuela.Seguimiento.SEG_TIPO, seguimiento.getTipo());
-        valores.put(ContratoEscuela.Seguimiento.SEG_MAT_ID, seguimiento.getIdMateria());
-        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
-        if(response != -1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
     }
 
     /**
@@ -249,21 +241,7 @@ public final class OperacionesBaseDeDatos {
         return grupoAL;
     }
 
-    public ArrayList<Asistencia> obtenerAsistencia(){
-        String consulta = String.format("SELECT * FROM %s",ManejaSQL.Tablas.TBL_ASISTENCIA);
-        Cursor asistencia = obtenerDataDB(consulta);
-        Asistencia asist;
-        ArrayList<Asistencia> asistenciaAL = new ArrayList<>();
-        if(asistencia.moveToFirst()){
-            do{
-                asist = new Asistencia(asistencia.getString(0),asistencia.getInt(1),asistencia.getString(2));
-                asistenciaAL.add(asist);
-            }while(asistencia.moveToNext());
-        }
-        return asistenciaAL;
-    }
-
-    public boolean borrarEstudiante(String idEstudiante){
+    public boolean borrarEstudiante(String idEstudiante) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};
@@ -271,7 +249,6 @@ public final class OperacionesBaseDeDatos {
         return resultado > 0;
     }
 
-    // Probando Metodos
     public ArrayList<ListaMetas> listarMetas(){
         String consulta = "SELECT * FROM tbl_lista_metas";
         Cursor cursor = obtenerDataDB(consulta);
@@ -279,7 +256,8 @@ public final class OperacionesBaseDeDatos {
         ArrayList<ListaMetas> lista = new ArrayList<>();
         if(cursor.moveToFirst()){
             do{
-                meta = new ListaMetas(cursor.getInt(0),cursor.getString(1), cursor.getString(2));
+                meta = new ListaMetas(cursor.getString(1), cursor.getString(2));
+                meta.setId(cursor.getInt(0));
                 lista.add(meta);
             }while(cursor.moveToNext());
         }
@@ -345,12 +323,6 @@ public final class OperacionesBaseDeDatos {
         return categoria;
     }
 
-    /**
-     * obtiene las categorias de seguiemiento de acuerdo al tipo si es 1 retorna las categorias de
-     * seguimiento cognitivo y si es 2 retorna las categorias de seguimiento etico
-     * @param id tipo de categoria 1->Seguimiento Cognitivo 2->Seguimiento Etico
-     * @return retorna el ArrayList con todas las categorias de ese tipo
-     */
     public ArrayList<Categoria> obtenerCategorias(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE %s = %s",
@@ -378,11 +350,6 @@ public final class OperacionesBaseDeDatos {
         return categorias;
     }
 
-    /**
-     * obtieene las subcategorias a partir del id de la categoria
-     * @param id es el id de las categorias
-     * @return es un ArrayList de Subcategoria con todas las subcategorias de cada categoria
-     */
     public ArrayList<Subcategoria> obtenerSubCategoriasFromCategoriaId(int id) {
         String consulta;
         consulta = String.format("SELECT * FROM %s WHERE (%s = %s)",
@@ -407,35 +374,4 @@ public final class OperacionesBaseDeDatos {
 
         return subcategorias;
     }
-
-    /**
-     * obtiene todas las materias desde la table de materias y las lleva a un ArrayList
-     * @return retorna ArrayList con todas las Materias en la base de datos
-     */
-    public ArrayList<Materia> obtenerMaterias() {
-        String consulta;
-        consulta = String.format("SELECT * FROM %s",
-                ManejaSQL.Tablas.TBL_MATERIAS);
-
-        Cursor cursor = obtenerDataDB(consulta);
-
-        ArrayList<Materia> materias = new ArrayList<Materia>();
-        cursor.moveToFirst();
-        for(int i = 0; i < cursor.getCount();i++)
-        {
-            Materia materia = new Materia(cursor.getString(1));
-            materia.setId(cursor.getInt(0));
-            materias.add(materia);
-            if (!cursor.isLast())
-            {
-                cursor.moveToNext();
-            }
-        }
-
-        return materias;
-    }
-
-
-
-
 }

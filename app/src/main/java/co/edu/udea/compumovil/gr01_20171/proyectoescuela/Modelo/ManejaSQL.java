@@ -74,125 +74,82 @@ public class ManejaSQL extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String s = "PRAGMA foreign_kets=ON";
-        db.execSQL(s);
+        db.execSQL("PRAGMA foreign_kets=ON");
 
         //GRUPO
-        s = String.format("CREATE TABLE %s ( %s INTEGER ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER ," +
                         "%s VARCHAR(2) )",
-                Tablas.TBL_GRUPO, ContratoEscuela.Grupos.GRP_CURSO, ContratoEscuela.Grupos.GRP_GRUPO);
-        db.execSQL(s);
+                Tablas.TBL_GRUPO, ContratoEscuela.Grupos.GRP_CURSO, ContratoEscuela.Grupos.GRP_GRUPO));
 
         //ESTUDIANTE**
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY ," +
                         "%s VARCHAR(20),%s VARCHAR(20),%s VARCHAR(50),%s INTEGER,%s VARCHAR(2)" +
                         ",%s INTEGER,%s INTEGER )",
                 Tablas.TBL_ESTUDIANTE, ContratoEscuela.Estudiantes.EST_IDENTIFICACION,
                 ContratoEscuela.Estudiantes.EST_NOMBRES,ContratoEscuela.Estudiantes.EST_APELLIDOS,
                 ContratoEscuela.Estudiantes.EST_FOTO,ContratoEscuela.Estudiantes.EST_GRP_CURSO,
                 ContratoEscuela.Estudiantes.EST_GRP_GRUPO, ContratoEscuela.Estudiantes.EST_POS_FILA,
-                ContratoEscuela.Estudiantes.EST_POS_COL);
-        db.execSQL(s);
+                ContratoEscuela.Estudiantes.EST_POS_COL));
 
         //CATEGORIA
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
                         "%s VARCHAR(50), %s INTEGER)",
                 Tablas.TBL_CATEGORIAS,
                 ContratoEscuela.Categorias.CAT_ID,
                 ContratoEscuela.Categorias.CAT_NOMBRE,
-                ContratoEscuela.Categorias.CAT_TIPO);
-        db.execSQL(s);
+                ContratoEscuela.Categorias.CAT_TIPO));
 
         //SUBCATEGORIAS**
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s INTEGER,%s VARCHAR(50),%s VARCHAR(50) )",
                 Tablas.TBL_SUBCATEGORIAS,
                 ContratoEscuela.Subcategorias.SUBC_ID, ContratoEscuela.Subcategorias.SUBC_CAT_ID,
-                ContratoEscuela.Subcategorias.SUBC_NOMBRE, ContratoEscuela.Subcategorias.SUBC_ICONO);
-        db.execSQL(s);
+                ContratoEscuela.Subcategorias.SUBC_NOMBRE, ContratoEscuela.Subcategorias.SUBC_ICONO));
 
         //SEGUIMIENTO**
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s INTEGER(1),%s INTEGER(2) )",
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s VARCHAR(10) )",
                 Tablas.TBL_SEGUIMIENTO, ContratoEscuela.Seguimiento.SEG_ID, ContratoEscuela.Seguimiento.SEG_SUBC_ID,
                 ContratoEscuela.Seguimiento.SEG_EST_ID, ContratoEscuela.Seguimiento.SEG_ESTADO,
-                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO,
-                ContratoEscuela.Seguimiento.SEG_MAT_ID);
-        db.execSQL(s);
+                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO));
 
         //LISTAMETAS
-<<<<<<< HEAD
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "%s VARCHAR(50),%s VARCHAR (16) )",
+                        "%s VARCHAR(50),%s VARCHAR(16))",
                 Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID,
                 ContratoEscuela.ListaMetas.LISTMET_NOMBRE, ContratoEscuela.ListaMetas.MET_TIPO));
 
         //METAS
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s INTEGER,%s INTEGER,%s DATE,%s INTEGER )",
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s INTEGER,%s INTEGER,%s DATE,%s INTEGER)",
                 Tablas.TBL_METAS, ContratoEscuela.Metas.MET_ID, ContratoEscuela.Metas.EST_ID
                 , ContratoEscuela.Metas.LISTMETA_ID, ContratoEscuela.Metas.MET_FECHA_INICIO,
                 ContratoEscuela.Metas.MET_DURACION));
-=======
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50))",
-                Tablas.TBL_LISTA_METAS, ContratoEscuela.ListaMetas.LISTMET_ID,
-                ContratoEscuela.ListaMetas.LISTMET_NOMBRE);
-        db.execSQL(s);
-
-        //GRUPOSESTUDIANTES
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s VARCHAR(50))",
-                Tablas.TBL_GRUPOS_ESTUDIANTES, ContratoEscuela.GrupoEstudiantes.GPEST_ID,
-                ContratoEscuela.GrupoEstudiantes.GPEST_NOMBRE);
-        db.execSQL(s);
-
-        //METAS**
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s INTEGER,%s INTEGER,%s DATE,%s INTEGER )",
-                Tablas.TBL_META, ContratoEscuela.Metas.MET_ID, ContratoEscuela.Metas.MET_LISTMET_ID
-                , ContratoEscuela.Metas.MET_ID_GPEST_ID, ContratoEscuela.Metas.MET_FECHA_INICIO,
-                ContratoEscuela.Metas.MET_DURACION);
-        db.execSQL(s);
->>>>>>> refs/remotes/origin/master
 
         //CUMPLIMIENTOMETAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                        "%s INTEGER,%s DATE,%s BOOLEAN)",
+                        "%s INTEGER,%s DATE,%s INTEGER)",
                 Tablas.TBL_CUMPLIMIENTO_METAS,ContratoEscuela.ColumnasCumplimientoMetas.CUMPLIMIENTO_ID,
                 ContratoEscuela.ColumnasCumplimientoMetas.MET_ID,
                 ContratoEscuela.CumplimientoMetas.MET_FECHA, ContratoEscuela.ColumnasCumplimientoMetas.MET_ESTADO));
 
         //ASISTENCIA
-        s = String.format("CREATE TABLE %s ( %s VARCHAR(40) ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s DATE ," +
                         "%s INTEGER, %s VARCHAR(20) )",
                 Tablas.TBL_ASISTENCIA, ContratoEscuela.Asistencia.AST_FECHA, ContratoEscuela.Asistencia.AST_EST_ID,
-                ContratoEscuela.Asistencia.AST_ASISTENCIA);
-        db.execSQL(s);
+                ContratoEscuela.Asistencia.AST_ASISTENCIA));
 
-<<<<<<< HEAD
-=======
-        //GRUPOSLISTAESTUDIANTES
-        s = String.format("CREATE TABLE %s ( %s INTEGER  ," +
-                        "%s INTEGER)",
-                Tablas.TBL_GRUPOS_LISTA_ESTUDIANTES, ContratoEscuela.ListaGrupoEstudiantes.GPELISTEST_EST_IDENTIFICACION,
-                ContratoEscuela.ListaGrupoEstudiantes.GPLISTEST_GPEST_ID);
-        db.execSQL(s);
-
->>>>>>> refs/remotes/origin/master
         //MATERIAS
-        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s VARCHAR(20))",
                 Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID,
-                ContratoEscuela.Materias.MTA_NOMBRE);
-        db.execSQL(s);
+                ContratoEscuela.Materias.MTA_NOMBRE));
 
         //MATERIASESTUDIANTES
-        s=String.format("CREATE TABLE %s ( %s INTEGER ," +
+        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER ," +
                         "%s INTEGER)",
                 Tablas.TBL_MATERIAS_ESTUDIANTE, ContratoEscuela.MateriaEstudiante.MEST_MTA_ID,
-                ContratoEscuela.MateriaEstudiante.MEST_EST_ID);
-        db.execSQL(s);
+                ContratoEscuela.MateriaEstudiante.MEST_EST_ID));
 
         /**
         *INSERTANDO CATEGORIAS DE COGNITIVO
@@ -227,11 +184,6 @@ public class ManejaSQL extends SQLiteOpenHelper {
         valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.evaluar));
         valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
         db.insert(Tablas.TBL_CATEGORIAS,null,valores);
-
-        //INSERTANDO MATERIA GENERAL
-        valores = new ContentValues();
-        valores.put(ContratoEscuela.Materias.MTA_NOMBRE, "GENERAL");
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
     }
 
     @Override

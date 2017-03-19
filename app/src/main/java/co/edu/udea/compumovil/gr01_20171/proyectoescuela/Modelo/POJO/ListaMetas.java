@@ -5,8 +5,7 @@ public class ListaMetas {
     private String nombre;
     private String tipo;
 
-    public ListaMetas(int id, String nombre, String tipo){
-        this.id = id;
+    public ListaMetas(String nombre, String tipo){
         this.nombre = nombre;
         this.tipo = tipo;
     }
