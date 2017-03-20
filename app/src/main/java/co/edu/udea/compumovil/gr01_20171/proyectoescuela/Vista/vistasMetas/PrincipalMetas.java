@@ -9,15 +9,21 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaBDMetas;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.GestionEstudianteMeta;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Meta;
@@ -36,6 +42,7 @@ public class PrincipalMetas extends AppCompatActivity {
     private Spinner opciones;
     private ListaMetas metaSeleccionada;
     private ArrayList<ListaMetas> metas;
+    private CustomListAdapterM customListAdapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +59,12 @@ public class PrincipalMetas extends AppCompatActivity {
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         estudiantes = retornaEstudiantes(grupo);
         list = (ListView)findViewById(R.id.list_metas);
-        final CustomListAdapterM customListAdapter = new CustomListAdapterM(getApplicationContext()
+        customListAdapter = new CustomListAdapterM(getApplicationContext()
                 ,R.layout.activity_list_metas);
         customListAdapter.clear();
         if(estudiantes != null){
             for(Estudiante estudiante : estudiantes){
+                estudiante.setGestorMetas(new GestionEstudianteMeta());
                 customListAdapter.add(estudiante);
             }
         }
@@ -64,6 +72,13 @@ public class PrincipalMetas extends AppCompatActivity {
         if(customListAdapter != null && list!=null && estudiantes!=null ){
             list.setAdapter(customListAdapter);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 
     private static ArrayList<Estudiante> retornaEstudiantes(Grupo grupo){
@@ -99,7 +114,19 @@ public class PrincipalMetas extends AppCompatActivity {
     private void asignarMeta(){
         int seleccion = opciones.getSelectedItemPosition();
         metaSeleccionada = metas.get(seleccion);
-        // Desarrollar lógica
+        for (int i=0; i<estudiantes.size(); i++){
+            if(estudiantes.get(i).getGestorMetas().estado()){
+                Log.d(estudiantes.get(i).getNombres(), String.valueOf(estudiantes.get(i).getGestorMetas().getDuracionMeta()));
+            }
+        }
+    }
+
+    private void borrarMeta(){
+        int seleccion = opciones.getSelectedItemPosition();
+        metaSeleccionada = metas.get(seleccion);
+
+        ManejaBDMetas.borrarMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()),metaSeleccionada.getId());
+        onRestart();
     }
 
     // Menu
@@ -118,7 +145,17 @@ public class PrincipalMetas extends AppCompatActivity {
                 break;
             case (R.id.opcionAsignar): asignarMeta();
                 break;
+            case (R.id.opcionBorrar):borrarMeta();
+                break;
         }
         return(true);
+    }
+
+    /*private Meta setMeta(Estudiante estudiante){
+
+    }*/
+
+    private void mensaje(String mensaje){
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
 }

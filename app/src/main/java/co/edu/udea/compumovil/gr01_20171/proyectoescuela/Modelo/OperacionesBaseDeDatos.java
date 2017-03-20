@@ -171,6 +171,17 @@ public final class OperacionesBaseDeDatos {
     }
 
     /**
+     * Método para borrar una meta de la tabla ListaMetas
+     */
+    public boolean borrarMeta(String idMeta) {
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String whereClause = String.format("%s=?", ContratoEscuela.ListaMetas.LISTMET_ID);
+        String[] whereArgs = {idMeta};
+        int resultado = db.delete(ManejaSQL.Tablas.TBL_LISTA_METAS, whereClause, whereArgs);
+        return resultado > 0;
+    }
+
+    /**
      * Método para insertar seguimiento en la tabla de seguimiento
      */
     public void insertarSeguimiento(Seguimiento seguimiento) {
