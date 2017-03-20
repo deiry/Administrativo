@@ -14,8 +14,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import java.util.ArrayList;
+
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Subcategoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class PantallaPpal extends AppCompatActivity {
@@ -23,6 +28,8 @@ public class PantallaPpal extends AppCompatActivity {
     Grupo grupo;
     Intent intent;
     Bundle bundle;
+    private OperacionesBaseDeDatos manager;
+    private String GRUPO = "GRUPO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +38,13 @@ public class PantallaPpal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_ppal);
         intent = getIntent();
         bundle = intent.getExtras();
-        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+        grupo = (Grupo) intent.getSerializableExtra(GRUPO);
 
+        manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
         //obtener extra del grupo que esta seleccionado
         Intent intent = getIntent();
-        grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+        grupo = (Grupo) intent.getSerializableExtra(GRUPO);
 
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
         Button asistencia = (Button) findViewById(R.id.btn_asistencia);
@@ -66,15 +74,23 @@ public class PantallaPpal extends AppCompatActivity {
     public void ClickIrAsistencia(View view)
     {
         intent = new Intent(this,Asistencia.class);
-        intent.putExtra("GRUPO",grupo);
+        intent.putExtra(GRUPO,grupo);
         startActivity(intent);
     }
 
     public void ClckIrMetas(View view)
     {
         //se crea la intencion
-//DE LA VISTA SE ASIGNA EL ONCLICK
+        //DE LA VISTA SE ASIGNA EL ONCLICK
     }
+
+    public void ClickIrUbicacion(View view)
+    {
+        intent = new Intent(this,Ubicacion.class);
+        intent.putExtra(GRUPO,grupo);
+        startActivity(intent);
+    }
+
 
 
 }

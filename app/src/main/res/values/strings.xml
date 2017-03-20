@@ -26,6 +26,7 @@
     <string name="seguimiento_etico">Seguimiento Etico</string>
     <string name="metas">Metas</string>
     <string name="asistencia">Asistencia</string>
+    <string name="ubicacion">Ubicación</string>
 
 
 </resources>

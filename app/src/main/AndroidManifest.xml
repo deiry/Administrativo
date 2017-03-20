@@ -12,32 +12,36 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Vista.PantallaPpal"
-            android:parentActivityName=".Vista.InicioActivity"/>
+        <activity
+            android:name=".Vista.PantallaPpal"
+            android:parentActivityName=".Vista.InicioActivity" />
         <activity
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Vista.AgregarEstudiantes" />
         <activity android:name=".Vista.SegCogEstudiante" />
-        <activity android:name=".Vista.PantallaConfiguracion"
-            android:parentActivityName=".Vista.InicioActivity"/>
-        <activity android:name=".Vista.PantallaProfesor"
-            android:parentActivityName=".Vista.PantallaConfiguracion"/>
+        <activity
+            android:name=".Vista.PantallaConfiguracion"
+            android:parentActivityName=".Vista.InicioActivity" />
+        <activity
+            android:name=".Vista.PantallaProfesor"
+            android:parentActivityName=".Vista.PantallaConfiguracion" />
         <activity android:name=".Vista.DialogAgregarGrupos" />
         <activity android:name=".Vista.ListarEstudiantes" />
         <activity android:name=".Vista.InicioActivity">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Vista.Asistencia" />
-        <!--<activity android:name=".Vista.AsistenciaEstudianteAdapter" />-->
-        <activity android:name=".Vista.MateriaAdicion"
-            android:parentActivityName=".Vista.PantallaProfesor"></activity>
+        <!-- <activity android:name=".Vista.AsistenciaEstudianteAdapter" /> -->
+        <activity
+            android:name=".Vista.MateriaAdicion"
+            android:parentActivityName=".Vista.PantallaProfesor" />
+        <activity android:name=".Vista.Ubicacion"></activity>
     </application>
 
 </manifest>
