@@ -2,11 +2,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -19,6 +15,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
@@ -27,15 +24,40 @@ public class EstadisticaModel extends AppCompatActivity {
     float barWidth;
     float barSpace;
     float groupSpace;
+    List<String> valX;
+    List<Integer> valSI, valNo;
 
+    public List getValSI() {
+        return valSI;
+    }
 
+    public void setValSI(List valSI) {
+        this.valSI = valSI;
+    }
 
+    public List getValNo() {
+        return valNo;
+    }
+
+    public void setValNo(List valNo) {
+        this.valNo = valNo;
+    }
+
+    public List getValX() {
+        return valX;
+    }
+
+    public void setValX(ArrayList<String> valX) {
+        this.valX = valX;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadistica_model);
-
+        valX = (ArrayList<String>) getIntent().getSerializableExtra("valX");
+        valSI =(List)getIntent().getSerializableExtra("valSI");
+        valNo =(List)getIntent().getSerializableExtra("valNo");
         barWidth = 0.3f;
         barSpace = 0f;
         groupSpace = 0.4f;
@@ -48,7 +70,7 @@ public class EstadisticaModel extends AppCompatActivity {
 
         int groupCount = 6;
 
-        ArrayList xVals = new ArrayList();
+  /*      ArrayList xVals = new ArrayList();
 
         xVals.add("Recordar");
         xVals.add("Comprender");
@@ -56,28 +78,21 @@ public class EstadisticaModel extends AppCompatActivity {
         xVals.add("Analizar");
         xVals.add("Evaluar");
         xVals.add("Crear");
-
+*/
         ArrayList yVals1 = new ArrayList();
         ArrayList yVals2 = new ArrayList();
 
-        yVals1.add(new BarEntry(1, (float) 1));
-        yVals2.add(new BarEntry(1, (float) 2));
-        yVals1.add(new BarEntry(2, (float) 3));
-        yVals2.add(new BarEntry(2, (float) 4));
-        yVals1.add(new BarEntry(3, (float) 5));
-        yVals2.add(new BarEntry(3, (float) 6));
-        yVals1.add(new BarEntry(4, (float) 7));
-        yVals2.add(new BarEntry(4, (float) 8));
-        yVals1.add(new BarEntry(5, (float) 9));
-        yVals2.add(new BarEntry(5, (float) 10));
-        yVals1.add(new BarEntry(6, (float) 11));
-        yVals2.add(new BarEntry(6, (float) 12));
+        for(int i=1;i<=valX.size();i++){
+            yVals1.add(new BarEntry(i, (float)valSI.get(i-1)));
+            yVals2.add(new BarEntry(i, (float)valNo.get(i-1)));
+
+        }
 
         BarDataSet set1, set2;
         set1 = new BarDataSet(yVals1, "SI");
-        set1.setColor(Color.RED);
+        set1.setColor(Color.GREEN);
         set2 = new BarDataSet(yVals2, "NO");
-        set2.setColor(Color.BLUE);
+        set2.setColor(Color.RED);
         BarData data = new BarData(set1, set2);
         data.setValueFormatter(new LargeValueFormatter());
         chart.setData(data);
@@ -107,7 +122,7 @@ public class EstadisticaModel extends AppCompatActivity {
         xAxis.setDrawGridLines(false);
         xAxis.setAxisMaximum(6);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(xVals));
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(valX));
 //Y-axis
         chart.getAxisRight().setEnabled(false);
         YAxis leftAxis = chart.getAxisLeft();
@@ -116,5 +131,7 @@ public class EstadisticaModel extends AppCompatActivity {
         leftAxis.setSpaceTop(35f);
         leftAxis.setAxisMinimum(0f);
     }
+
+
 
 }
