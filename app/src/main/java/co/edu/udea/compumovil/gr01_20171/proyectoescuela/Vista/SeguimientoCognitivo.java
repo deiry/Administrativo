@@ -27,6 +27,7 @@ public class SeguimientoCognitivo extends Activity {
 
     private ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
+    private int tipoVista;
 
     private OperacionesBaseDeDatos manager;
     @Override
@@ -37,6 +38,7 @@ public class SeguimientoCognitivo extends Activity {
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
+        tipoVista = (int) getIntent().getSerializableExtra("tipoVista");
 
     }
 
@@ -58,10 +60,17 @@ public class SeguimientoCognitivo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                if(tipoVista == 1){
 
-                Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
-                intent.putExtra("id",estudiantes.get(position).getIdentificacion());
-                startActivity(intent);
+                    Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
+                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
+                    startActivity(intent);
+
+                }else if(tipoVista == 2){
+                    Intent intent = new Intent(SeguimientoCognitivo.this, EstadisticaModel.class);
+                    startActivity(intent);
+
+                }
 
 
             }

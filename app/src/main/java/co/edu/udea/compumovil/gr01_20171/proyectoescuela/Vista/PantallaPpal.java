@@ -23,6 +23,7 @@ public class PantallaPpal extends AppCompatActivity {
     Grupo grupo;
     Intent intent;
     Bundle bundle;
+    int tipoVista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class PantallaPpal extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+        tipoVista = (int) intent.getIntExtra("tipoVista",0);
 
 
         //obtener extra del grupo que esta seleccionado
@@ -52,9 +54,14 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClckIrSeguimientoCognitivo(View view)
     {
-        Intent intent = new Intent(this,SeguimientoCognitivo.class);
-        intent.putExtra("GRUPO",grupo);
-        startActivity(intent);
+
+            Intent intent = new Intent(this,SeguimientoCognitivo.class);
+            intent.putExtra("GRUPO",grupo);
+            intent.putExtra("tipoVista",tipoVista);
+            startActivity(intent);
+
+
+
     }
 
     public void ClckIrSeguimientoEtico(View view)
