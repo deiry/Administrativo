@@ -11,6 +11,8 @@ public class Estudiante implements Serializable{
     private String grupo;
     private int posFila;
     private int posColumna;
+    // Clase de Apoyo para las metas
+    private GestionEstudianteMeta gestorMetas;
 
     public Estudiante(String nombres, String apellidos,String foto,int identificacion){
         this.nombres = nombres;
@@ -103,5 +105,12 @@ public class Estudiante implements Serializable{
     public void setPosColumna(int posColumna) {
         this.posColumna = posColumna;
     }
-    
+
+    public GestionEstudianteMeta getGestorMetas() {
+        return gestorMetas;
+    }
+
+    public void setGestorMetas(GestionEstudianteMeta gestorMetas) {
+        this.gestorMetas = gestorMetas;
+    }
 }

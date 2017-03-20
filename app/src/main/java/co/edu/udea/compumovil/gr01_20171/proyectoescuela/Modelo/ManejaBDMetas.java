@@ -40,6 +40,15 @@ public class ManejaBDMetas {
         finally {operador.getDb().endTransaction();}
     }
 
+    public static void borrarMeta(OperacionesBaseDeDatos operador, int idMeta){
+        try {
+            operador.getDb().beginTransaction();
+            operador.borrarMeta(idMeta + "");
+            operador.getDb().setTransactionSuccessful();
+        }catch (Exception e){e.printStackTrace();}
+        finally {operador.getDb().endTransaction();}
+    }
+
     public static ArrayList<ListaMetas> listarMetas(OperacionesBaseDeDatos operador){
         return(operador.listarMetas());
     }
