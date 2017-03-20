@@ -24,11 +24,13 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     OperacionesBaseDeDatos datos;
     EditText faltasMes;
     EditText diaMayorFaltas;
-    ArrayList<Asistencia>faltasa;
+    EditText tardesMes;
+    EditText diaMayorTarde;
+    ArrayList<Asistencia>faltasA;
     ArrayList<Asistencia> faltasmes;
-
-
-     ArrayList<Estudiante> estudiantes;
+    ArrayList<Asistencia>tardes;
+    ArrayList<Asistencia> tardeMes;
+    ArrayList<Estudiante> estudiantes;
      ArrayList<Asistencia> asistencia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +44,46 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         estudiantes = datos.obtenerEstudiantesDB(grupo);
         faltasMes= (EditText)findViewById(R.id.falta_utm_mes);
         diaMayorFaltas=(EditText)findViewById(R.id.dia_mayor_faltas);
-       asistencia=obtenerAsistenciaGrupo(estudiantes);
-       /* if (asistencia!=null) {
-            faltasa = faltas(asistencia);
-            faltasmes = faltasUltimoMes(faltasa);
-            faltasMes.setText(faltasmes.size());
+        tardesMes=(EditText)findViewById(R.id.llegadas_tarde_mes);
+        diaMayorTarde=(EditText)findViewById(R.id.dia_llegadas_tarde);
+        asistencia=obtenerAsistenciaGrupo(estudiantes);
+        llenar();
 
-            diaMayorFaltas.setText(diaMayorFaltas(faltasmes));
-        }*/
     }
-
+    public void llenar(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+        String fecha= sdf.format(cal.getTime());
+        if (asistencia!=null) {
+            faltasA = faltas(asistencia);
+            faltasmes = faltasUltimoMes(faltasA);
+            faltasMes.setText(Integer.toString(faltasmes.size()));
+            if(faltasmes.size()!=0) {
+                diaMayorFaltas.setText(Integer.toString(diaMayorFaltas(faltasmes)) + "/" + fecha);
+            }else{
+                diaMayorFaltas.setText("No hay");
+            }
+            tardes = llegadasTarde(asistencia);
+            tardeMes = llegadasTardeUltimoMes(tardes);
+            tardesMes.setText(Integer.toString(tardeMes.size()));
+            if(tardeMes.size()!=0) {
+                diaMayorTarde.setText(Integer.toString(diaMayorLlegadas(tardeMes)) + "/" + fecha);
+            }else{
+                diaMayorTarde.setText("No hay");
+            }
+        }
+    }
     public ArrayList<Asistencia> obtenerAsistenciaGrupo(ArrayList<Estudiante> estudiantes){
         ArrayList<Asistencia> asistenciaGrupo = new ArrayList<>();
+        ArrayList<Asistencia> asistenciaEstudiante;
         for(int i=0;i<estudiantes.size();i++){
             Estudiante estudiante=estudiantes.get(i);
-            ArrayList<Asistencia> asistenciaEstudiante;
-            asistenciaEstudiante= datos.obtenerAsistenciaEstudiante(Integer.toString(estudiante.getIdentificacion()));
+
+            asistenciaEstudiante= datos.obtenerAsistenciaEstudiante(estudiante.getIdentificacion());
             if(asistenciaEstudiante!=null) {
                 for (int j = 0; j < asistenciaEstudiante.size(); j++) {
-                    asistenciaGrupo.add(asistenciaEstudiante.get(i));
+                    Asistencia a =asistenciaEstudiante.get(i);
+                    asistenciaGrupo.add(a);
                 }
             }
         }
@@ -96,7 +119,7 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     //Arroja todas las falta del mes actual
     public ArrayList<Asistencia> faltasUltimoMes(ArrayList<Asistencia> asistenciaFaltas){
         Calendar cal = Calendar.getInstance();
-        ArrayList<Asistencia> faltasUltimomes = faltas(asistenciaFaltas);
+        ArrayList<Asistencia> faltasUltimomes = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("MM");
         String mesActual= sdf.format(cal.getTime());
         String mesFecha;
@@ -113,7 +136,7 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     //Le pasa por parámetro lo que arrojó el metodo llegadas tarde
     public  ArrayList<Asistencia> llegadasTardeUltimoMes(ArrayList<Asistencia> asisLlegadasTarde){
         Calendar cal = Calendar.getInstance();
-        ArrayList<Asistencia> llegadasTarde = llegadasTarde(asisLlegadasTarde);
+        ArrayList<Asistencia> llegadasTarde = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("MM");
         String mesActual= sdf.format(cal.getTime());
         String mesFecha="";
@@ -132,22 +155,53 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
         String dia= sdf.format(cal.getTime());
-        int[] faltasdias = new int[Integer.parseInt(dia)];
-        for(int i=0;i< faltasdias.length;i++){
-            faltasdias[i]=0;
+        if(faltas!=null) {
+            int[] faltasdias = new int[Integer.parseInt(dia)];
+            for (int i = 0; i < faltasdias.length; i++) {
+                faltasdias[i] = 0;
+            }
+            for (int i = 0; i < faltas.size(); i++) {
+                Asistencia a = faltas.get(i);
+                char b = a.getFecha().charAt(0);
+                char c = a.getFecha().charAt(1);
+                String diaFalta = "" + b + c;
+                faltasdias[Integer.parseInt(diaFalta) - 1] += 1;
+            }
+            int mayor = 0;
+            int indice = 0;
+            for (int i = 0; i < faltasdias.length; i++) {
+                if (mayor < faltasdias[i]) {
+                    mayor = faltasdias[i];
+                    indice = i;
+                }
+            }
+            return indice+1;
+        }else{
+            return 0;
         }
-        for (int i=0; i<faltas.size();i++){
-            Asistencia a = faltas.get(i);
+
+    }
+
+        public  int diaMayorLlegadas(ArrayList<Asistencia> llegadasTardes){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        String dia= sdf.format(cal.getTime());
+        int[] tardeDias = new int[Integer.parseInt(dia)];
+        for(int i=0;i< tardeDias.length;i++){
+            tardeDias[i]=0;
+        }
+        for (int i=0; i<llegadasTardes.size();i++){
+            Asistencia a = llegadasTardes.get(i);
             char b =a.getFecha().charAt(0);
             char c = a.getFecha().charAt(1);
             String diaFalta= ""+b+c;
-            faltasdias[Integer.parseInt(diaFalta)-1]+=1;
+            tardeDias[Integer.parseInt(diaFalta)-1]+=1;
         }
         int mayor=0;
         int indice=0;
-        for (int i=0;i<faltasdias.length;i++) {
-            if (mayor <faltasdias[i]){
-                mayor=faltasdias[i];
+        for (int i=0;i<tardeDias.length;i++) {
+            if (mayor <tardeDias[i]){
+                mayor=tardeDias[i];
                 indice=i;
             }
         }
