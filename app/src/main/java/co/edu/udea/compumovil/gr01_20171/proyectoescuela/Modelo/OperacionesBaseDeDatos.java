@@ -57,6 +57,46 @@ public final class OperacionesBaseDeDatos {
         db.insertOrThrow(ManejaSQL.Tablas.TBL_ESTUDIANTE, null, valores);
     }
 
+    public boolean insertarEstudiante2(co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante estudiante) {
+
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+
+        String query = String.format("SELECT MAX(%s) %s FROM %s WHERE %s = %s AND %s = '%s'",
+                ContratoEscuela.ColumnasEstudiante.EST_POS_FILA,
+                ContratoEscuela.ColumnasEstudiante.EST_POS_FILA,
+                ManejaSQL.Tablas.TBL_ESTUDIANTE,
+                ContratoEscuela.ColumnasEstudiante.EST_GRP_CURSO,
+                estudiante.getCurso(),
+                ContratoEscuela.ColumnasEstudiante.EST_GRP_GRUPO,
+                estudiante.getGrupo());
+        int filamax = 0;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount() > 0)
+        {
+            cursor.moveToFirst();
+            filamax = cursor.getInt(0);
+        }
+
+        ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Estudiantes.EST_IDENTIFICACION, estudiante.getIdentificacion());
+        valores.put(ContratoEscuela.Estudiantes.EST_NOMBRES, estudiante.getNombres());
+        valores.put(ContratoEscuela.Estudiantes.EST_APELLIDOS, estudiante.getApellidos());
+        valores.put(ContratoEscuela.Estudiantes.EST_FOTO, estudiante.getFoto());
+        valores.put(ContratoEscuela.Estudiantes.EST_GRP_CURSO, estudiante.getCurso());
+        valores.put(ContratoEscuela.Estudiantes.EST_GRP_GRUPO, estudiante.getGrupo());
+        valores.put(ContratoEscuela.Estudiantes.EST_POS_COL, estudiante.getPosColumna());
+        valores.put(ContratoEscuela.Estudiantes.EST_POS_FILA, filamax+1);
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_ESTUDIANTE, null, valores);
+        if (response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     /**
      * Método para agregar grupos a la tabla de grupos
      */

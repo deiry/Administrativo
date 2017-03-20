@@ -7,9 +7,10 @@
     <color name="transparente">#00fefefe</color>
 
     <drawable name="yellow_color">#FDD835</drawable>
-    <drawable name="red_color">#FF5722 </drawable>
+    <drawable name="red_color">#FF5722</drawable>
 
     <color name="green_color_icon">#43A047</color>
+    <color name="background_card_view">#B3FFC5</color>
 
 
 </resources>
