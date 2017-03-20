@@ -292,7 +292,7 @@ public final class OperacionesBaseDeDatos {
      * Obtiene los registros de asistencias pertenecientes al estudiante cuyo id ha sido pasado por parametro
      *
      * */
-    public ArrayList<Asistencia> obtenerAsistenciaEstudiante(int idEstudiante){
+    public ArrayList<Asistencia> obtenerAsistenciaEstudiante(String idEstudiante){
         String consulta;
 
         consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s)",ManejaSQL.Tablas.TBL_ASISTENCIA

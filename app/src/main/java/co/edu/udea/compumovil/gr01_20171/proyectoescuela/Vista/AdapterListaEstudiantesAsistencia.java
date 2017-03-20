@@ -2,6 +2,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -63,7 +64,7 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
             convertView = layoutInflater.inflate(R.layout.activity_adapter_lista_estudiantes_asistencia, null, true);
         }
 
-        Estudiante estudiante = getItem(position);
+        final Estudiante estudiante = getItem(position);
         ImageView imaEstA;
         TextView nombreEst;
         TextView apellidoEst;

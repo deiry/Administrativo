@@ -42,12 +42,16 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         estudiantes = datos.obtenerEstudiantesDB(grupo);
+
         faltasMes= (EditText)findViewById(R.id.falta_utm_mes);
         diaMayorFaltas=(EditText)findViewById(R.id.dia_mayor_faltas);
         tardesMes=(EditText)findViewById(R.id.llegadas_tarde_mes);
         diaMayorTarde=(EditText)findViewById(R.id.dia_llegadas_tarde);
         asistencia=obtenerAsistenciaGrupo(estudiantes);
         llenar();
+
+
+
 
     }
     public void llenar(){
@@ -79,7 +83,7 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         for(int i=0;i<estudiantes.size();i++){
             Estudiante estudiante=estudiantes.get(i);
 
-            asistenciaEstudiante= datos.obtenerAsistenciaEstudiante(estudiante.getIdentificacion());
+            asistenciaEstudiante= retornaAsistencia(estudiante.getIdentificacion());
             if(asistenciaEstudiante!=null) {
                 for (int j = 0; j < asistenciaEstudiante.size(); j++) {
                     Asistencia a =asistenciaEstudiante.get(i);
@@ -208,5 +212,18 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         return indice+1;
     }
 
+    private ArrayList<Asistencia> retornaAsistencia(int estId){
+        ArrayList<Asistencia> asisten= new ArrayList<>();
+        try {
 
+            datos.getDb().beginTransaction();
+            asisten= datos.obtenerAsistenciaEstudiante(Integer.toString(estId));
+            datos.getDb().setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            datos.getDb().endTransaction();
+        }
+        return asisten;
+    }
 }

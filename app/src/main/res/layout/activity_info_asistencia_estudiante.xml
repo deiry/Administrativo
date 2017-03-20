@@ -15,7 +15,7 @@
         android:weightSum="1">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/iv_ima_est"
             android:layout_width="108dp"
             android:layout_height="match_parent"
             app:srcCompat="@mipmap/ic_launcher" />
@@ -30,7 +30,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/txt_name_est"
         android:layout_width="wrap_content"
         android:layout_height="92dp"
         android:layout_alignBottom="@+id/linearLayout"
@@ -45,8 +45,8 @@
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText4"
-        android:layout_alignBottom="@+id/editText4"
+        android:layout_alignBaseline="@+id/et_nroFaltas"
+        android:layout_alignBottom="@+id/et_nroFaltas"
         android:layout_alignLeft="@+id/textView29"
         android:layout_alignStart="@+id/textView29"
         android:text="Faltas:"
@@ -54,12 +54,12 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/et_nroFaltas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView26"
+        android:layout_below="@+id/txt_name_est"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/et_nroFaltas"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
@@ -79,12 +79,12 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/et_nroTarde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/et_nroFaltas"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name" />
@@ -95,14 +95,14 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView29"
         android:layout_alignStart="@+id/textView29"
-        android:layout_below="@+id/editText5"
+        android:layout_below="@+id/et_nroTarde"
         android:layout_marginTop="21dp"
         android:text="Faltas el último mes:"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/et_faltasMes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView30"
@@ -127,10 +127,10 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/et_tardeMes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText6"
+        android:layout_below="@+id/et_faltasMes"
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_toEndOf="@+id/textView31"
@@ -145,8 +145,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/relativeLayout"
-        android:layout_toLeftOf="@+id/editText6"
-        android:layout_toStartOf="@+id/editText6"
+        android:layout_toLeftOf="@+id/et_faltasMes"
+        android:layout_toStartOf="@+id/et_faltasMes"
         android:id="@+id/lv_faltas" />
 
     <ListView
@@ -171,8 +171,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/lv_tarde"
-        android:layout_alignLeft="@+id/editText6"
-        android:layout_alignStart="@+id/editText6"
+        android:layout_alignLeft="@+id/et_faltasMes"
+        android:layout_alignStart="@+id/et_faltasMes"
         android:text="Fecha lllegadas tarde" />
 
 </RelativeLayout>

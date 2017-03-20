@@ -43,15 +43,29 @@ public class ListarEstudiantesAsistencia extends AppCompatActivity {
         final AdapterListaEstudiantesAsistencia adapterListaEstudiantesAsistencia = new AdapterListaEstudiantesAsistencia(getApplicationContext()
                 ,R.layout.activity_adapter_lista_estudiantes_asistencia);
         adapterListaEstudiantesAsistencia.clear();
-        if(estudiantes != null){
-            for(Estudiante estudiante : estudiantes){
+        if(estudiantes != null) {
+            for (Estudiante estudiante : estudiantes) {
                 adapterListaEstudiantesAsistencia.add(estudiante);
             }
         }
+
+        /**
+         * Muestra la informacion de asistencia para el estudiante clickeado
+         * */
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Estudiante estudiante = estudiantes.get(position);
+                Intent intentp = new Intent(ListarEstudiantesAsistencia.this,InfoAsistenciaEstudiante.class);
+                intentp.putExtra("ESTUDIANTE",estudiante);
+                startActivity(intentp);
+            }
+        });
         adapterListaEstudiantesAsistencia.notifyDataSetChanged();
         if(adapterListaEstudiantesAsistencia != null && list!=null && estudiantes!=null ){
             list.setAdapter(adapterListaEstudiantesAsistencia);
         }
+
 
     }
 
