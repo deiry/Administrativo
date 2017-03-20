@@ -1,8 +1,10 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class Estudiante implements Serializable{
+public class Estudiante implements Serializable, Comparable<Estudiante>{
     private int identificacion;
     private String nombres;
     private String apellidos;
@@ -112,5 +114,12 @@ public class Estudiante implements Serializable{
 
     public void setGestorMetas(GestionEstudianteMeta gestorMetas) {
         this.gestorMetas = gestorMetas;
+    }
+
+    @Override
+    public int compareTo(@NonNull Estudiante o) {
+        if(apellidos.compareTo(o.apellidos)<0) return(-1);
+        else if(apellidos.compareTo(o.apellidos)>0) return(1);
+        return 0;
     }
 }

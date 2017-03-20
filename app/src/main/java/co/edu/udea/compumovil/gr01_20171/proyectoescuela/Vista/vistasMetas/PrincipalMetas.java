@@ -15,9 +15,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaBDMetas;
@@ -43,6 +47,7 @@ public class PrincipalMetas extends AppCompatActivity {
     private ListaMetas metaSeleccionada;
     private ArrayList<ListaMetas> metas;
     private CustomListAdapterM customListAdapter;
+    private Meta metaPorEstudiante;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +63,7 @@ public class PrincipalMetas extends AppCompatActivity {
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         estudiantes = retornaEstudiantes(grupo);
+        Collections.sort(estudiantes);
         list = (ListView)findViewById(R.id.list_metas);
         customListAdapter = new CustomListAdapterM(getApplicationContext()
                 ,R.layout.activity_list_metas);
@@ -113,10 +119,15 @@ public class PrincipalMetas extends AppCompatActivity {
     // Asignacion de Meta
     private void asignarMeta(){
         int seleccion = opciones.getSelectedItemPosition();
+        if (seleccion == -1){
+            mensaje("Se debe seleccionar una meta");
+            return;
+        }
         metaSeleccionada = metas.get(seleccion);
         for (int i=0; i<estudiantes.size(); i++){
             if(estudiantes.get(i).getGestorMetas().estado()){
-                Log.d(estudiantes.get(i).getNombres(), String.valueOf(estudiantes.get(i).getGestorMetas().getDuracionMeta()));
+                setMeta(estudiantes.get(i));
+                ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
             }
         }
     }
@@ -143,7 +154,7 @@ public class PrincipalMetas extends AppCompatActivity {
         switch (id){
             case (R.id.opcionCrear): activarCrear();
                 break;
-            case (R.id.opcionAsignar): asignarMeta();
+            case (R.id.opcionAsignarMI): asignarMeta();
                 break;
             case (R.id.opcionBorrar):borrarMeta();
                 break;
@@ -151,9 +162,12 @@ public class PrincipalMetas extends AppCompatActivity {
         return(true);
     }
 
-    /*private Meta setMeta(Estudiante estudiante){
-
-    }*/
+    private void setMeta(Estudiante estudiante){
+        metaPorEstudiante.setEstudianteId(estudiante.getIdentificacion());
+        metaPorEstudiante.setListaMetasId(metaSeleccionada.getId());
+        metaPorEstudiante.setFechaInicio(Calendar.getInstance().getTime());
+        metaPorEstudiante.setDuracion(estudiante.getGestorMetas().getDuracionMeta());
+    }
 
     private void mensaje(String mensaje){
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
