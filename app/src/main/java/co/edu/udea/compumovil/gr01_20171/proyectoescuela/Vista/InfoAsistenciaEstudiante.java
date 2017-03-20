@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,9 +34,11 @@ public class InfoAsistenciaEstudiante extends AppCompatActivity {
     ArrayList<Asistencia> asistencias;
     ArrayList<Asistencia> tardes;
     ArrayList<Asistencia> faltasGA;
-    ArrayAdapter<String> adapterfaltas;
     ArrayList<String> fechasFaltas;
     ArrayList<String> fechasTarde;
+    ListView lv_faltas;
+    ListView lv_tarde;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,23 +68,47 @@ public class InfoAsistenciaEstudiante extends AppCompatActivity {
         tardes = new ArrayList<>();
         faltasGA = new ArrayList<>();
 
-        EditText faltaset = (EditText) findViewById(R.id.et_nroFaltas);
+        TextView faltaset = (TextView) findViewById(R.id.et_nroFaltas);
         faltaset.setText(String.valueOf(contarFaltas(asistencias)));
 
-        EditText tarde = (EditText) findViewById(R.id.et_nroTarde);
+        TextView tarde = (TextView) findViewById(R.id.et_nroTarde);
         tarde.setText(String.valueOf(contarTarde(asistencias)));
 
-        EditText faltasLM = (EditText)findViewById(R.id.et_faltasMes);
+        TextView faltasLM = (TextView)findViewById(R.id.et_faltasMes);
         faltasLM.setText(String.valueOf(faltasUltimoMes().size()));
 
-        EditText tardeLM = (EditText) findViewById(R.id.et_tardeMes);
+        TextView tardeLM = (TextView) findViewById(R.id.et_tardeMes);
         tardeLM.setText(String.valueOf(llegadasTardeUltimoMes().size()));
 
-        ListView lv_faltas = (ListView) findViewById(R.id.lv_faltas);
-        ListView lv_tarde = (ListView) findViewById(R.id.lv_tarde);
+        lv_faltas = (ListView) findViewById(R.id.lv_faltas);
+        lv_tarde = (ListView) findViewById(R.id.lv_tarde);
 
+        lv_faltas.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fechasFaltas));
+        lv_tarde.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, fechasTarde));
 
+        ListUtils.setDynamicHeight(lv_faltas);
+        ListUtils.setDynamicHeight(lv_tarde);
+    }
 
+    public static class ListUtils {
+        public static void setDynamicHeight(ListView mListView) {
+            ListAdapter mListAdapter = mListView.getAdapter();
+            if (mListAdapter == null) {
+                // when adapter is null
+                return;
+            }
+            int height = 0;
+            int desiredWidth = View.MeasureSpec.makeMeasureSpec(mListView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+            for (int i = 0; i < mListAdapter.getCount(); i++) {
+                View listItem = mListAdapter.getView(i, null, mListView);
+                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+                height += listItem.getMeasuredHeight();
+            }
+            ViewGroup.LayoutParams params = mListView.getLayoutParams();
+            params.height = height + (mListView.getDividerHeight() * (mListAdapter.getCount() - 1));
+            mListView.setLayoutParams(params);
+            mListView.requestLayout();
+        }
     }
 
     private Uri pathToUri(String imgPath){

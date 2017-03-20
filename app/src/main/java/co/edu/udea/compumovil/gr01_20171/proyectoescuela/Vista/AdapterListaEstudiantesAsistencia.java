@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
@@ -63,12 +64,15 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.activity_adapter_lista_estudiantes_asistencia, null, true);
         }
-
+        datos = OperacionesBaseDeDatos.obtenerInstancia(getContext());
         final Estudiante estudiante = getItem(position);
+        ArrayList<Asistencia> asistencias = retornaAsistencia(estudiante.getIdentificacion());
         ImageView imaEstA;
         TextView nombreEst;
         TextView apellidoEst;
         TextView idEst;
+        TextView txt_late;
+        TextView txt_missing;
         Uri uri = pathToUri(estudiante.getFoto());
         imaEstA = (ImageView)convertView.findViewById(R.id.imaEstA);
 
@@ -83,11 +87,16 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
 
         apellidoEst = (TextView)convertView.findViewById(R.id.txtApellidoA);
         apellidoEst.setText(estudiante.getApellidos());
+
         idEst = (TextView)convertView.findViewById(R.id.txtIdeA);
         idEst.setText(Integer.toString(estudiante.getIdentificacion()));
-        nombreEst.setTextColor(Color.BLACK);
-        apellidoEst.setTextColor(Color.BLACK);
-        idEst.setTextColor(Color.BLACK);
+
+        txt_late = (TextView) convertView.findViewById(R.id.txt_late);
+        txt_late.setText(String.valueOf(contarTarde(asistencias)));
+
+        txt_missing = (TextView) convertView.findViewById(R.id.txt_missing);
+        txt_missing.setText(String.valueOf(contarFaltas(asistencias)));
+
         return convertView;
     }
 
@@ -99,6 +108,41 @@ public class AdapterListaEstudiantesAsistencia extends ArrayAdapter<Estudiante> 
 
         }
         return Uri.EMPTY;
+    }
+
+    private int contarFaltas(ArrayList<Asistencia> asistencias){
+        int count=0;
+        for (int i=0;i<asistencias.size();i++){
+            if(asistencias.get(i).getAsistencia().equals("faltó")){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private int contarTarde(ArrayList<Asistencia> asistencias){
+        int count=0;
+        for (int i=0;i<asistencias.size();i++){
+            if(asistencias.get(i).getAsistencia().equals("tarde")){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private ArrayList<Asistencia> retornaAsistencia(int estId){
+        ArrayList<Asistencia> asisten= new ArrayList<>();
+        try {
+
+            datos.getDb().beginTransaction();
+            asisten= datos.obtenerAsistenciaEstudiante(Integer.toString(estId));
+            datos.getDb().setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            datos.getDb().endTransaction();
+        }
+        return asisten;
     }
 }
 

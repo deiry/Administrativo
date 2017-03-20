@@ -34,6 +34,7 @@
                 ></LinearLayout>
             <TextView
                 android:id="@+id/txtNombreA"
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nombre Estudiante"
@@ -41,6 +42,8 @@
                 />
             <TextView
                 android:id="@+id/txtApellidoA"
+
+                android:textColor="@android:color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Apellido Estudiante"
@@ -49,6 +52,8 @@
             <TextView
                 android:id="@+id/txtIdeA"
                 android:layout_width="wrap_content"
+
+                android:textColor="@android:color/black"
                 android:layout_height="wrap_content"
                 android:text="Identificación"
                 android:textSize="16sp"
@@ -65,23 +70,47 @@
             android:layout_width="1dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
 
             <TextView
-                android:id="@+id/nroLlegadasF"
-                android:layout_width="0dp"
+                android:id="@+id/indicadorT"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="nroLlegadasF"/>
+
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="Llegadas tarde" />
+
+            <TextView
+                android:id="@+id/txt_late"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="muestraLate" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="Faltas" />
+
+            <TextView
+                android:id="@+id/txt_missing"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:text="muestraMiss" />
 
         </LinearLayout>
 
