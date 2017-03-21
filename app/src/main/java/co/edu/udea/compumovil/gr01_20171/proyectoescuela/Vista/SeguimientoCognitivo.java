@@ -53,6 +53,7 @@ public class SeguimientoCognitivo extends Activity {
     {
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
+        estudiantes = completarEstudiantes(estudiantes,20);
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes);
 
@@ -60,7 +61,7 @@ public class SeguimientoCognitivo extends Activity {
 
         gridEstudiante.setAdapter(adapter);
 
-        gridEstudiante.setNumColumns(4);
+        gridEstudiante.setNumColumns(6);
 
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,6 +69,7 @@ public class SeguimientoCognitivo extends Activity {
                 idEstudiante = estudiantes.get(position).getIdentificacion();
                 estadistica.setIdEstudiante(idEstudiante);
                 //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+
                 if(tipoVista == 1){
 
                     intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
@@ -98,6 +100,13 @@ public class SeguimientoCognitivo extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ArrayList<Materia> materias =  manager.obtenerMaterias();
         final CharSequence[] items = new CharSequence[materias.size()];
+
+                if(id != 0)
+                {
+                    Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
+                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
+                    startActivity(intent);
+                }
 
 
             for (int i=0; i<items.length;i++){
@@ -137,6 +146,41 @@ public class SeguimientoCognitivo extends Activity {
 
         crearGridView();
         super.onResume();
+    }
+
+    private ArrayList<Estudiante> completarEstudiantes(ArrayList<Estudiante> estudiantes, int n)
+    {
+        ArrayList<Estudiante> estudiantesFull = new ArrayList<Estudiante>();
+        int contador = estudiantes.size();
+        int filaAnt = 0;
+        int j;
+        for (int i = 0 ; i < contador ; i++)
+        {
+
+            int filaAct = estudiantes.get(i).getPosFila();
+            while (filaAnt+1 != filaAct)
+            {
+                Estudiante e = new Estudiante(0,"","","",0,"",filaAnt+1,0);
+                estudiantesFull.add(e);
+                filaAnt++;
+            }
+            estudiantesFull.add(estudiantes.get(i));
+            filaAnt = filaAct;
+        }
+        contador =estudiantesFull.size();
+        if( contador < n)
+        {
+            int valorFila = estudiantesFull.get(contador-1).getPosFila() + 1;
+
+            for(int i = contador ; i < n; i++)
+            {
+                Estudiante e = new Estudiante(0,"","","",0,"",valorFila,0);
+                estudiantesFull.add(e);
+                valorFila++;
+            }
+        }
+
+        return estudiantesFull;
     }
 
 
