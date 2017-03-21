@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLInput;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.*;
@@ -260,6 +262,7 @@ public final class OperacionesBaseDeDatos {
         return resultado > 0;
     }
 
+    // Recuperar Lista de Metas Creadas
     public ArrayList<ListaMetas> listarMetas(){
         String consulta = "SELECT * FROM tbl_lista_metas";
         Cursor cursor = obtenerDataDB(consulta);
@@ -275,8 +278,42 @@ public final class OperacionesBaseDeDatos {
         return lista;
     }
 
+    // Recuperar Lista de Metas Asignadas
+    public ArrayList<Meta> listarMetasEstudiante(){
+        String consulta = "SELECT * FROM tbl_meta";
+        Cursor cursor = obtenerDataDB(consulta);
+        Meta meta;
+        ArrayList<Meta> metasEstudiante = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                try {
+                    meta = new Meta(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
+                            Integer.parseInt(cursor.getString(2)), new SimpleDateFormat().parse(cursor.getString(3)),
+                            Integer.parseInt(cursor.getString(4)));
+                    metasEstudiante.add(meta);
+                }catch (ParseException e){}
+            }while(cursor.moveToNext());
+        }
+        return metasEstudiante;
+    }
+
     public SQLiteDatabase getDb() {
         return baseDatos.getWritableDatabase();
+    }
+
+    public ListaMetas obtenerMeta(int id) {
+        String consulta;
+        consulta = String.format("SELECT * FROM tbl_lista_metas WHERE ("+
+                ContratoEscuela.ColumnasListaMetas.LISTMET_ID+" = %s)", id);
+        Cursor cursor = obtenerDataDB(consulta);
+        ListaMetas meta;
+        if(cursor.getCount() == 1) {
+            cursor.moveToFirst();
+            meta = new ListaMetas(
+                    cursor.getString(0),
+                    cursor.getString(1));}
+        else meta = null;
+        return(meta);
     }
 
     public Estudiante obtenerEstudiante(int id) {

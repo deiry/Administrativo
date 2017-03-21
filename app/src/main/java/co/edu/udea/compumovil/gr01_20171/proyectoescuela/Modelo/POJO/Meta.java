@@ -10,6 +10,16 @@ public class Meta {
     private Date fechaInicio;
     private int duracion;
 
+    public Meta(int id, int estudianteId, int listaMetasId, Date fechaInicio, int duracion){
+        this.id = id;
+        this.estudianteId = estudianteId;
+        this.listaMetasId = listaMetasId;
+        this.fechaInicio = fechaInicio;
+        this.duracion = duracion;
+    }
+
+    public Meta(){}
+
     public int getId() {
         return id;
     }

@@ -53,11 +53,20 @@ public class ManejaBDMetas {
         return(operador.listarMetas());
     }
 
-    public static ArrayList retornarDatos(OperacionesBaseDeDatos operador, int identeficacion){
-        switch (identeficacion){
+    public static ArrayList retornarDatos(OperacionesBaseDeDatos operador, int clave){
+        switch (clave){
             // Se ejecutara listarMetas
             case 0: return (operador.listarMetas());
+            case 1: return (operador.listarMetasEstudiante());
         }
         return (null);
+    }
+
+    public static Estudiante obtenerEstudiante(OperacionesBaseDeDatos operador, int id){
+        return (operador.obtenerEstudiante(id));
+    }
+
+    public static ListaMetas obtenerMeta(OperacionesBaseDeDatos operador, int id){
+        return (operador.obtenerMeta(id));
     }
 }

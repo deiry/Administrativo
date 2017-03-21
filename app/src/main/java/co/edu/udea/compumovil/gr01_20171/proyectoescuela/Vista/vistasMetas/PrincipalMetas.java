@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -57,6 +58,7 @@ public class PrincipalMetas extends AppCompatActivity {
         setSupportActionBar(barra);
         opciones = (Spinner)findViewById(R.id.opcionesMetas);
         listarMetas();
+        metaPorEstudiante = new Meta();
 
         getApplicationContext().deleteDatabase("pedidos.db");
         intent = getIntent();
@@ -120,7 +122,7 @@ public class PrincipalMetas extends AppCompatActivity {
     private void asignarMeta(){
         int seleccion = opciones.getSelectedItemPosition();
         if (seleccion == -1){
-            mensaje("Se debe seleccionar una meta");
+            mensaje("Se debe seleccionar una meta", 0);
             return;
         }
         metaSeleccionada = metas.get(seleccion);
@@ -130,8 +132,10 @@ public class PrincipalMetas extends AppCompatActivity {
                 ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
             }
         }
+        mensaje("Se asignó exitosamente la meta a los estudiantes seleccionados", 1);
     }
 
+    // Borrar una Meta de la lista de Metas
     private void borrarMeta(){
         int seleccion = opciones.getSelectedItemPosition();
         metaSeleccionada = metas.get(seleccion);
@@ -139,6 +143,8 @@ public class PrincipalMetas extends AppCompatActivity {
         ManejaBDMetas.borrarMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()),metaSeleccionada.getId());
         onRestart();
     }
+
+    // Metodos apoyo Meta Grupal
 
     // Menu
     @Override
@@ -158,6 +164,8 @@ public class PrincipalMetas extends AppCompatActivity {
                 break;
             case (R.id.opcionBorrar):borrarMeta();
                 break;
+            case (R.id.opcionAsignarMG): prueba();
+                break;
         }
         return(true);
     }
@@ -169,7 +177,18 @@ public class PrincipalMetas extends AppCompatActivity {
         metaPorEstudiante.setDuracion(estudiante.getGestorMetas().getDuracionMeta());
     }
 
-    private void mensaje(String mensaje){
-        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+    private void mensaje(String mensaje, int clave){
+        if(clave == 0) Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+    }
+
+    private void prueba(){
+        ArrayList<Meta> l = ManejaBDMetas.retornarDatos(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), 1);
+        for(int i=0; i<l.size(); i++){
+            Estudiante e = ManejaBDMetas.obtenerEstudiante(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getId());
+            Log.d("MENSAJE", e.getNombres()+"");
+            ListaMetas m = ManejaBDMetas.obtenerMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getListaMetasId());
+            Log.d("MENSAJE", m.getNombre());
+        }
     }
 }
