@@ -231,6 +231,19 @@ public final class OperacionesBaseDeDatos {
         db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
     }
 
+    public void actualizarFila(int identificacionEstudiante, int posicionFila)
+    {
+        if(identificacionEstudiante != 0) {
+            SQLiteDatabase db = baseDatos.getWritableDatabase();
+            ContentValues valores = new ContentValues();
+            valores.put(ContratoEscuela.ColumnasEstudiante.EST_POS_FILA, posicionFila);
+            db.update(ManejaSQL.Tablas.TBL_ESTUDIANTE,
+                    valores,
+                    ContratoEscuela.Estudiantes.EST_IDENTIFICACION +" = "+String.valueOf(identificacionEstudiante),
+                    null);
+        }
+    }
+
     /**
      * Método para obtener datos de la base de datos es necesario pasar por parametro
      * la secuencia que indica que datos se deberían retornar.
@@ -245,13 +258,15 @@ public final class OperacionesBaseDeDatos {
 
         if(grupo != null){
 
-        consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ESTUDIANTE
+        consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s') ORDER BY %s ASC",ManejaSQL.Tablas.TBL_ESTUDIANTE
                 ,ManejaSQL.Tablas.TBL_ESTUDIANTE,
                 ContratoEscuela.Estudiantes.EST_GRP_CURSO,grupo.getCurso(),
-                ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo());
+                ContratoEscuela.Estudiantes.EST_GRP_GRUPO,grupo.getGrupo(),
+                ContratoEscuela.Estudiantes.EST_POS_FILA);
 
         }else{
-         consulta = String.format("SELECT * FROM %s", ManejaSQL.Tablas.TBL_ESTUDIANTE);}
+         consulta = String.format("SELECT * FROM %s ORDER BY %s ASC", ManejaSQL.Tablas.TBL_ESTUDIANTE,
+                 ContratoEscuela.Estudiantes.EST_POS_FILA);}
 
         Cursor estudiantes = obtenerDataDB(consulta);
 

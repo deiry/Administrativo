@@ -10,7 +10,8 @@
     <drawable name="red_color">#FF5722</drawable>
 
     <color name="green_color_icon">#43A047</color>
-    <color name="background_card_view">#B3FFC5</color>
+    <color name="background_card_view">#bbbebc</color>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>
