@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -76,7 +77,8 @@ public class SeguimientoCognitivo extends Activity {
                     intent.putExtra("id",estudiantes.get(position).getIdentificacion());
                     startActivity(intent);
 
-                }else if(tipoVista == 2){
+                }
+                else if(tipoVista == 2){
                     AlertDialog dialog = listarOpcionesMatGral();
                     dialog.show();
                    /* intent = new Intent(SeguimientoCognitivo.this, EstadisticaModel.class);
@@ -101,13 +103,13 @@ public class SeguimientoCognitivo extends Activity {
         ArrayList<Materia> materias =  manager.obtenerMaterias();
         final CharSequence[] items = new CharSequence[materias.size()];
 
-                if(id != 0)
+                /*if(id != 0)
                 {
                     Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
                     intent.putExtra("id",estudiantes.get(position).getIdentificacion());
                     startActivity(intent);
                 }
-
+*/
 
             for (int i=0; i<items.length;i++){
                 items[i] = materias.get(i).getNombre();
@@ -116,6 +118,7 @@ public class SeguimientoCognitivo extends Activity {
 
 
         intent = new Intent(this, EstadisticaModel.class);
+
         builder.setTitle("Seleccione una opción").setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -130,7 +133,8 @@ public class SeguimientoCognitivo extends Activity {
                 intent.putExtra("idEstudiante", idEstudiante);
                 intent.putExtra("abrirBarra", true);
                 intent.putExtra("tipoEstadistica", 1);
-
+ 0
+         
                 startActivity(intent);
             }
         });
@@ -142,122 +146,38 @@ public class SeguimientoCognitivo extends Activity {
 
     @Override
     protected void onResume() {
-        estudiantes = manager.obtenerEstudiantesDB(grupo);
-
         crearGridView();
         super.onResume();
     }
 
-    private ArrayList<Estudiante> completarEstudiantes(ArrayList<Estudiante> estudiantes, int n)
-    {
+    private ArrayList<Estudiante> completarEstudiantes(ArrayList<Estudiante> estudiantes, int n) {
         ArrayList<Estudiante> estudiantesFull = new ArrayList<Estudiante>();
         int contador = estudiantes.size();
         int filaAnt = 0;
         int j;
-        for (int i = 0 ; i < contador ; i++)
-        {
+        for (int i = 0; i < contador; i++) {
 
             int filaAct = estudiantes.get(i).getPosFila();
-            while (filaAnt+1 != filaAct)
-            {
-                Estudiante e = new Estudiante(0,"","","",0,"",filaAnt+1,0);
+            while (filaAnt + 1 != filaAct) {
+                Estudiante e = new Estudiante(0, "", "", "", 0, "", filaAnt + 1, 0);
                 estudiantesFull.add(e);
                 filaAnt++;
             }
             estudiantesFull.add(estudiantes.get(i));
             filaAnt = filaAct;
         }
-        contador =estudiantesFull.size();
-        if( contador < n)
-        {
-            int valorFila = estudiantesFull.get(contador-1).getPosFila() + 1;
+        contador = estudiantesFull.size();
+        if (contador < n) {
+            int valorFila = estudiantesFull.get(contador - 1).getPosFila() + 1;
 
-            for(int i = contador ; i < n; i++)
-            {
-                Estudiante e = new Estudiante(0,"","","",0,"",valorFila,0);
+            for (int i = contador; i < n; i++) {
+                Estudiante e = new Estudiante(0, "", "", "", 0, "", valorFila, 0);
                 estudiantesFull.add(e);
                 valorFila++;
             }
         }
 
         return estudiantesFull;
-    }
-
-
-    public ArrayList<Integer> asignarValoresNo(ArrayList<Subcategoria> subcategorias){
-        ArrayList<Integer> valsNo = new ArrayList<>();
-     for (int i=0; i< subcategorias.size();i++){
-         int valNo = (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(subcategorias.get(i).getId(),idEstudiante,"no");
-         subcategorias.get(i).setValorNo(valNo);
-         valsNo.add(valNo);
-     }
-     return valsNo;
-
-    }
-
-    public ArrayList<Integer> asignarValoresSi(ArrayList<Subcategoria> subcategorias){
-       ArrayList<Integer> valsSi = new ArrayList<>();
-        for (int i=0; i< subcategorias.size();i++){
-            int valSi = (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(subcategorias.get(i).getId(),idEstudiante,"si");
-            subcategorias.get(i).setValorSi(valSi);
-            valsSi.add(valSi);
-        }
-        return valsSi;
-
-    }
-
-
-
-    public int asignarSubcategoriaSI(ArrayList<Subcategoria> subcategorias){
-
-        int gano=0;
-        for (int i=0; i< subcategorias.size();i++){
-            int si=subcategorias.get(i).getValorSi();
-            int no=subcategorias.get(i).getValorNo();
-            if (si>=no){
-                gano++;
-            }
-        }
-
-        return gano;
-    }
-
-    public int asignarSubcategoriaNO(ArrayList<Subcategoria> subcategorias){
-
-        int perdio=0;
-        for (int i=0; i< subcategorias.size();i++){
-            int si=subcategorias.get(i).getValorSi();
-            int no=subcategorias.get(i).getValorNo();
-
-            if (no>si){
-                perdio++;
-            }
-        }
-
-        return perdio;
-    }
-    public ArrayList<Integer> asignarCategoriaSI(ArrayList<Categoria> categorias){
-        ArrayList<Integer> estadoSi = new ArrayList<>();
-
-        for (int i=0; i<categorias.size();i++){
-            subcategorias = manager.obtenerSubCategoriasFromCategoriaId(categorias.get(i).getId());
-
-            estadoSi.add(asignarSubcategoriaSI(subcategorias));
-        }
-
-        return estadoSi;
-    }
-
-    public ArrayList<Integer> asignarCategoriaNO(ArrayList<Categoria> categorias){
-        ArrayList<Integer> estadoNo = new ArrayList<>();
-        ArrayList<Subcategoria> subcategorias;
-        for (int i=0; i<categorias.size();i++){
-            subcategorias = manager.obtenerSubCategoriasFromCategoriaId(categorias.get(i).getId());
-
-            estadoNo.add(asignarSubcategoriaNO(subcategorias));
-        }
-
-        return estadoNo;
     }
 
 
