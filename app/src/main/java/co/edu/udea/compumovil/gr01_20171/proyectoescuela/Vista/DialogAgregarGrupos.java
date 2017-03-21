@@ -54,7 +54,8 @@ public class DialogAgregarGrupos extends AppCompatActivity {
                 datos.insertarGrupo(grupo);
                 datos.getDb().setTransactionSuccessful();
                 Toast.makeText(getApplicationContext(),"Grupo agregado",Toast.LENGTH_SHORT).show();
-
+                grado.setText("");
+                ngrupo.setText("");
 
             }
 

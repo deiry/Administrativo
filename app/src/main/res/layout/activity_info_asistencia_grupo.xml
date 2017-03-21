@@ -103,7 +103,11 @@
         android:layout_toRightOf="@+id/textView12"
         android:editable="false"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <EditText
         android:id="@+id/dia_mayor_faltas"
@@ -113,28 +117,40 @@
         android:layout_alignLeft="@+id/falta_utm_mes"
         android:layout_alignStart="@+id/falta_utm_mes"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <EditText
-        android:id="@+id/cant_est_mes"
+        android:id="@+id/cant_est_fmes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView23"
         android:layout_toEndOf="@+id/textView23"
         android:layout_toRightOf="@+id/textView23"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <EditText
         android:id="@+id/llegadas_tarde_mes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cant_est_mes"
-        android:layout_alignStart="@+id/cant_est_mes"
-        android:layout_below="@+id/cant_est_mes"
+        android:layout_alignLeft="@+id/cant_est_fmes"
+        android:layout_alignStart="@+id/cant_est_fmes"
+        android:layout_below="@+id/cant_est_fmes"
         android:layout_marginTop="17dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <EditText
         android:id="@+id/dia_llegadas_tarde"
@@ -147,17 +163,25 @@
         android:layout_toEndOf="@+id/textView22"
         android:layout_toRightOf="@+id/textView22"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <EditText
-        android:id="@+id/cant_est_tarde"
+        android:id="@+id/cant_est_tmes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView13"
         android:layout_toEndOf="@+id/textView13"
         android:layout_toRightOf="@+id/textView13"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <Space
         android:layout_width="wrap_content"
