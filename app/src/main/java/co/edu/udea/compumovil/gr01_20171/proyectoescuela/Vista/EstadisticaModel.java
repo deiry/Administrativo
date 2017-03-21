@@ -18,50 +18,35 @@ import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Subcategoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class EstadisticaModel extends AppCompatActivity {
     private BarChart chart;
-    float barWidth;
-    float barSpace;
-    float groupSpace;
-    List<String> valX;
-    List<Integer> valSI, valNo;
+    private float barWidth;
+    private float barSpace;
+    private float groupSpace;
+    private List<String> valX;
+    private List<Integer> valSi, valNo;
+    private int tipoEstadistica;
+    private boolean abrirBarra;
 
-    public List getValSI() {
-        return valSI;
-    }
-
-    public void setValSI(List valSI) {
-        this.valSI = valSI;
-    }
-
-    public List getValNo() {
-        return valNo;
-    }
-
-    public void setValNo(List valNo) {
-        this.valNo = valNo;
-    }
-
-    public List getValX() {
-        return valX;
-    }
-
-    public void setValX(ArrayList<String> valX) {
-        this.valX = valX;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadistica_model);
         valX = (ArrayList<String>) getIntent().getSerializableExtra("valX");
-        valSI = (List) getIntent().getSerializableExtra("valSI");
+        valSi = (List) getIntent().getSerializableExtra("valSi");
         valNo = (List) getIntent().getSerializableExtra("valNo");
+        tipoEstadistica = (int)getIntent().getIntExtra("tipoEstadistica",1);
         barWidth = 0.3f;
         barSpace = 0f;
         groupSpace = 0.4f;
@@ -74,21 +59,12 @@ public class EstadisticaModel extends AppCompatActivity {
 
         int groupCount = 6;
 
-  /*      ArrayList xVals = new ArrayList();
-
-        xVals.add("Recordar");
-        xVals.add("Comprender");
-        xVals.add("Aplicar");
-        xVals.add("Analizar");
-        xVals.add("Evaluar");
-        xVals.add("Crear");
-*/
         ArrayList yVals1 = new ArrayList();
         ArrayList yVals2 = new ArrayList();
 
         for (int i = 1; i <= valX.size(); i++) {
-            yVals1.add(new BarEntry(i, (float) valSI.get(i - 1)));
-            yVals2.add(new BarEntry(i, (float) valNo.get(i - 1)));
+            yVals1.add(new BarEntry(i, (float) valSi.get(i - 1), valX.get(i-1)));
+            yVals2.add(new BarEntry(i, (float) valNo.get(i - 1), valX.get(i-1)));
 
         }
 
@@ -104,7 +80,7 @@ public class EstadisticaModel extends AppCompatActivity {
         chart.getXAxis().setAxisMinimum(0);
         chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
         chart.groupBars(0, groupSpace, barSpace);
-        chart.getData().setHighlightEnabled(false);
+        chart.getData().setHighlightEnabled(getIntent().getBooleanExtra("abrirBarra",false));
         chart.invalidate();
 
 
@@ -123,23 +99,31 @@ public class EstadisticaModel extends AppCompatActivity {
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
         xAxis.setCenterAxisLabels(true);
-        xAxis.setDrawGridLines(false);
-        xAxis.setAxisMaximum(6);
+        xAxis.setDrawGridLines(true);
+        xAxis.setAxisMaximum(valX.size());
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(valX));
 //Y-axis
         chart.getAxisRight().setEnabled(false);
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setValueFormatter(new LargeValueFormatter());
-        leftAxis.setDrawGridLines(true);
+        leftAxis.setDrawGridLines(false);
         leftAxis.setSpaceTop(35f);
         leftAxis.setAxisMinimum(0f);
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        chart.setTouchEnabled(true);
+        chart.setDragEnabled(true);
+        chart.setBackgroundColor(Color.rgb(252,236,233));
+/*        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundColor(Color.DKGRAY);
+            }
+        });*/
+       chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Intent intent = new Intent(EstadisticaModel.this, PantallaConfiguracion.class);
-                startActivity(intent);
+               crearVistaBarra(e);
             }
 
             @Override
@@ -150,4 +134,42 @@ public class EstadisticaModel extends AppCompatActivity {
 
 
     }
+
+    public void crearVistaBarra(Entry e){
+        OperacionesBaseDeDatos manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        if (tipoEstadistica== 1){
+            EstadisticaCognitiva estadistica = new EstadisticaCognitiva(manager);
+            estadistica.setIdEstudiante(getIntent().getIntExtra("idEstudiante",0));
+            String nombreBarra = (String) e.getData();
+            Categoria cat = manager.obtenerCategoria(1,nombreBarra);
+            ArrayList<Subcategoria> subcategorias = manager.obtenerSubCategoriasFromCategoriaId(cat.getId());
+            ArrayList<Integer> valSi=estadistica.asignarValoresSi(subcategorias);
+            ArrayList<Integer> valNo= estadistica.asignarValoresNo(subcategorias);
+
+                chart.setBackgroundColor(Color.CYAN);
+                Intent intent = new Intent(this,EstadisticaModel.class);
+                intent.putStringArrayListExtra("valX",estadistica.listarSubCategorias(cat.getId()));
+                intent.putExtra("valSi",valSi );
+                intent.putExtra("valNo", valNo);
+                intent.putExtra("abrirBarra", false);
+                startActivity(intent);
+
+        }
+
+
+
+
+        /*Intent intent = new Intent(this,PantallaPpal.class);
+        startActivity(intent);*/
+    }
+
+        public void setValX(){
+
+
+        }
+
+        public void setValY(){
+
+
+        }
 }

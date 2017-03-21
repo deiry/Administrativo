@@ -29,6 +29,7 @@ public class SeguimientoCognitivo extends Activity {
     private ArrayList<Subcategoria> subcategorias;
     private int idEstudiante;
     private Intent intent;
+    private EstadisticaCognitiva estadistica;
 
 
     private OperacionesBaseDeDatos manager;
@@ -39,6 +40,7 @@ public class SeguimientoCognitivo extends Activity {
         setContentView(R.layout.activity_seguimiento_cognitivo);
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        estadistica = new EstadisticaCognitiva(manager);
         grupo = (Grupo) getIntent().getSerializableExtra("GRUPO");
         tipoVista = (int) getIntent().getSerializableExtra("tipoVista");
         //El 1 represente el valor de tipo cognitivo
@@ -64,6 +66,7 @@ public class SeguimientoCognitivo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 idEstudiante = estudiantes.get(position).getIdentificacion();
+                estadistica.setIdEstudiante(idEstudiante);
                 //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                 if(tipoVista == 1){
 
@@ -112,9 +115,13 @@ public class SeguimientoCognitivo extends Activity {
                 intent.putExtra("valSi", asignarValoresSi(subcategorias));
                 intent.putExtra("valNo", asignarValoresNo(subcategorias));*/
 
-                intent.putStringArrayListExtra("valX", listarCategorias(categorias));
-                intent.putExtra("valSI",asignarCategoriaSI(categorias));
-                intent.putExtra("valNo", asignarCategoriaNO(categorias));
+                intent.putStringArrayListExtra("valX", estadistica.listarCategorias(categorias));
+                intent.putExtra("valSi",estadistica.obtenerValSiCategorias(categorias));
+                intent.putExtra("valNo", estadistica.obtenerValNoCategorias(categorias));
+                intent.putExtra("idEstudiante", idEstudiante);
+                intent.putExtra("abrirBarra", true);
+                intent.putExtra("tipoEstadistica", 1);
+
                 startActivity(intent);
             }
         });
@@ -132,30 +139,6 @@ public class SeguimientoCognitivo extends Activity {
         super.onResume();
     }
 
-    public ArrayList<String> listarCategorias(ArrayList<Categoria> categorias){
-        ArrayList<String> nombreCategorias = new ArrayList<>();
-        for (int i=0;i< categorias.size();i++){
-            nombreCategorias.add(categorias.get(i).getNombre());
-
-        }
-        return nombreCategorias;
-    }
-
-    /**
-     *
-     * @param cat
-     * @return
-     */
-    public ArrayList<String> listarSubCategorias(Categoria cat){
-        ArrayList<String> nombreSubcategoria = new ArrayList<>();
-        subcategorias = manager.obtenerSubCategoriasFromCategoriaId(cat.getId());
-
-        for (int i=0;i< subcategorias.size();i++){
-            nombreSubcategoria.add(subcategorias.get(i).getNombre());
-        }
-
-        return  nombreSubcategoria;
-    }
 
     public ArrayList<Integer> asignarValoresNo(ArrayList<Subcategoria> subcategorias){
         ArrayList<Integer> valsNo = new ArrayList<>();
@@ -232,6 +215,7 @@ public class SeguimientoCognitivo extends Activity {
 
         return estadoNo;
     }
+
 
 
 }
