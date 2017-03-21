@@ -133,8 +133,7 @@ public class SeguimientoCognitivo extends Activity {
                 intent.putExtra("idEstudiante", idEstudiante);
                 intent.putExtra("abrirBarra", true);
                 intent.putExtra("tipoEstadistica", 1);
- 0
-         
+
                 startActivity(intent);
             }
         });
