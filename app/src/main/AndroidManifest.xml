@@ -41,11 +41,11 @@
             android:name=".Vista.EstadisticaModel"
             android:label="@string/title_activity_estadistica_model"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
         <!-- <activity android:name=".Vista.AsistenciaEstudianteAdapter" /> -->
         <activity
             android:name=".Vista.MateriaAdicion"
             android:parentActivityName=".Vista.PantallaProfesor" />
+        <activity android:name=".Vista.Ubicacion"></activity>
     </application>
 
 </manifest>
