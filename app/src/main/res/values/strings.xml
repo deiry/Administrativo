@@ -30,6 +30,11 @@
     <string name="ubicacion">Ubicación</string>
 
 
+    <string-array name="filtros">
+        <item>Asistencia</item>
+        <item>Falta</item>
+    </string-array>
+
 
 </resources>
 

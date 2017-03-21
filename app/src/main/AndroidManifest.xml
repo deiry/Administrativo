@@ -36,16 +36,41 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vista.Asistencia" />
+        <activity android:name=".Vista.AsistenciaV" />
+
+
+
+
+
+
+
+
+
+        <activity android:name=".Vista.AsistenciaEstudianteAdapter" />
+        <activity android:name=".Vista.PantallaEstadisticas" />
+        <activity android:name=".Vista.EstadisticasAsistencia" />
+        <activity android:name=".Vista.InfoAsistenciaEstudiante" />
+        <activity android:name=".Vista.Asistencia"/> 
+
+        
+        <activity android:name=".Vista.EstadisticasAsistencia" />
+        <activity android:name=".Vista.InfoAsistenciaEstudiante" />
+
+
         <activity
             android:name=".Vista.EstadisticaModel"
             android:label="@string/title_activity_estadistica_model"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity
         <!-- <activity android:name=".Vista.AsistenciaEstudianteAdapter" /> -->
         <activity
             android:name=".Vista.MateriaAdicion"
-            android:parentActivityName=".Vista.PantallaProfesor" />
+            android:parentActivityName=".Vista.PantallaProfesor"/>
+        <activity android:name=".Vista.AdapterListaEstudiantesAsistencia" />
+        <activity android:name=".Vista.ListarEstudiantesAsistencia"></activity>
+
+        <activity android:name=".Vista.InfoAsistenciaGrupo"></activity>
         <activity android:name=".Vista.Ubicacion"></activity>
+
     </application>
 
 </manifest>

@@ -160,10 +160,10 @@ public class ContratoEscuela {
     public static class ListaGrupoEstudiantes implements ColumnasListaGrupoEstudiantes{
 
     }
-
+/*
     public static class CumplimientoMetas implements ColumnasCumplimientoMetas{
 
-    }
+    }*/
 
     private ContratoEscuela(){}
 

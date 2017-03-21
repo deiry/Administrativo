@@ -253,6 +253,10 @@ public final class OperacionesBaseDeDatos {
         return db.rawQuery(sentence, null);
     }
 
+    /**
+     * Obtiene los registros de los estudiantes que pertenezcan al grupo pasado por parametro
+     *
+     * */
     public ArrayList<Estudiante> obtenerEstudiantesDB(Grupo grupo) {
         String consulta;
 
@@ -302,6 +306,9 @@ public final class OperacionesBaseDeDatos {
         return grupoAL;
     }
 
+    /**
+     * Obtiene todos los registros de asistencia de la base de datos
+     * */
     public ArrayList<Asistencia> obtenerAsistencia(){
         String consulta = String.format("SELECT * FROM %s",ManejaSQL.Tablas.TBL_ASISTENCIA);
         Cursor asistencia = obtenerDataDB(consulta);
@@ -316,6 +323,54 @@ public final class OperacionesBaseDeDatos {
         return asistenciaAL;
     }
 
+    /**
+     * Se actualizan los valores pertenecientes al registro de asistencia cuyos campos idEstudiante y fecha
+     * coincidan con los ingresados por parametro a traves del objeto asistencia.
+     * */
+    public boolean actualizarAsistencia(Asistencia asistencia){
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put(ContratoEscuela.Asistencia.AST_FECHA,asistencia.getFecha());
+        valores.put(ContratoEscuela.Asistencia.AST_EST_ID,asistencia.getIdEstudiante());
+        valores.put(ContratoEscuela.Asistencia.AST_ASISTENCIA,asistencia.getAsistencia());
+        String selection = String.format("%s=? AND %s=?",
+                ContratoEscuela.Asistencia.AST_FECHA, ContratoEscuela.Asistencia.AST_EST_ID);
+        final String[] whereArgs = {asistencia.getFecha(),Integer.toString(asistencia.getIdEstudiante())};
+
+        int resultado = db.update(ManejaSQL.Tablas.TBL_ASISTENCIA, valores, selection, whereArgs);
+
+        return resultado > 0;
+
+    }
+
+    /**
+     * Obtiene los registros de asistencias pertenecientes al estudiante cuyo id ha sido pasado por parametro
+     *
+     * */
+    public ArrayList<Asistencia> obtenerAsistenciaEstudiante(String idEstudiante){
+        String consulta;
+
+        consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s)",ManejaSQL.Tablas.TBL_ASISTENCIA
+                    ,ManejaSQL.Tablas.TBL_ASISTENCIA,
+                    ContratoEscuela.Asistencia.AST_EST_ID,idEstudiante);
+
+        Cursor asistencias = obtenerDataDB(consulta);
+        Asistencia asistencia;
+        ArrayList<Asistencia> asistenciasAL = new ArrayList<>();
+        asistenciasAL.clear();
+
+        if(asistencias.moveToFirst()){
+            do{
+                asistencia = new Asistencia(asistencias.getString(0),asistencias.getInt(1),asistencias.getString(2));
+                asistenciasAL.add(asistencia);
+            }while(asistencias.moveToNext());
+        }
+        return asistenciasAL;
+    }
+
+    /**
+     * Borra el registro del estudiante cuyo id haya sido pasado por parametros de la tabla tbl_estudiantes
+     * */
     public boolean borrarEstudiante(String idEstudiante){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);

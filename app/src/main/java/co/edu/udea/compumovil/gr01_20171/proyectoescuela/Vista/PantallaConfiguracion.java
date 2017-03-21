@@ -28,6 +28,7 @@ public class PantallaConfiguracion extends AppCompatActivity {
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
+
         Button ingresoProfesor = (Button)findViewById(R.id.btn_ingreso_profe);
         ingresoProfesor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,7 @@ public class PantallaConfiguracion extends AppCompatActivity {
                 dialog.show();
             }
         });
+
     }
 
     public ArrayList<String> convertirGrupos (ArrayList<Grupo> a){

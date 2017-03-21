@@ -52,15 +52,17 @@ public class PantallaPpal extends AppCompatActivity {
         Intent intent = getIntent();
         grupo = (Grupo) intent.getSerializableExtra(GRUPO);
 
+
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
         Button asistencia = (Button) findViewById(R.id.btn_asistencia);
         asistencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ingresar = new Intent(PantallaPpal.this, PantallaConfiguracion.class);
+                Intent ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
                 startActivity(ingresar);
             }
         });
+
 
     }
 
@@ -84,8 +86,13 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClickIrAsistencia(View view)
     {
+
+        intent = new Intent(this,AsistenciaV.class);
+        intent.putExtra("GRUPO",grupo);
+
         intent = new Intent(this,Asistencia.class);
         intent.putExtra(GRUPO,grupo);
+
         startActivity(intent);
     }
 

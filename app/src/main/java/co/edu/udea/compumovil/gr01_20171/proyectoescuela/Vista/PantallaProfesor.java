@@ -30,9 +30,11 @@ public class PantallaProfesor extends AppCompatActivity {
     FloatingActionButton agregar;
     EditText grado ;
     EditText ngrupo;
-
+    FloatingActionButton subirE;
+    FloatingActionButton agregarM;
     ArrayList<String> gruposString = new ArrayList<>();
     ArrayList<Grupo> grupos = new ArrayList<>();
+    ArrayList<Grupo> totalGrupos = new ArrayList<>();
 
 
     @Override
@@ -42,9 +44,12 @@ public class PantallaProfesor extends AppCompatActivity {
 
         grado = (EditText)findViewById(R.id.numGrado);
         ngrupo = (EditText)findViewById(R.id.idenGrupo);
-
+        subirE=(FloatingActionButton) findViewById(R.id.btn_subirEstudiantes);
+        agregarM=(FloatingActionButton)findViewById(R.id.btn_materias);
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+        totalGrupos= datos.obtenerGruposDB();
+
 
 
     }

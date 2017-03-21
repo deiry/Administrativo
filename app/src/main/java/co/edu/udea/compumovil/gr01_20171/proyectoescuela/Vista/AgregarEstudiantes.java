@@ -67,7 +67,7 @@ public class AgregarEstudiantes extends AppCompatActivity {
                 Intent ingresar = new Intent(AgregarEstudiantes.this,PantallaProfesor.class);
                 startActivity(ingresar);
                 try {
-                    this.finalize();
+                    finish();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
@@ -89,6 +89,9 @@ public class AgregarEstudiantes extends AppCompatActivity {
                     datos.insertarEstudiante2(estudiante);
                     datos.getDb().setTransactionSuccessful();
                     Toast.makeText(getApplicationContext(),"Estudiante agregado",Toast.LENGTH_SHORT).show();
+                    nombreEstudiante.setText("");
+                    apellidoEstudiante.setText("");
+                    idEstudiante.setText("");
                 }
                 catch (Exception e){
                     e.printStackTrace();
