@@ -22,9 +22,15 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<Grupo> grupos = new ArrayList<>();
     Intent intent;
     OperacionesBaseDeDatos datos ;
+
     ControladorServiciosGenerales controlador = new ControladorServiciosGenerales();
     ArrayList<String> gruposString = new ArrayList<>();
 
+
+    /**
+     * Tipo de vista 1=Añadir datos  2=Estadistica
+     */
+    int tipoVista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +51,23 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()){
             //Intent intent;
+
             case R.id.btnGrupo:
                 grupos = datos.obtenerGruposDB();
                cadenaGrupos= controlador.convertirGrupos(grupos);
                 AlertDialog dialog = listarGrupos(cadenaGrupos);
                 dialog.show();
+                tipoVista = 1;
                 break;
             case R.id.btnEstadisticas:
+
                 grupos= datos.obtenerGruposDB();
                 gruposString= controlador.convertirGrupos(grupos);
                 AlertDialog dialogo = listarGruposEstadisticas(gruposString);
                 dialogo.show();
+
+                tipoVista = 2;
+
                 break;
             case R.id.btnConfiguracion:
                 intent = new Intent(this,PantallaConfiguracion.class);
@@ -75,6 +87,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 intent.putExtra("GRUPO",grupos.get(which));
+                intent.putExtra("tipoVista",tipoVista);
                 startActivity(intent);
             }
         });
