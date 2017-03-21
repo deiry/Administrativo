@@ -13,6 +13,8 @@ public class Subcategoria {
     private int idCat;
     private String nombre;
     private String icono;
+    private int valorSi;
+    private int valorNo;
 
     public Subcategoria(int idCat, String nombre) {
         this.idCat = idCat;
@@ -51,5 +53,15 @@ public class Subcategoria {
         this.icono = icono;
     }
 
-    
+    public int getValorSi() { return valorSi;  }
+
+    public void setValorSi(int valorSi) { this.valorSi = valorSi; }
+
+    public int getValorNo() {
+        return valorNo;
+    }
+
+    public void setValorNo(int valorNo) {
+        this.valorNo = valorNo;
+    }
 }

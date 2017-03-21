@@ -503,14 +503,14 @@ public final class OperacionesBaseDeDatos {
         return seguimientos;
     }
 
-    public int countSeguimientoFromIdSubcategoriIdEstudiante(int idSubCategoria,int idEstudiante)
+    public int countSeguimientoFromIdSubcategoriIdEstudiante(int idSubCategoria,int idEstudiante, String estado)
     {
-        String query = String.format("SELECT  * FROM %s WHERE %s = %s AND %s = %s",
+        String query = String.format("SELECT  * FROM %s WHERE %s = %s AND %s = %s AND %s = '%s'",
                 ManejaSQL.Tablas.TBL_SEGUIMIENTO,
                 ContratoEscuela.ColumnasSeguimiento.SEG_EST_ID,
                 idEstudiante,
                 ContratoEscuela.ColumnasSeguimiento.SEG_SUBC_ID,
-                idSubCategoria);
+                idSubCategoria,ContratoEscuela.ColumnasSeguimiento.SEG_ESTADO, estado);
         Cursor cursor = obtenerDataDB(query);
 
         return cursor.getCount();

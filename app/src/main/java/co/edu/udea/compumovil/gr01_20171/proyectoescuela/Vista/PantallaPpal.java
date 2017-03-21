@@ -28,8 +28,12 @@ public class PantallaPpal extends AppCompatActivity {
     Grupo grupo;
     Intent intent;
     Bundle bundle;
+
+    int tipoVista;
+
     private OperacionesBaseDeDatos manager;
     private String GRUPO = "GRUPO";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,9 @@ public class PantallaPpal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_ppal);
         intent = getIntent();
         bundle = intent.getExtras();
+
         grupo = (Grupo) intent.getSerializableExtra(GRUPO);
+        tipoVista = (int) intent.getIntExtra("tipoVista",0);
 
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
 
@@ -60,9 +66,14 @@ public class PantallaPpal extends AppCompatActivity {
 
     public void ClckIrSeguimientoCognitivo(View view)
     {
-        Intent intent = new Intent(this,SeguimientoCognitivo.class);
-        intent.putExtra("GRUPO",grupo);
-        startActivity(intent);
+
+            Intent intent = new Intent(this,SeguimientoCognitivo.class);
+            intent.putExtra("GRUPO",grupo);
+            intent.putExtra("tipoVista",tipoVista);
+            startActivity(intent);
+
+
+
     }
 
     public void ClckIrSeguimientoEtico(View view)
