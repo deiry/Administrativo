@@ -1,5 +1,6 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,12 +60,12 @@ public class EstadisticaModel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadistica_model);
         valX = (ArrayList<String>) getIntent().getSerializableExtra("valX");
-        valSI =(List)getIntent().getSerializableExtra("valSI");
-        valNo =(List)getIntent().getSerializableExtra("valNo");
+        valSI = (List) getIntent().getSerializableExtra("valSI");
+        valNo = (List) getIntent().getSerializableExtra("valNo");
         barWidth = 0.3f;
         barSpace = 0f;
         groupSpace = 0.4f;
-        chart = (BarChart)findViewById(R.id.barChart);
+        chart = (BarChart) findViewById(R.id.barChart);
         chart.setDescription(null);
         chart.setPinchZoom(false);
         chart.setScaleEnabled(false);
@@ -82,9 +86,9 @@ public class EstadisticaModel extends AppCompatActivity {
         ArrayList yVals1 = new ArrayList();
         ArrayList yVals2 = new ArrayList();
 
-        for(int i=1;i<=valX.size();i++){
-            yVals1.add(new BarEntry(i, (float)valSI.get(i-1)));
-            yVals2.add(new BarEntry(i, (float)valNo.get(i-1)));
+        for (int i = 1; i <= valX.size(); i++) {
+            yVals1.add(new BarEntry(i, (float) valSI.get(i - 1)));
+            yVals2.add(new BarEntry(i, (float) valNo.get(i - 1)));
 
         }
 
@@ -130,8 +134,20 @@ public class EstadisticaModel extends AppCompatActivity {
         leftAxis.setDrawGridLines(true);
         leftAxis.setSpaceTop(35f);
         leftAxis.setAxisMinimum(0f);
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                Intent intent = new Intent(EstadisticaModel.this, PantallaConfiguracion.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+
     }
-
-
-
 }
