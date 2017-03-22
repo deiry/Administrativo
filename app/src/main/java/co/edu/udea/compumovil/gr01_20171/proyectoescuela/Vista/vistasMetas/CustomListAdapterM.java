@@ -59,7 +59,6 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                         @Override
                         public void onClick(View v){
                             Estudiante est = null;
-                            Log.d("NUMERO", getCount()+"");
                             for(int i=0 ; i<getCount() ; i++){
                                 if(i==position){
                                     est = getItem(i);

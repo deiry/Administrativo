@@ -3,6 +3,7 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.vistasMetas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,6 +57,11 @@ public class Cumplimiento extends AppCompatActivity {
         if(customListAdapter != null && lista!=null && estudiantes!=null ){
             lista.setAdapter(customListAdapter);
         }
+    }
+
+    public void guardarCumplimientos(View vista){
+        // Logica de asignacion para los cumplimientos
+        // Recordar: usar el valor asignacionCumplimiento de estudiante
     }
 
     private void setMeta(){

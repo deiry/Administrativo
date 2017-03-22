@@ -23,6 +23,7 @@ public class ManejaBDMetas {
     }
 
     public static void agregarRegistro(OperacionesBaseDeDatos operador, Meta meta){
+        // Agregar metodo
         try{
             operador.getDb().beginTransaction();
             operador.asignarMeta(meta);

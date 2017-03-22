@@ -36,8 +36,8 @@ public class CreacionMeta extends AppCompatActivity {
 
     public void crearMeta(View vista){
         if(validarCondiciones()){
-            if(r1.isChecked())tipo = "cognitivo";
-            else tipo = "comportamental";
+            if(r1.isChecked())tipo = "Cognitiva";
+            else tipo = "Comportamental";
             nuevaMeta = new ListaMetas(nombre, tipo);
             OperacionesBaseDeDatos op = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
             ManejaBDMetas.agregarRegistro(op, nuevaMeta);

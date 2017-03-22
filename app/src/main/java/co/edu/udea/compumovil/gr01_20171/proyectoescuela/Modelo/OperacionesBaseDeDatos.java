@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.sql.SQLInput;
 import java.text.DateFormat;
@@ -356,12 +357,13 @@ public final class OperacionesBaseDeDatos {
                 calendar.setTime(meta.getFechaInicio());
                 calendar.add(Calendar.DAY_OF_YEAR,meta.getDuracion());
 
-                if(calendar.getTime().compareTo(Calendar.getInstance().getTime())<0){
-                    borrarMetaPorIdListaMetas(idListaMetas);
-                }
-                else{
+                Log.d("MENSAJE", calendar.getTime().toString());
+                Log.d("MENSAJE", Calendar.getInstance().getTime().toString());
+                Log.d("MENSAJE", String.valueOf(calendar.getTime().compareTo(Calendar.getInstance().getTime())));
+                if(calendar.getTime().compareTo(Calendar.getInstance().getTime()) >= 0){
                     listarMetas.add(meta);
                 }
+                //borrarMetaPorIdListaMetas(idListaMetas);
 
             }while(cursor.moveToNext());
         }

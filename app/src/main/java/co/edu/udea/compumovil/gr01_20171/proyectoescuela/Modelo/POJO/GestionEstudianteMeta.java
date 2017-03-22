@@ -4,6 +4,7 @@ public class GestionEstudianteMeta {
     private boolean estado; // Correspone a si el estudiante esta seleccionado en la vista
     private int duracionMeta;
     private boolean cumplimiento; // Corresponde a si el estudiante cumplio o no alguna meta
+    private boolean asignacionCumplimiento;
 
     public boolean estado() {
         return estado;
@@ -31,5 +32,17 @@ public class GestionEstudianteMeta {
 
     public void setCumplimiento(boolean cumplimiento) {
         this.cumplimiento = cumplimiento;
+    }
+
+    public boolean isCumplimiento() {
+        return cumplimiento;
+    }
+
+    public boolean asignacionCumplimiento() {
+        return asignacionCumplimiento;
+    }
+
+    public void setAsignacionCumplimiento(boolean asignacionCumplimiento) {
+        this.asignacionCumplimiento = asignacionCumplimiento;
     }
 }

@@ -108,7 +108,6 @@ public class PrincipalMetas extends AppCompatActivity {
         }
         metaSeleccionada = metas.get(seleccion);
         for(int i=0; i<estudiantes.size(); i++){
-            estudiantes.get(i).getGestorMetas().setDuracionMeta(Integer.parseInt(campoEdicion.getText().toString()));
             setMeta(estudiantes.get(i), 1);
             ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
         }
@@ -179,7 +178,6 @@ public class PrincipalMetas extends AppCompatActivity {
     private void borrarMeta(){
         int seleccion = opciones.getSelectedItemPosition();
         metaSeleccionada = metas.get(seleccion);
-
         ManejaBDMetas.borrarMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()),metaSeleccionada.getId());
         onRestart();
     }
@@ -221,6 +219,7 @@ public class PrincipalMetas extends AppCompatActivity {
         metaPorEstudiante.setListaMetasId(metaSeleccionada.getId());
         metaPorEstudiante.setFechaInicio(Calendar.getInstance().getTime());
         if(clave == 0) metaPorEstudiante.setDuracion(estudiante.getGestorMetas().getDuracionMeta());
+        else metaPorEstudiante.setDuracion(Integer.parseInt(campoEdicion.getText().toString()));
     }
 
     private void mensaje(String mensaje, int clave){
