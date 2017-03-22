@@ -11,7 +11,7 @@
         android:title="BORRAR META" />
     <item
         android:id="@+id/opcionAsignarMI"
-        android:title="ASIGANR META" />
+        android:title="ASIGNAR META" />
     <item
         android:id="@+id/opcionAsignarMG"
         android:title="META GRUPAL"  />

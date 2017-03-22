@@ -11,6 +11,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.*;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
@@ -286,12 +288,21 @@ public final class OperacionesBaseDeDatos {
         ArrayList<Meta> metasEstudiante = new ArrayList<>();
         if(cursor.moveToFirst()){
             do{
+                meta = new Meta(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
+                        Integer.parseInt(cursor.getString(2)), new Date(),
+                        Integer.parseInt(cursor.getString(4)));
+
+                String s= cursor.getString(3);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
+                Date d=new Date();
                 try {
-                    meta = new Meta(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
-                            Integer.parseInt(cursor.getString(2)), new SimpleDateFormat().parse(cursor.getString(3)),
-                            Integer.parseInt(cursor.getString(4)));
-                    metasEstudiante.add(meta);
-                }catch (ParseException e){}
+                    d=  dateFormat.parse(s);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                meta.setFechaInicio(d);
+                metasEstudiante.add(meta);
             }while(cursor.moveToNext());
         }
         return metasEstudiante;
@@ -310,8 +321,9 @@ public final class OperacionesBaseDeDatos {
         if(cursor.getCount() == 1) {
             cursor.moveToFirst();
             meta = new ListaMetas(
-                    cursor.getString(0),
-                    cursor.getString(1));}
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2));}
         else meta = null;
         return(meta);
     }

@@ -55,7 +55,6 @@ public class ManejaBDMetas {
 
     public static ArrayList retornarDatos(OperacionesBaseDeDatos operador, int clave){
         switch (clave){
-            // Se ejecutara listarMetas
             case 0: return (operador.listarMetas());
             case 1: return (operador.listarMetasEstudiante());
         }

@@ -64,6 +64,7 @@ public class PrincipalMetas extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+        //
         estudiantes = retornaEstudiantes(grupo);
         Collections.sort(estudiantes);
         list = (ListView)findViewById(R.id.list_metas);
@@ -104,6 +105,18 @@ public class PrincipalMetas extends AppCompatActivity {
 
     private void activarCrear(){
         Intent intencion = new Intent(this, CreacionMeta.class);
+        startActivity(intencion);
+    }
+
+    private void activarCumplimiento(){
+        int seleccion = opciones.getSelectedItemPosition();
+        if (seleccion == -1){
+            mensaje("Se debe seleccionar una meta", 0);
+            return;
+        }
+        metaSeleccionada = metas.get(seleccion);
+        Intent intencion = new Intent(this, Cumplimiento.class);
+        intencion.putExtra("META", metaSeleccionada.getId());
         startActivity(intencion);
     }
 
@@ -164,7 +177,9 @@ public class PrincipalMetas extends AppCompatActivity {
                 break;
             case (R.id.opcionBorrar):borrarMeta();
                 break;
-            case (R.id.opcionAsignarMG): prueba();
+            case (R.id.opcionAsignarMG):
+                break;
+            case (R.id.opcionCumplimiento): activarCumplimiento();
                 break;
         }
         return(true);
@@ -182,13 +197,13 @@ public class PrincipalMetas extends AppCompatActivity {
         else Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
     }
 
-    private void prueba(){
+    /*private void prueba(){
         ArrayList<Meta> l = ManejaBDMetas.retornarDatos(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), 1);
         for(int i=0; i<l.size(); i++){
-            Estudiante e = ManejaBDMetas.obtenerEstudiante(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getId());
+            Estudiante e = ManejaBDMetas.obtenerEstudiante(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getEstudianteId());
             Log.d("MENSAJE", e.getNombres()+"");
             ListaMetas m = ManejaBDMetas.obtenerMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getListaMetasId());
             Log.d("MENSAJE", m.getNombre());
         }
-    }
+    }*/
 }

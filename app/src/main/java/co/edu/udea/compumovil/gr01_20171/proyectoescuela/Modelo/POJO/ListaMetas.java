@@ -10,6 +10,12 @@ public class ListaMetas {
         this.tipo = tipo;
     }
 
+    public ListaMetas(int id, String nombre, String tipo ){
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+    }
+
     public int getId() {
         return id;
     }
