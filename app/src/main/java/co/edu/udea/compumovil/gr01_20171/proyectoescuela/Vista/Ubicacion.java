@@ -61,7 +61,7 @@ public class Ubicacion extends AppCompatActivity {
         int a = estudiantes.size();
 
         gv_ubicacion = (GridView) findViewById(R.id.grid_view_ubicacion_estudiante);
-        gv_ubicacion.setNumColumns(filas);
+        gv_ubicacion.setNumColumns(grupo.getFilas());
 
         EstudianteAdapter adapter = new EstudianteAdapter(this,estudiantes);
 

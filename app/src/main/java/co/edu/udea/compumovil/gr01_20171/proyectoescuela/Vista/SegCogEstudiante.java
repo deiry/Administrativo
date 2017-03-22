@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -218,12 +219,16 @@ public class SegCogEstudiante extends Activity {
         ImageButton btn_no = new ImageButton(view.getContext());
 
         btn_si.setImageResource(R.drawable.ic_checkbox_marked_circle_black_24dp);
-        btn_si.setColorFilter(getColor(R.color.green_color_icon));
+        //btn_si.setColorFilter(getColor(R.color.green_color_icon));
+        btn_si.setColorFilter(Color.GREEN);
+
 
         btn_no.setImageResource(R.drawable.ic_close_circle_grey600_24dp);
 
-        btn_si.setBackgroundColor(getColor(R.color.transparente));
-        btn_no.setBackgroundColor(getColor(R.color.transparente));
+        //btn_si.setBackgroundColor(getColor(R.color.transparente));
+        btn_si.setBackgroundColor(Color.TRANSPARENT);
+        //btn_no.setBackgroundColor(getColor(R.color.transparente));
+        btn_no.setBackgroundColor(Color.TRANSPARENT);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

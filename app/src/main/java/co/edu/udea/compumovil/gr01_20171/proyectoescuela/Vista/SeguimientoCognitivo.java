@@ -54,7 +54,7 @@ public class SeguimientoCognitivo extends Activity {
     {
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
-        estudiantes = completarEstudiantes(estudiantes,20);
+        estudiantes = completarEstudiantes(estudiantes,grupo.getColumnas()*grupo.getFilas());
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes);
 
@@ -62,7 +62,7 @@ public class SeguimientoCognitivo extends Activity {
 
         gridEstudiante.setAdapter(adapter);
 
-        gridEstudiante.setNumColumns(6);
+        gridEstudiante.setNumColumns(grupo.getFilas());
 
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
