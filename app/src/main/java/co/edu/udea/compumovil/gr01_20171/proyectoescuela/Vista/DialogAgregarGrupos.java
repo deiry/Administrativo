@@ -44,7 +44,10 @@ public class DialogAgregarGrupos extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Acciona el botón para guardar el grupo ingresado, llevándolo a la base de datos
+     * @param v: Ingresa un objeto de tipo View
+     */
     public  void clickGuardarGrupo(View v){
         if (!grado.getText().toString().isEmpty() && !ngrupo.getText().toString().isEmpty()) {
             try{

@@ -69,6 +69,12 @@ public class ListarEstudiantesAsistencia extends AppCompatActivity {
 
     }
 
+    /**
+     * Trae todos los estudiantes de la base de datos correspondientes al grupo que se está
+     * manejando en ese momento.
+     * @param grupo: El grupo que se está manejando en el momento de ejecución
+     * @return Un ArrayList con todos los estudiantes pertenecientes al mismo grupo
+     */
     private static ArrayList<Estudiante> retornaEstudiantes(Grupo grupo){
         try {
             datos.getDb().beginTransaction();
@@ -81,6 +87,11 @@ public class ListarEstudiantesAsistencia extends AppCompatActivity {
         }
         return estudiantes;
     }
+
+    /**
+     *Permite al accionar el botón mostrar las estadístcas grupales
+     * @param view
+     */
         public void clickGrupales(View view){
             intent = new Intent(this,InfoAsistenciaGrupo.class);
             intent.putExtra("GRUPO",grupo);

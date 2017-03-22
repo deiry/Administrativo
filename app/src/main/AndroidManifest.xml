@@ -46,11 +46,10 @@
 
 
 
-        <activity android:name=".Vista.AsistenciaEstudianteAdapter" />
+        <activity android:name=".Vista$AsistenciaEstudianteAdapter" />
         <activity android:name=".Vista.PantallaEstadisticas" />
-        <activity android:name=".Vista.EstadisticasAsistencia" />
         <activity android:name=".Vista.InfoAsistenciaEstudiante" />
-        <activity android:name=".Vista.Asistencia" />
+        <activity android:name=".Vista.AsistenciaV" />
 
         <activity android:name=".Vista.PantallaEstadisticas" />
         <activity android:name=".Vista.EstadisticasAsistencia" />
@@ -61,7 +60,7 @@
         <activity
             android:name=".Vista.MateriaAdicion"
             android:parentActivityName=".Vista.PantallaProfesor" />
-        <activity android:name=".Vista.AdapterListaEstudiantesAsistencia" />
+        <activity android:name=".Vista$AdapterListaEstudiantesAsistencia" />
         <activity android:name=".Vista.ListarEstudiantesAsistencia"></activity>
 
         <activity android:name=".Vista.InfoAsistenciaGrupo"></activity>
