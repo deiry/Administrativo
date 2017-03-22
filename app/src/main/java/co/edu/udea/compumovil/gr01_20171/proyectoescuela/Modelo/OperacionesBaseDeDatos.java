@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -326,6 +327,54 @@ public final class OperacionesBaseDeDatos {
                     cursor.getString(2));}
         else meta = null;
         return(meta);
+    }
+
+    //se recuperan las metas que tengan el un id de lista metas
+    public ArrayList<Meta> obtenerMetasPorIdListaMtas(int idListaMetas){
+        String consulta = String.format("SELECT * FROM tbl_meta WHERE ("+
+                ContratoEscuela.ColumnasMetas.LISTMETA_ID+" = %s)", idListaMetas);
+        Cursor cursor = obtenerDataDB(consulta);
+        Meta meta;
+        ArrayList<Meta> listarMetas = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                meta = new Meta(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
+                        Integer.parseInt(cursor.getString(2)), new Date(),
+                        Integer.parseInt(cursor.getString(4)));
+                String s = cursor.getString(3);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
+
+                Date d = new Date();
+                try {
+                    d = dateFormat.parse(s);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                meta.setFechaInicio(d);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(meta.getFechaInicio());
+                calendar.add(Calendar.DAY_OF_YEAR,meta.getDuracion());
+
+                if(calendar.getTime().compareTo(Calendar.getInstance().getTime())<0){
+                    borrarMetaPorIdListaMetas(idListaMetas);
+                }
+                else{
+                    listarMetas.add(meta);
+                }
+
+            }while(cursor.moveToNext());
+        }
+        return listarMetas;
+    }
+
+    //borra de la tabla tabla_meta
+    public boolean borrarMetaPorIdListaMetas(int idMeta) {
+        SQLiteDatabase db = baseDatos.getWritableDatabase();
+        String whereClause = String.format("%s=?", ContratoEscuela.ColumnasMetas.LISTMETA_ID);
+        String[] whereArgs = {idMeta+""};
+        int resultado = db.delete(ManejaSQL.Tablas.TBL_METAS, whereClause, whereArgs);
+        return resultado > 0;
     }
 
     public Estudiante obtenerEstudiante(int id) {

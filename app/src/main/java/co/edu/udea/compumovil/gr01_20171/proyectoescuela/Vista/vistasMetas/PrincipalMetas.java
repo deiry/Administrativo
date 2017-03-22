@@ -146,6 +146,7 @@ public class PrincipalMetas extends AppCompatActivity {
             }
         }
         mensaje("Se asignó exitosamente la meta a los estudiantes seleccionados", 1);
+        onRestart();
     }
 
     // Borrar una Meta de la lista de Metas
