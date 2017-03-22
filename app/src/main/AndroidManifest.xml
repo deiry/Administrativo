@@ -36,36 +36,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vista.AsistenciaV" />
-
-
-
-
-
-
-
-
-
-<<<<<<< HEAD
         <activity android:name=".Vista$AsistenciaEstudianteAdapter" />
-=======
-        <!--<activity android:name=".Vista$AsistenciaEstudianteAdapter" />-->
->>>>>>> b8d22100d3309bc2e44249fc98057b9ee8884cf7
+
+
         <activity android:name=".Vista.PantallaEstadisticas" />
         <activity android:name=".Vista.InfoAsistenciaEstudiante" />
-<<<<<<< HEAD
-        <activity android:name=".Vista.AsistenciaV"/>
-
-
-=======
-        <activity android:name=".Vista.AsistenciaV" />
 
         <activity android:name=".Vista.AsistenciaV"/>
-
-        
-
-        <activity android:name=".Vista.InfoAsistenciaEstudiante" />
->>>>>>> b8d22100d3309bc2e44249fc98057b9ee8884cf7
 
 
         <activity
@@ -77,12 +54,11 @@
             android:parentActivityName=".Vista.PantallaProfesor" />
         <!--<activity android:name=".Vista$AdapterListaEstudiantesAsistencia" />-->
 
-            android:parentActivityName=".Vista.PantallaProfesor"/>
-<<<<<<< HEAD
+
+
         <activity android:name=".Vista$AdapterListaEstudiantesAsistencia" />
-=======
-       <!--<activity android:name=".Vista.AdapterListaEstudiantesAsistencia" />-->
->>>>>>> b8d22100d3309bc2e44249fc98057b9ee8884cf7
+
+
         <activity android:name=".Vista.ListarEstudiantesAsistencia"></activity>
 
         <activity android:name=".Vista.InfoAsistenciaGrupo"></activity>

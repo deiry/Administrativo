@@ -125,10 +125,6 @@ public class AsistenciaV extends AppCompatActivity {
 
         gridEstudiante.setNumColumns(4);
 
-        for(Estudiante estudiante : estudiantes)
-        {
-
-        }
 
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
