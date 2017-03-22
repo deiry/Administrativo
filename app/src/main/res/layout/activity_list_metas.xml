@@ -68,6 +68,9 @@
                 android:inputType="number"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@android:color/holo_green_dark"
+                android:textColorHint="@color/cardview_shadow_start_color"
                 android:textSize="24sp" />
 
         </LinearLayout>

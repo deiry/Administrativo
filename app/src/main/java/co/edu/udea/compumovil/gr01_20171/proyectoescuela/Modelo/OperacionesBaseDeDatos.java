@@ -370,6 +370,38 @@ public final class OperacionesBaseDeDatos {
         return listarMetas;
     }
 
+    //se recuperan las metas que tengan un id de lista metas
+    public ArrayList<Meta> validarMetaAEstudiante(int idListaMetas, int idEstudiante){
+        String consulta = String.format("SELECT * FROM tbl_meta WHERE ("+
+                        ContratoEscuela.ColumnasMetas.LISTMETA_ID+" = %s AND "+ContratoEscuela.ColumnasMetas.EST_ID+" = %s)",
+                idListaMetas,idEstudiante);
+        Cursor cursor = obtenerDataDB(consulta);
+        Meta meta;
+        ArrayList<Meta> listarMetas = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                meta = new Meta(Integer.parseInt(cursor.getString(0)), Integer.parseInt(cursor.getString(1)),
+                        Integer.parseInt(cursor.getString(2)), new Date(),
+                        Integer.parseInt(cursor.getString(4)));
+                String s = cursor.getString(3);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
+
+                Date d = new Date();
+                try {
+                    d = dateFormat.parse(s);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                meta.setFechaInicio(d);
+                //borrarMetaPorIdListaMetas(idListaMetas);
+                listarMetas.add(meta);
+            }while(cursor.moveToNext());
+        }
+        return listarMetas;
+    }
+
+
     //borra de la tabla tabla_meta
     public boolean borrarMetaPorIdListaMetas(int idMeta) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();

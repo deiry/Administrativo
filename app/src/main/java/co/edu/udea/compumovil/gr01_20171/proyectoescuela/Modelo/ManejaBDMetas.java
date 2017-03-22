@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Region;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.CumplimientoMeta;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
@@ -22,12 +23,36 @@ public class ManejaBDMetas {
         finally {operador.getDb().endTransaction();}
     }
 
-    public static void agregarRegistro(OperacionesBaseDeDatos operador, Meta meta){
-        // Agregar metodo
+    /*public static void agregarRegistro(OperacionesBaseDeDatos operador, Meta meta){
+        // Agregar metodo para verificar que un estudiante no tenga la meta registrada
         try{
             operador.getDb().beginTransaction();
             operador.asignarMeta(meta);
             operador.getDb().setTransactionSuccessful();
+        }catch (Exception e){e.printStackTrace();}
+        finally {operador.getDb().endTransaction();}
+    }*/
+
+    public static void agregarRegistro(OperacionesBaseDeDatos operador, Meta meta){
+        try{
+            operador.getDb().beginTransaction();
+            ArrayList<Meta> metasEstudiante = operador.validarMetaAEstudiante(meta.getListaMetasId(),meta.getEstudianteId());
+            Calendar a = Calendar.getInstance();
+            //
+            boolean asignarMeta = false;
+            for (int i = 0; i < metasEstudiante.size(); i++){
+                a.setTime(metasEstudiante.get(i).getFechaInicio());
+                a.add(Calendar.DAY_OF_YEAR,metasEstudiante.get(i).getDuracion());
+                if(a.getTime().compareTo(Calendar.getInstance().getTime())>0){
+                    asignarMeta = true;
+                }
+            }
+            if(!asignarMeta){
+                operador.asignarMeta(meta);
+            }
+
+            operador.getDb().setTransactionSuccessful();
+
         }catch (Exception e){e.printStackTrace();}
         finally {operador.getDb().endTransaction();}
     }
