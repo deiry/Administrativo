@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"
-        android:orientation="horizontal">
+        android:layout_weight="0.3">
 
         <Button
             android:id="@+id/btonGrupales"
@@ -21,13 +20,6 @@
             android:onClick="clickGrupales"
             android:text="GRUPALES" />
 
-        <Spinner
-            android:id="@+id/filtro"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/filtros"/>
 
     </LinearLayout>
 
@@ -44,7 +36,5 @@
 
 
     </LinearLayout>
-
-
 
 </LinearLayout>

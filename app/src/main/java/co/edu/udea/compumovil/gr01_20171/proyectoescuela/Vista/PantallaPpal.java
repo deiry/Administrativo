@@ -59,6 +59,7 @@ public class PantallaPpal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
+                ingresar.putExtra("GRUPO",grupo);
                 startActivity(ingresar);
             }
         });
@@ -89,9 +90,6 @@ public class PantallaPpal extends AppCompatActivity {
 
         intent = new Intent(this,AsistenciaV.class);
         intent.putExtra("GRUPO",grupo);
-
-        intent = new Intent(this,Asistencia.class);
-        intent.putExtra(GRUPO,grupo);
 
         startActivity(intent);
     }

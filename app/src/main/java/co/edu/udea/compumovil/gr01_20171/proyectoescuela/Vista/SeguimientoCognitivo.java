@@ -101,12 +101,12 @@ public class SeguimientoCognitivo extends Activity {
         ArrayList<Materia> materias =  manager.obtenerMaterias();
         final CharSequence[] items = new CharSequence[materias.size()];
 
-                if(id != 0)
-                {
-                    Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
-                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
-                    startActivity(intent);
-                }
+//                if(id != 0)
+//                {
+//                    Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
+//                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
+//                    startActivity(intent);
+//                }
 
 
             for (int i=0; i<items.length;i++){

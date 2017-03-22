@@ -27,26 +27,30 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
 public class AsistenciaV extends AppCompatActivity {
 
-    private ArrayList<Estudiante> estudiantes;
+    private static Asistencia asistenciaC;
+    private static ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
     private int[] contadores;
-    OperacionesBaseDeDatos manager;
+    private static OperacionesBaseDeDatos datos;
     Intent intent;
     Bundle bundle;
-    OperacionesBaseDeDatos datos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asistencia_v);
+
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+
         getApplicationContext().deleteDatabase("pedidos.db");
-        manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
-        estudiantes = manager.obtenerEstudiantesDB(grupo);
+        datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
+
+        estudiantes = retornaEstudiantes(grupo);
 
         CrearGridView();
+
         Button addRegistros = (Button) findViewById(R.id.btnAddRegistros);
         Button modRegistros = (Button) findViewById(R.id.btnModRegistros);
 
@@ -121,10 +125,15 @@ public class AsistenciaV extends AppCompatActivity {
 
         gridEstudiante.setNumColumns(4);
 
+        for(Estudiante estudiante : estudiantes)
+        {
+
+        }
+
         gridEstudiante.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AsistenciaV.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AsistenciaV.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                 contadores[position]++;
                 LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
                 switch (contadores[position])
@@ -223,6 +232,34 @@ public class AsistenciaV extends AppCompatActivity {
         }finally{
             datos.getDb().endTransaction();
         }
+
+    }
+
+    private static ArrayList<Estudiante> retornaEstudiantes(Grupo grupo){
+        try {
+            datos.getDb().beginTransaction();
+            estudiantes = datos.obtenerEstudiantesDB(grupo);
+            datos.getDb().setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            datos.getDb().endTransaction();
+        }
+        return estudiantes;
+    }
+
+    private  static Asistencia retornaAsistenciaDia(String id, String fecha){
+        Asistencia asistencia=new Asistencia();
+        try {
+            datos.getDb().beginTransaction();
+            asistencia = datos.obtenerAsistenciaEstudianteDia(id,fecha);
+            datos.getDb().setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            datos.getDb().endTransaction();
+        }
+        return asistencia;
 
     }
 }
