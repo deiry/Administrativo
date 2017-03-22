@@ -91,8 +91,8 @@ public class PantallaPpal extends AppCompatActivity {
 
         if (tipoVista == 1)
         {
-                ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
-                ingresar.putExtra("GRUPO",grupo);
+            intent = new Intent(PantallaPpal.this, AsistenciaV.class);
+            intent.putExtra("GRUPO",grupo);
                  
         }
         else if (tipoVista == 2)

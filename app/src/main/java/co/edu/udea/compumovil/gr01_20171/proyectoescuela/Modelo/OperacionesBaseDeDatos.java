@@ -303,11 +303,15 @@ public final class OperacionesBaseDeDatos {
         Cursor grupos = obtenerDataDB(consulta);
         Grupo grupo;
         ArrayList<Grupo> grupoAL = new ArrayList<>();
-        if (grupos.moveToFirst()) {
-            do {
-                grupo = new Grupo(grupos.getInt(0), grupos.getString(1),grupos.getInt(2),grupos.getInt(3));
-                grupoAL.add(grupo);
-            } while (grupos.moveToNext());
+        if(grupos.getCount() != 0)
+        {
+            if (grupos.moveToFirst()) {
+                do {
+                    grupo = new Grupo(grupos.getInt(0), grupos.getString(1),grupos.getInt(2),grupos.getInt(3));
+                    grupoAL.add(grupo);
+                } while (grupos.moveToNext());
+            }
+
         }
         return grupoAL;
     }

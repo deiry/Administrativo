@@ -22,7 +22,7 @@ public class DialogAgregarGrupos extends AppCompatActivity {
     OperacionesBaseDeDatos datos;
     Button guardarGp,finalizar;
     EditText grado,ngrupo;
-    Spinner filas, columnas;
+    EditText filas, columnas;
     List list;
 
 
@@ -34,11 +34,11 @@ public class DialogAgregarGrupos extends AppCompatActivity {
         finalizar=(Button)findViewById(R.id.btn_finalizar_grupos);
         grado = (EditText)findViewById(R.id.numGrado);
         ngrupo = (EditText)findViewById(R.id.idenGrupo);
-        filas = (Spinner) findViewById(R.id.nro_filas);
-        columnas = (Spinner) findViewById(R.id.nro_columnas);
+        filas = (EditText) findViewById(R.id.nro_filas);
+        columnas = (EditText) findViewById(R.id.nro_columnas);
 
 
-        list = new ArrayList();
+        /*list = new ArrayList();
         ArrayAdapter arrayAdapter;
         for (int i = 2; i <= 6; i++){
             list.add(i);
@@ -46,7 +46,7 @@ public class DialogAgregarGrupos extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item, list);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         columnas.setAdapter(arrayAdapter);
-        filas.setAdapter(arrayAdapter);
+        filas.setAdapter(arrayAdapter);*/
 
 
        getApplicationContext().deleteDatabase("pedidos.db");
@@ -71,8 +71,8 @@ public class DialogAgregarGrupos extends AppCompatActivity {
                 datos.getDb().beginTransaction();
 
                 Grupo grupo = new Grupo(Integer.parseInt(grado.getText().toString()),
-                        ngrupo.getText().toString(),(int)filas.getSelectedItem(),
-                        (int)columnas.getSelectedItem());
+                        ngrupo.getText().toString(),Integer.parseInt(filas.getText().toString()),
+                        Integer.parseInt(columnas.getText().toString()));
                 datos.insertarGrupo(grupo);
                 datos.getDb().setTransactionSuccessful();
                 Toast.makeText(getApplicationContext(),"Grupo agregado",Toast.LENGTH_SHORT).show();

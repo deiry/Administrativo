@@ -19,15 +19,20 @@
             android:name=".Vista.SeguimientoCognitivo"
             android:label="@string/title_activity_seguimiento_cognitivo"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Vista.AgregarEstudiantes" />
+        <activity android:name=".Vista.AgregarEstudiantes"
+            android:parentActivityName=".Vista.PantallaProfesor"/>
+
         <activity android:name=".Vista.SegCogEstudiante" />
+
         <activity
             android:name=".Vista.PantallaConfiguracion"
             android:parentActivityName=".Vista.InicioActivity" />
+
         <activity
             android:name=".Vista.PantallaProfesor"
             android:parentActivityName=".Vista.PantallaConfiguracion" />
-        <activity android:name=".Vista.DialogAgregarGrupos" />
+        <activity android:name=".Vista.DialogAgregarGrupos"
+            android:parentActivityName=".Vista.PantallaProfesor"/>
         <activity android:name=".Vista.ListarEstudiantes" />
         <activity android:name=".Vista.InicioActivity">
             <intent-filter>

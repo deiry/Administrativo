@@ -48,7 +48,7 @@ public class PantallaProfesor extends AppCompatActivity {
         agregarM=(FloatingActionButton)findViewById(R.id.btn_materias);
         getApplicationContext().deleteDatabase("pedidos.db");
         datos = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
-        totalGrupos= datos.obtenerGruposDB();
+        //totalGrupos= datos.obtenerGruposDB();
 
     }
 

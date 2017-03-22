@@ -50,15 +50,12 @@ public class Ubicacion extends AppCompatActivity {
     private void init()
     {
 
-        filas = 6;
-        columnas = 6;
-
         grupo = (Grupo) getIntent().getSerializableExtra(GRUPO);
 
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
 
-        estudiantes = completarEstudiantes(estudiantes,filas*columnas);
+        estudiantes = completarEstudiantes(estudiantes,grupo.getColumnas()*grupo.getFilas());
 
 
         int a = estudiantes.size();

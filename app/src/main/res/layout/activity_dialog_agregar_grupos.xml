@@ -48,7 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="2"
-                    android:inputType="textPersonName" />
+                    android:maxLength="2"
+                    android:inputType="number" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -66,7 +67,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="2"
-                    android:inputType="textPersonName" />
+                    android:maxLength="1"
+                    android:inputType="textPersonName|textCapCharacters" />
 
 
             </LinearLayout>
@@ -85,9 +87,11 @@
                     android:text="Filas:"
                     android:textColor="@android:color/black" />
 
-                <Spinner
+                <EditText
                     android:id="@+id/nro_filas"
                     android:layout_width="60dp"
+                    android:maxLength="1"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     />
 
@@ -104,9 +108,11 @@
                     android:text="Columnas:"
                     android:textColor="@android:color/black" />
 
-                <Spinner
+                <EditText
                     android:id="@+id/nro_columnas"
                     android:layout_width="60dp"
+                    android:maxLength="1"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     />
 

@@ -111,12 +111,14 @@ public class AsistenciaV extends AppCompatActivity {
 
 
     private void CrearGridView() {
+        //estudiantes = completarEstudiantes(estudiantes,grupo.getColumnas()*grupo.getFilas());
 
         contadores = new int[estudiantes.size()];
         for (int i = 0; i < contadores.length;i++)
         {
             contadores[i] = 0;
         }
+
 
         final AsistenciaEstudianteAdapter adapte = new AsistenciaEstudianteAdapter(this,estudiantes);
 
@@ -134,6 +136,7 @@ public class AsistenciaV extends AppCompatActivity {
 //                Toast.makeText(AsistenciaV.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
                 contadores[position]++;
                 LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
+
                 switch (contadores[position])
                 {
                     case 1:
@@ -259,5 +262,40 @@ public class AsistenciaV extends AppCompatActivity {
         }
         return asistencia;
 
+    }
+
+    private ArrayList<Estudiante> completarEstudiantes(ArrayList<Estudiante> estudiantes, int n)
+    {
+        ArrayList<Estudiante> estudiantesFull = new ArrayList<Estudiante>();
+        int contador = estudiantes.size();
+        int filaAnt = 0;
+        int j;
+        for (int i = 0 ; i < contador ; i++)
+        {
+
+            int filaAct = estudiantes.get(i).getPosFila();
+            while (filaAnt+1 != filaAct)
+            {
+                Estudiante e = new Estudiante(0,"","","",0,"",filaAnt+1,0);
+                estudiantesFull.add(e);
+                filaAnt++;
+            }
+            estudiantesFull.add(estudiantes.get(i));
+            filaAnt = filaAct;
+        }
+        contador =estudiantesFull.size();
+        if( contador < n)
+        {
+            int valorFila = estudiantesFull.get(contador-1).getPosFila() + 1;
+
+            for(int i = contador ; i < n; i++)
+            {
+                Estudiante e = new Estudiante(0,"","","",0,"",valorFila,0);
+                estudiantesFull.add(e);
+                valorFila++;
+            }
+        }
+
+        return estudiantesFull;
     }
 }
