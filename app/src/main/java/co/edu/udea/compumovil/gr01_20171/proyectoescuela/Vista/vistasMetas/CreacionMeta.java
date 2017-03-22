@@ -42,6 +42,7 @@ public class CreacionMeta extends AppCompatActivity {
             OperacionesBaseDeDatos op = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
             ManejaBDMetas.agregarRegistro(op, nuevaMeta);
             mensaje("Meta Creada");
+            refresh();
 
         }else{
             mensaje("Nombre vacio o tipo de meta no seleccionado");
@@ -57,5 +58,11 @@ public class CreacionMeta extends AppCompatActivity {
         if (nombre.compareTo("") == 0) return (false);
         if(!r1.isChecked()&&!r2.isChecked())return (false);
         return (true);
+    }
+
+    private void refresh(){
+        campo.setText("");
+        r1.setChecked(false);
+        r2.setChecked(false);
     }
 }

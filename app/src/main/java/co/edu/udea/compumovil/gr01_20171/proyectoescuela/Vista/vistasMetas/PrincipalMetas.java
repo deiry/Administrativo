@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -49,6 +50,8 @@ public class PrincipalMetas extends AppCompatActivity {
     private ArrayList<ListaMetas> metas;
     private CustomListAdapterM customListAdapter;
     private Meta metaPorEstudiante;
+    private EditText campoEdicion;
+    private Button boton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,9 @@ public class PrincipalMetas extends AppCompatActivity {
         Toolbar barra = (Toolbar)findViewById(R.id.barra);
         setSupportActionBar(barra);
         opciones = (Spinner)findViewById(R.id.opcionesMetas);
+        campoEdicion = (EditText)findViewById(R.id.duracionGlobal);
+        boton = (Button)findViewById(R.id.aceptarMetaGrupal);
+        cambiarEstadoComponentesMG(false);
         listarMetas();
         metaPorEstudiante = new Meta();
 
@@ -64,7 +70,6 @@ public class PrincipalMetas extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
-        //
         estudiantes = retornaEstudiantes(grupo);
         Collections.sort(estudiantes);
         list = (ListView)findViewById(R.id.list_metas);
@@ -88,6 +93,27 @@ public class PrincipalMetas extends AppCompatActivity {
         super.onRestart();
         finish();
         startActivity(getIntent());
+    }
+
+    // Metodo para asignacion de meta grupal
+    public void asignarMetaGrupal(View vista){
+        if(campoEdicion.getText().toString().compareTo("")==0){
+            mensaje("Debe agregar una duracion(dias) global para todos los estudiantes ",0);
+            return;
+        }
+        int seleccion = opciones.getSelectedItemPosition();
+        if (seleccion == -1){
+            mensaje("Se debe seleccionar una meta", 0);
+            return;
+        }
+        metaSeleccionada = metas.get(seleccion);
+        for(int i=0; i<estudiantes.size(); i++){
+            estudiantes.get(i).getGestorMetas().setDuracionMeta(Integer.parseInt(campoEdicion.getText().toString()));
+            setMeta(estudiantes.get(i), 1);
+            ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
+        }
+        mensaje("Se asignó correctamente la meta grupal", 0);
+        onRestart();
     }
 
     private static ArrayList<Estudiante> retornaEstudiantes(Grupo grupo){
@@ -141,7 +167,7 @@ public class PrincipalMetas extends AppCompatActivity {
         metaSeleccionada = metas.get(seleccion);
         for (int i=0; i<estudiantes.size(); i++){
             if(estudiantes.get(i).getGestorMetas().estado()){
-                setMeta(estudiantes.get(i));
+                setMeta(estudiantes.get(i), 0);
                 ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
             }
         }
@@ -159,6 +185,10 @@ public class PrincipalMetas extends AppCompatActivity {
     }
 
     // Metodos apoyo Meta Grupal
+    private void cambiarEstadoComponentesMG(boolean estado){
+        campoEdicion.setEnabled(estado);
+        boton.setEnabled(estado);
+    }
 
     // Menu
     @Override
@@ -178,7 +208,7 @@ public class PrincipalMetas extends AppCompatActivity {
                 break;
             case (R.id.opcionBorrar):borrarMeta();
                 break;
-            case (R.id.opcionAsignarMG):
+            case (R.id.opcionAsignarMG): cambiarEstadoComponentesMG(true);
                 break;
             case (R.id.opcionCumplimiento): activarCumplimiento();
                 break;
@@ -186,25 +216,15 @@ public class PrincipalMetas extends AppCompatActivity {
         return(true);
     }
 
-    private void setMeta(Estudiante estudiante){
+    private void setMeta(Estudiante estudiante, int clave){
         metaPorEstudiante.setEstudianteId(estudiante.getIdentificacion());
         metaPorEstudiante.setListaMetasId(metaSeleccionada.getId());
         metaPorEstudiante.setFechaInicio(Calendar.getInstance().getTime());
-        metaPorEstudiante.setDuracion(estudiante.getGestorMetas().getDuracionMeta());
+        if(clave == 0) metaPorEstudiante.setDuracion(estudiante.getGestorMetas().getDuracionMeta());
     }
 
     private void mensaje(String mensaje, int clave){
         if(clave == 0) Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
         else Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
     }
-
-    /*private void prueba(){
-        ArrayList<Meta> l = ManejaBDMetas.retornarDatos(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), 1);
-        for(int i=0; i<l.size(); i++){
-            Estudiante e = ManejaBDMetas.obtenerEstudiante(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getEstudianteId());
-            Log.d("MENSAJE", e.getNombres()+"");
-            ListaMetas m = ManejaBDMetas.obtenerMeta(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), l.get(i).getListaMetasId());
-            Log.d("MENSAJE", m.getNombre());
-        }
-    }*/
 }
