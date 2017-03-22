@@ -25,6 +25,7 @@ import java.util.List;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Materia;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Subcategoria;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
@@ -37,6 +38,7 @@ public class EstadisticaModel extends AppCompatActivity {
     private List<Integer> valSi, valNo;
     private int tipoEstadistica;
     private boolean abrirBarra;
+    private Materia materia;
 
 
     @Override
@@ -46,6 +48,7 @@ public class EstadisticaModel extends AppCompatActivity {
         valX = (ArrayList<String>) getIntent().getSerializableExtra("valX");
         valSi = (List) getIntent().getSerializableExtra("valSi");
         valNo = (List) getIntent().getSerializableExtra("valNo");
+        materia = (Materia) getIntent().getSerializableExtra("materia");
         tipoEstadistica = (int)getIntent().getIntExtra("tipoEstadistica",1);
         barWidth = 0.3f;
         barSpace = 0f;
@@ -146,7 +149,7 @@ public class EstadisticaModel extends AppCompatActivity {
             ArrayList<Integer> valSi=estadistica.asignarValoresSi(subcategorias);
             ArrayList<Integer> valNo= estadistica.asignarValoresNo(subcategorias);
 
-                chart.setBackgroundColor(Color.CYAN);
+
                 Intent intent = new Intent(this,EstadisticaModel.class);
                 intent.putStringArrayListExtra("valX",estadistica.listarSubCategorias(cat.getId()));
                 intent.putExtra("valSi",valSi );

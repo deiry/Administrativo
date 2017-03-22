@@ -34,6 +34,7 @@ public class AsistenciaV extends AppCompatActivity {
     Intent intent;
     Bundle bundle;
     OperacionesBaseDeDatos datos;
+    private int tipoVista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class AsistenciaV extends AppCompatActivity {
         intent = getIntent();
         bundle = intent.getExtras();
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
+        tipoVista = (int) intent.getIntExtra("tipoVista",1);
         getApplicationContext().deleteDatabase("pedidos.db");
         manager = OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext());
         estudiantes = manager.obtenerEstudiantesDB(grupo);
