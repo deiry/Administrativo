@@ -103,12 +103,12 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         for (int i = 0; i < a.size(); i++){
             items[i] = a.get(i);
         }
-        intent = new Intent(this, PantallaEstadisticas.class);
+        intent = new Intent(this,PantallaPpal.class);
         builder.setTitle("Grupos actuales").setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 intent.putExtra("GRUPO",grupos.get(which));
+                intent.putExtra("tipoVista",tipoVista);
                 startActivity(intent);
             }
         });

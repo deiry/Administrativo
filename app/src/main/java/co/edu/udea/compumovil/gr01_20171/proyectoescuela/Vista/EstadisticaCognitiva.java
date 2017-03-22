@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Materia;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Subcategoria;
 
 /**
@@ -14,6 +15,8 @@ public class EstadisticaCognitiva {
 
     OperacionesBaseDeDatos manager;
     private int idEstudiante;
+    private Materia materia;
+
 
     public EstadisticaCognitiva(OperacionesBaseDeDatos manager) {
         this.manager= manager;
@@ -37,7 +40,7 @@ public class EstadisticaCognitiva {
 
     /**
      *Lista el nombre de todas las subcategorias que contiene la categoria, haciendo la consulta en la base de datos
-     * @param cat Categoria para obtener las subcategorias
+     *
      * @return Una lista de todos los nombres de las subcategorias
      */
     public ArrayList<String> listarSubCategorias(int id){
@@ -75,15 +78,43 @@ public class EstadisticaCognitiva {
 
 
 
-    /**
+/*
+    */
+/**
      *Metodo encargado de obtener la cantidad de SI que se encuentra en esa subcategoria
      * @param sub Subcategoria para obtener los valores de si que contiene
      *
      * @return  Cantidad de SI que hay en esa categoria
-     */
+     *//*
+
 
     public int obtenerValSiSubcategoria (Subcategoria sub){
         return (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(sub.getId(),idEstudiante,"si");
+    }
+
+
+
+    */
+/**
+     * Metodo encargado de obtener la cantidad de NO que se encuentra en esa subcategoria
+     * @param sub ubcategoria para obtener los valores de NO que contiene
+     * @return antidad de NO que hay en esa categoria
+     *//*
+
+    public int obtenerValNoSubcategoria(Subcategoria sub){
+        return (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(sub.getId(),idEstudiante,"no");
+    }
+*/
+
+
+    /**
+     *Metodo encargado de obtener la cantidad de SI que se encuentra en esa subcategoria
+     * @param sub Subcategoria para obtener los valores de si que contiene     *
+     * @return  Cantidad de SI que hay en esa categoria
+     */
+
+    public int obtenerValSiSubcategoria(Subcategoria sub){
+        return (int)manager.countSeguimientoFromIdSubcategoriIdEstudianteIdMateria(sub.getId(),idEstudiante,materia.getId(),"si");
     }
 
     /**
@@ -92,7 +123,7 @@ public class EstadisticaCognitiva {
      * @return antidad de NO que hay en esa categoria
      */
     public int obtenerValNoSubcategoria (Subcategoria sub){
-        return (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(sub.getId(),idEstudiante,"no");
+        return (int)manager.countSeguimientoFromIdSubcategoriIdEstudianteIdMateria(sub.getId(),idEstudiante,materia.getId(),"no" );
     }
 
     /**
@@ -174,4 +205,13 @@ public class EstadisticaCognitiva {
     public void setIdEstudiante(int idEstudiante) {
         this.idEstudiante = idEstudiante;
     }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
+    }
+
 }

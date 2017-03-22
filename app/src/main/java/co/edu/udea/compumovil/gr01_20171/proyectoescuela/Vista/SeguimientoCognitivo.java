@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -98,8 +99,9 @@ public class SeguimientoCognitivo extends Activity {
 
     public AlertDialog listarOpcionesMatGral(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        ArrayList<Materia> materias =  manager.obtenerMaterias();
+        final ArrayList<Materia> materias =  manager.obtenerMaterias();
         final CharSequence[] items = new CharSequence[materias.size()];
+
 
 //                if(id != 0)
 //                {
@@ -107,6 +109,7 @@ public class SeguimientoCognitivo extends Activity {
 //                    intent.putExtra("id",estudiantes.get(position).getIdentificacion());
 //                    startActivity(intent);
 //                }
+
 
 
             for (int i=0; i<items.length;i++){
@@ -123,13 +126,14 @@ public class SeguimientoCognitivo extends Activity {
                 intent.putStringArrayListExtra("valX",listarSubCategorias(categorias.get(1)));
                 intent.putExtra("valSi", asignarValoresSi(subcategorias));
                 intent.putExtra("valNo", asignarValoresNo(subcategorias));*/
-
+                estadistica.setMateria(materias.get(which));
                 intent.putStringArrayListExtra("valX", estadistica.listarCategorias(categorias));
                 intent.putExtra("valSi",estadistica.obtenerValSiCategorias(categorias));
                 intent.putExtra("valNo", estadistica.obtenerValNoCategorias(categorias));
                 intent.putExtra("idEstudiante", idEstudiante);
                 intent.putExtra("abrirBarra", true);
                 intent.putExtra("tipoEstadistica", 1);
+                intent.putExtra("materia", estadistica.getMateria());
 
                 startActivity(intent);
             }
@@ -183,82 +187,6 @@ public class SeguimientoCognitivo extends Activity {
         return estudiantesFull;
     }
 
-
-    public ArrayList<Integer> asignarValoresNo(ArrayList<Subcategoria> subcategorias){
-        ArrayList<Integer> valsNo = new ArrayList<>();
-     for (int i=0; i< subcategorias.size();i++){
-         int valNo = (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(subcategorias.get(i).getId(),idEstudiante,"no");
-         subcategorias.get(i).setValorNo(valNo);
-         valsNo.add(valNo);
-     }
-     return valsNo;
-
-    }
-
-    public ArrayList<Integer> asignarValoresSi(ArrayList<Subcategoria> subcategorias){
-       ArrayList<Integer> valsSi = new ArrayList<>();
-        for (int i=0; i< subcategorias.size();i++){
-            int valSi = (int)manager.countSeguimientoFromIdSubcategoriIdEstudiante(subcategorias.get(i).getId(),idEstudiante,"si");
-            subcategorias.get(i).setValorSi(valSi);
-            valsSi.add(valSi);
-        }
-        return valsSi;
-
-    }
-
-
-
-    public int asignarSubcategoriaSI(ArrayList<Subcategoria> subcategorias){
-
-        int gano=0;
-        for (int i=0; i< subcategorias.size();i++){
-            int si=subcategorias.get(i).getValorSi();
-            int no=subcategorias.get(i).getValorNo();
-            if (si>=no){
-                gano++;
-            }
-        }
-
-        return gano;
-    }
-
-    public int asignarSubcategoriaNO(ArrayList<Subcategoria> subcategorias){
-
-        int perdio=0;
-        for (int i=0; i< subcategorias.size();i++){
-            int si=subcategorias.get(i).getValorSi();
-            int no=subcategorias.get(i).getValorNo();
-
-            if (no>si){
-                perdio++;
-            }
-        }
-
-        return perdio;
-    }
-    public ArrayList<Integer> asignarCategoriaSI(ArrayList<Categoria> categorias){
-        ArrayList<Integer> estadoSi = new ArrayList<>();
-
-        for (int i=0; i<categorias.size();i++){
-            subcategorias = manager.obtenerSubCategoriasFromCategoriaId(categorias.get(i).getId());
-
-            estadoSi.add(asignarSubcategoriaSI(subcategorias));
-        }
-
-        return estadoSi;
-    }
-
-    public ArrayList<Integer> asignarCategoriaNO(ArrayList<Categoria> categorias){
-        ArrayList<Integer> estadoNo = new ArrayList<>();
-        ArrayList<Subcategoria> subcategorias;
-        for (int i=0; i<categorias.size();i++){
-            subcategorias = manager.obtenerSubCategoriasFromCategoriaId(categorias.get(i).getId());
-
-            estadoNo.add(asignarSubcategoriaNO(subcategorias));
-        }
-
-        return estadoNo;
-    }
 
 
 
