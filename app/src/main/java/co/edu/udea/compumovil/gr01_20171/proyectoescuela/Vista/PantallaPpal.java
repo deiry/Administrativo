@@ -37,7 +37,7 @@ public class PantallaPpal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
         intent = getIntent();
@@ -53,6 +53,7 @@ public class PantallaPpal extends AppCompatActivity {
         grupo = (Grupo) intent.getSerializableExtra(GRUPO);
 
 
+<<<<<<< HEAD
         //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
         Button asistencia = (Button) findViewById(R.id.btn_asistencia);
         asistencia.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +66,8 @@ public class PantallaPpal extends AppCompatActivity {
         });
 
 
+=======
+>>>>>>> b8d22100d3309bc2e44249fc98057b9ee8884cf7
     }
 
     public void ClckIrSeguimientoCognitivo(View view)

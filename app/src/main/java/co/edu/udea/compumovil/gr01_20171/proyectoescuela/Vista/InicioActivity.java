@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Controlador.ControladorServiciosGenerales;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Grupo;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
@@ -22,8 +20,6 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<Grupo> grupos = new ArrayList<>();
     Intent intent;
     OperacionesBaseDeDatos datos ;
-
-    ControladorServiciosGenerales controlador = new ControladorServiciosGenerales();
     ArrayList<String> gruposString = new ArrayList<>();
 
 
@@ -54,7 +50,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnGrupo:
                 grupos = datos.obtenerGruposDB();
-               cadenaGrupos= controlador.convertirGrupos(grupos);
+               cadenaGrupos= convertirGrupos(grupos);
                 AlertDialog dialog = listarGrupos(cadenaGrupos);
                 dialog.show();
                 tipoVista = 1;
@@ -62,7 +58,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnEstadisticas:
 
                 grupos= datos.obtenerGruposDB();
-                gruposString= controlador.convertirGrupos(grupos);
+                gruposString= convertirGrupos(grupos);
                 AlertDialog dialogo = listarGruposEstadisticas(gruposString);
                 dialogo.show();
 
@@ -95,7 +91,12 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         return builder.create();
     }
 
-
+    /**
+     * Organiza el ArrayList con los grupos tipo String para mostrarlos en un Alert Dialog
+     * y que el ususario pueda seleccionar el grupo que desee.
+     * @param a: Arraylist con los grupos a mostrar.
+     * @return Alert Dialog con los grupos contenidos en el.
+     */
     public AlertDialog listarGruposEstadisticas(ArrayList<String> a){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final CharSequence[] items = new CharSequence[a.size()];
@@ -113,5 +114,20 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         return builder.create();
+    }
+    /**
+     * Toma los grupos que se tiene registrados hastta el momento y los procesa para mosrarlos
+     * como una cadena completa de Strings de la siguiente forma "1-a"
+     * @param a Entra un Arraylist de tipo grupo con los grupos almacenados actualmente.
+     * @return Arraylist con los grupos del tipo String.
+     */
+    public ArrayList<String> convertirGrupos (ArrayList<Grupo> a){
+        ArrayList<String> gruposs = new ArrayList<>();
+        Grupo aux;
+        for (int i = 0; i < a.size(); i++){
+            aux = a.get(i);
+            gruposs.add(String.valueOf(aux.getCurso()) + "-" + aux.getGrupo());
+        }
+        return gruposs;
     }
 }
