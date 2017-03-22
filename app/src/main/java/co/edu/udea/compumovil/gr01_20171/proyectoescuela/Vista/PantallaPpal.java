@@ -37,7 +37,7 @@ public class PantallaPpal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_ppal);
         intent = getIntent();
@@ -52,8 +52,19 @@ public class PantallaPpal extends AppCompatActivity {
         Intent intent = getIntent();
         grupo = (Grupo) intent.getSerializableExtra(GRUPO);
 
+/*
+        //Voy a probar una pantalla en el botón de asistencia que nos corresponde :D
+        Button asistencia = (Button) findViewById(R.id.btn_asistencia);
+        asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
+                ingresar.putExtra("GRUPO",grupo);
+                startActivity(ingresar);
+            }
+        });
 
-
+*/
 
     }
 
@@ -75,12 +86,14 @@ public class PantallaPpal extends AppCompatActivity {
         //DE LA VISTA SE ASIGNA EL ONCLICK
     }
 
+
     public void ClickIrAsistencia(View view) {
 
         if (tipoVista == 1)
         {
-            intent = new Intent(this, AsistenciaV.class);
-            intent.putExtra("GRUPO", grupo);
+                ingresar = new Intent(PantallaPpal.this, AsistenciaV.class);
+                ingresar.putExtra("GRUPO",grupo);
+                 
         }
         else if (tipoVista == 2)
         {

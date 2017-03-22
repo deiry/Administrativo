@@ -106,6 +106,8 @@ public final class OperacionesBaseDeDatos {
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.Grupos.GRP_CURSO, grupo.getCurso());
         valores.put(ContratoEscuela.Grupos.GRP_GRUPO, grupo.getGrupo());
+        valores.put(ContratoEscuela.Grupos.GRP_FILAS, grupo.getFilas());
+        valores.put(ContratoEscuela.Grupos.GRP_COLUMNAS, grupo.getColumnas());
         db.insertOrThrow(ManejaSQL.Tablas.TBL_GRUPO, null, valores);
     }
 
@@ -292,6 +294,10 @@ public final class OperacionesBaseDeDatos {
         }
 
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Grupo> obtenerGruposDB() {
         String consulta = "SELECT * FROM tbl_grupo";
         Cursor grupos = obtenerDataDB(consulta);
@@ -299,7 +305,7 @@ public final class OperacionesBaseDeDatos {
         ArrayList<Grupo> grupoAL = new ArrayList<>();
         if (grupos.moveToFirst()) {
             do {
-                grupo = new Grupo(grupos.getInt(0), grupos.getString(1));
+                grupo = new Grupo(grupos.getInt(0), grupos.getString(1),grupos.getInt(2),grupos.getInt(3));
                 grupoAL.add(grupo);
             } while (grupos.moveToNext());
         }
@@ -366,6 +372,30 @@ public final class OperacionesBaseDeDatos {
             }while(asistencias.moveToNext());
         }
         return asistenciasAL;
+    }
+
+    /**
+     * Retorna el registro de fecha de un día especifico para un estudiante
+     * @param idEstudiante
+     * @return
+     */
+    public Asistencia obtenerAsistenciaEstudianteDia(String idEstudiante,String fecha){
+        String consulta;
+
+        consulta = String.format("SELECT %s.* FROM %s WHERE (%s=%s AND %s='%s')",ManejaSQL.Tablas.TBL_ASISTENCIA
+                ,ManejaSQL.Tablas.TBL_ASISTENCIA,
+                ContratoEscuela.Asistencia.AST_EST_ID,idEstudiante,
+                ContratoEscuela.Asistencia.AST_FECHA,fecha);
+
+        Cursor asistencias = obtenerDataDB(consulta);
+        Asistencia asistencia= new Asistencia();
+
+        if(asistencias.moveToFirst()){
+            do{
+                asistencia = new Asistencia(asistencias.getString(0),asistencias.getInt(1),asistencias.getString(2));
+            }while(asistencias.moveToNext());
+        }
+        return asistencia;
     }
 
     /**

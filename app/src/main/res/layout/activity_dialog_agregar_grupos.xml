@@ -12,6 +12,9 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="0.5"
         android:orientation="horizontal"> </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,12 +25,12 @@
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.4"></LinearLayout>
+            android:layout_weight="0.2"></LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="3">
+            android:layout_weight="1">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -44,14 +47,12 @@
                     android:id="@+id/numGrado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="2"
                     android:inputType="textPersonName" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6">
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"></LinearLayout>
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
@@ -64,18 +65,63 @@
                     android:id="@+id/idenGrupo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    android:ems="2"
                     android:inputType="textPersonName" />
 
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="0.6">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Filas:"
+                    android:textColor="@android:color/black" />
+
+                <Spinner
+                    android:id="@+id/nro_filas"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"></LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:text="Columnas:"
+                    android:textColor="@android:color/black" />
+
+                <Spinner
+                    android:id="@+id/nro_columnas"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="0.2"></LinearLayout>
 
     </LinearLayout>
 
@@ -86,29 +132,29 @@
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"></LinearLayout>
+            android:layout_weight="2"></LinearLayout>
+        <Button
+            android:id="@+id/btn_agregarGrupo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickGuardarGrupo"
+            android:text="Agregar" />
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="3">
-
-            <Button
-                android:id="@+id/btn_agregarGrupo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="clickGuardarGrupo"
-                android:text="Agregar" />
-
-            <Button
-                android:id="@+id/btn_finalizar_grupos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Finalizar" />
+            android:layout_weight="1">
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_finalizar_grupos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finalizar" />
+
         <LinearLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="2"></LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

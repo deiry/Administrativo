@@ -3,14 +3,13 @@ package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Asistencia;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
@@ -36,8 +35,6 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     ArrayList<Asistencia> asistencia;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +57,16 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         diaMayorTarde=(EditText)findViewById(R.id.dia_llegadas_tarde);
         cantidadEstFalta=(EditText)findViewById(R.id.cant_est_fmes);
         cantidadEstTarde=(EditText)findViewById(R.id.cant_est_tmes);
-        asistencia=obtenerAsistenciaGrupo();
-       llenar();
 
-
-
+        llenar();
 
     }
+
+    /**
+     * Obtiene los estudiantes desde la base de datos
+     * @param grupo seleccionado
+     * @return no retorna
+     */
     private  ArrayList<Estudiante> retornaEstudiantes(Grupo grupo){
         try {
             datos.getDb().beginTransaction();
@@ -79,6 +79,10 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         }
         return estudiantes;
     }
+
+    /**
+     * Llena los campos de los EditText necesarios para mostrar la información de las estadísticas grupales
+     */
    public void llenar(){
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
@@ -113,8 +117,12 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
 
     }
 
-
-    public ArrayList<Asistencia> retornaAsistencia(int estId){
+    /**
+     * Obtiene la asistencia por estudiante de la base de dato
+     * @param estId: Identificación única del estudiante
+     * @return Lista de los registros de  Asistencia almacenados en la base de datos
+     */
+    private ArrayList<Asistencia> retornaAsistencia(int estId){
         ArrayList<Asistencia> asisten= new ArrayList<>();
         try {
 
@@ -129,6 +137,11 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         return asisten;
     }
 
+    /**
+     * Toma los registros de asistencia de cada estudiante, y los guarda en un solo registro que
+     * es tomada como el total de asistencia del grupo.
+     * @return Un registro de el total de asistencias del grupo.
+     */
    public ArrayList<Asistencia> obtenerAsistenciaGrupo(){
        ArrayList<Asistencia>asistenciaGrupo = new ArrayList<>();
        estudiantes = retornaEstudiantes(grupo);
@@ -146,8 +159,11 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
     }
 
 
-
- //Arroja todas las faltas del array de asistencia
+    /**
+     * Separa del registro general de asistencias del grupo, las faltas del totales del grupo
+     * @param asistencia: registro total de las asistencias del grupo
+     * @return retorna un ArrayList con todas las faltas del grupo
+     */
 
     public ArrayList<Asistencia> faltas(ArrayList<Asistencia> asistencia){
 
@@ -160,7 +176,12 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         }
         return faltas;
     }
-    //Arroja todas las llegadas tarde del array de asistencia
+
+    /**
+     * Separa del registro general de asistencias del grupo, las llegadas tarde totales del grupo
+     * @param asistencia:registro total de las asistencias del grupo
+     * @return retorna un ArrayList con todas las llegadas tardes del grupo
+     */
     public ArrayList<Asistencia> llegadasTarde(ArrayList<Asistencia> asistencia){
 
         ArrayList<Asistencia> llegadasTardes= new ArrayList<>();
@@ -173,7 +194,11 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         return llegadasTardes;
     }
 
-    //Arroja todas las falta del mes actual
+    /**
+     * Del registro de faltas totales del grupo, se extraen sólo las faltas del mes actual
+     * @param asistenciaFaltas: Registro de las faltas totales del grupo, sin importar el mes
+     * @return Un ArrayList con las faltas filtradas del mes actual
+     */
     public ArrayList<Asistencia> faltasUltimoMes(ArrayList<Asistencia> asistenciaFaltas){
         ArrayList<Asistencia> faltasUltimomes=new ArrayList<>();
         Calendar cal = Calendar.getInstance();
@@ -190,7 +215,13 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         }
         return faltasUltimomes;
     }
-    //Le pasa por parámetro lo que arrojó el metodo llegadas tarde
+
+    /**
+     * Del registro de general de  llegadas tardes de los estudiantes, se extraen únicamente las llegadas
+     * tarde del mes actual
+     * * @param asisLlegadasTarde: Registro de las llegadas tarde totales del grupo
+     * @return Un ArrayList con todas las llegadas tarde del mes actual
+     */
     public  ArrayList<Asistencia> llegadasTardeUltimoMes(ArrayList<Asistencia> asisLlegadasTarde){
         Calendar cal = Calendar.getInstance();
         ArrayList<Asistencia> llegadasTarde=new ArrayList<>();
@@ -207,7 +238,13 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
         }
         return llegadasTarde;
     }
-    //el array del parametro es el de faltas ultimo mes
+
+    /**
+     * Recibe todas las faltas del mes actual, para procesarlas y retornar el dia con mas faltas, solo en el caso de que exita un unico dia con
+     * el mayor número de faltas
+     * @param faltas: Registro de todas las faltas del mes actual
+     * @return Un entero que indica el día en el cual se presentaron la mayoría de faltas
+     */
     public  int diaMayorFaltas(ArrayList<Asistencia> faltas) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
@@ -247,6 +284,12 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
 
     }
 
+    /**
+     * Recibe todas las llegadas tarde del mes actual, para procesarlas y retornar el dia con mayor llegadas tarde, solo en el caso
+     * de que exita un unico dia con el mayor número de llegadas tarde.
+     * @param llegadasTardes:Registro de todas las llegadas tarde del mes actual
+     * @return  Un entero que indica el día en el cual se presentaron la mayoría de llegadas tarde.
+     */
         public  int diaMayorLlegadas(ArrayList<Asistencia> llegadasTardes) {
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("dd");
@@ -285,6 +328,12 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
 
         }
 
+    /**
+     * Mediante el regitro de asistencia de cada estudiante del grupo,se realiza la separación únicamente
+     * de las faltas, si es posible hacerlo, se toma al estudiante dentro del conteo de estudaintes que
+     * faltaron último mes.
+     * @return un entero con la cantidad de estudiantes que faltaron en el último mes.
+     */
         public int cantidadEstudiantesFalta(){
             int cantidadEstFalta=0;
             for(int i=0;i<estudiantes.size();i++) {
@@ -302,7 +351,12 @@ public class InfoAsistenciaGrupo extends AppCompatActivity {
             return cantidadEstFalta;
         }
 
-
+    /**
+     * Mediante el regitro de asistencia de cada estudiante del grupo,se realiza la separación únicamente
+     * de las llegadas tardes, si es posible hacerlo, se toma al estudiante dentro del conteo de estudiantes que
+     * llegaron tarde en el último mes.
+     * @return :un entero con la cantidad de estudiantes que faltaron en el último mes.
+     */
     public int cantidadEstudiantesTarde(){
         int cantidadEstTarde=0;
         for(int i=0;i<estudiantes.size();i++) {
