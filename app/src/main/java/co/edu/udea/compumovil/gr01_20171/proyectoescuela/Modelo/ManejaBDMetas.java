@@ -17,7 +17,8 @@ public class ManejaBDMetas {
     public static void agregarRegistro(OperacionesBaseDeDatos operador,ListaMetas nuevaMeta){
         try{
         operador.getDb().beginTransaction();
-        operador.agregarMeta(nuevaMeta);
+
+            boolean b = operador.agregarMeta(nuevaMeta);
         operador.getDb().setTransactionSuccessful();
         }catch (Exception e){e.printStackTrace();}
         finally {operador.getDb().endTransaction();}
@@ -48,7 +49,7 @@ public class ManejaBDMetas {
                 }
             }
             if(!asignarMeta){
-                operador.asignarMeta(meta);
+                boolean b = operador.asignarMeta(meta);
             }
 
             operador.getDb().setTransactionSuccessful();

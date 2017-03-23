@@ -50,7 +50,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
             case R.id.btnGrupo:
                 grupos = datos.obtenerGruposDB();
-               cadenaGrupos= convertirGrupos(grupos);
+                cadenaGrupos= convertirGrupos(grupos);
                 AlertDialog dialog = listarGrupos(cadenaGrupos);
                 dialog.show();
                 tipoVista = 1;

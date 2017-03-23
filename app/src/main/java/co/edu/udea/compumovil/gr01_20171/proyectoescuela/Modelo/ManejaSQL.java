@@ -74,47 +74,52 @@ public class ManejaSQL extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("PRAGMA foreign_kets=ON");
+        String s = "PRAGMA foreign_kets=ON";
+        db.execSQL(s);
 
         //GRUPO
-        String s = String.format("CREATE TABLE %s ( %s INTEGER ," +
+        s = String.format("CREATE TABLE %s ( %s INTEGER ," +
                         "%s VARCHAR(2),%s INTEGER, %s INTEGER )",
                 Tablas.TBL_GRUPO, ContratoEscuela.Grupos.GRP_CURSO, ContratoEscuela.Grupos.GRP_GRUPO,
                 ContratoEscuela.Grupos.GRP_FILAS, ContratoEscuela.Grupos.GRP_COLUMNAS);
         db.execSQL(s);
 
-
         //ESTUDIANTE**
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY ," +
+        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY ," +
                         "%s VARCHAR(20),%s VARCHAR(20),%s VARCHAR(50),%s INTEGER,%s VARCHAR(2)" +
                         ",%s INTEGER,%s INTEGER )",
                 Tablas.TBL_ESTUDIANTE, ContratoEscuela.Estudiantes.EST_IDENTIFICACION,
                 ContratoEscuela.Estudiantes.EST_NOMBRES,ContratoEscuela.Estudiantes.EST_APELLIDOS,
                 ContratoEscuela.Estudiantes.EST_FOTO,ContratoEscuela.Estudiantes.EST_GRP_CURSO,
                 ContratoEscuela.Estudiantes.EST_GRP_GRUPO, ContratoEscuela.Estudiantes.EST_POS_FILA,
-                ContratoEscuela.Estudiantes.EST_POS_COL));
+                ContratoEscuela.Estudiantes.EST_POS_COL);
+        db.execSQL(s);
 
         //CATEGORIA
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
+        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT ," +
                         "%s VARCHAR(50), %s INTEGER)",
                 Tablas.TBL_CATEGORIAS,
                 ContratoEscuela.Categorias.CAT_ID,
                 ContratoEscuela.Categorias.CAT_NOMBRE,
-                ContratoEscuela.Categorias.CAT_TIPO));
+                ContratoEscuela.Categorias.CAT_TIPO);
+        db.execSQL(s);
 
         //SUBCATEGORIAS**
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s INTEGER,%s VARCHAR(50),%s VARCHAR(50) )",
                 Tablas.TBL_SUBCATEGORIAS,
                 ContratoEscuela.Subcategorias.SUBC_ID, ContratoEscuela.Subcategorias.SUBC_CAT_ID,
-                ContratoEscuela.Subcategorias.SUBC_NOMBRE, ContratoEscuela.Subcategorias.SUBC_ICONO));
+                ContratoEscuela.Subcategorias.SUBC_NOMBRE, ContratoEscuela.Subcategorias.SUBC_ICONO);
+        db.execSQL(s);
 
         //SEGUIMIENTO**
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s VARCHAR(10) )",
+        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "%s INTEGER,%s INTEGER,%s VARCHAR(30),%s DATE,%s INTEGER(1),%s INTEGER(2) )",
                 Tablas.TBL_SEGUIMIENTO, ContratoEscuela.Seguimiento.SEG_ID, ContratoEscuela.Seguimiento.SEG_SUBC_ID,
                 ContratoEscuela.Seguimiento.SEG_EST_ID, ContratoEscuela.Seguimiento.SEG_ESTADO,
-                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO));
+                ContratoEscuela.Seguimiento.SEG_FECHA, ContratoEscuela.Seguimiento.SEG_TIPO,
+                ContratoEscuela.Seguimiento.SEG_MAT_ID);
+        db.execSQL(s);
 
         //LISTAMETAS
         db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -137,26 +142,29 @@ public class ManejaSQL extends SQLiteOpenHelper {
                 ContratoEscuela.CumplimientoMetas.MET_FECHA, ContratoEscuela.ColumnasCumplimientoMetas.MET_ESTADO));
 
         //ASISTENCIA
-        db.execSQL(String.format("CREATE TABLE %s ( %s DATE ," +
+        s = String.format("CREATE TABLE %s ( %s VARCHAR(40) ," +
                         "%s INTEGER, %s VARCHAR(20) )",
                 Tablas.TBL_ASISTENCIA, ContratoEscuela.Asistencia.AST_FECHA, ContratoEscuela.Asistencia.AST_EST_ID,
-                ContratoEscuela.Asistencia.AST_ASISTENCIA));
+                ContratoEscuela.Asistencia.AST_ASISTENCIA);
+        db.execSQL(s);
 
         //MATERIAS
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        s = String.format("CREATE TABLE %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s VARCHAR(20))",
                 Tablas.TBL_MATERIAS, ContratoEscuela.Materias.MTA_ID,
-                ContratoEscuela.Materias.MTA_NOMBRE));
+                ContratoEscuela.Materias.MTA_NOMBRE);
+        db.execSQL(s);
 
         //MATERIASESTUDIANTES
-        db.execSQL(String.format("CREATE TABLE %s ( %s INTEGER ," +
+        s=String.format("CREATE TABLE %s ( %s INTEGER ," +
                         "%s INTEGER)",
                 Tablas.TBL_MATERIAS_ESTUDIANTE, ContratoEscuela.MateriaEstudiante.MEST_MTA_ID,
-                ContratoEscuela.MateriaEstudiante.MEST_EST_ID));
+                ContratoEscuela.MateriaEstudiante.MEST_EST_ID);
+        db.execSQL(s);
 
         /**
-        *INSERTANDO CATEGORIAS DE COGNITIVO
-        */
+         *INSERTANDO CATEGORIAS DE COGNITIVO
+         */
         //APLICAR
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.aplicar));
@@ -187,6 +195,11 @@ public class ManejaSQL extends SQLiteOpenHelper {
         valores.put(ContratoEscuela.Categorias.CAT_NOMBRE, contexto.getResources().getString(R.string.evaluar));
         valores.put(ContratoEscuela.Categorias.CAT_TIPO,1);
         db.insert(Tablas.TBL_CATEGORIAS,null,valores);
+
+        //INSERTANDO MATERIA GENERAL
+        valores = new ContentValues();
+        valores.put(ContratoEscuela.Materias.MTA_NOMBRE, "GENERAL");
+        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
     }
 
     @Override
@@ -197,10 +210,9 @@ public class ManejaSQL extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_ESTUDIANTE);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_GRUPO);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_LISTA_METAS);
-        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_METAS);
-        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_CUMPLIMIENTO_METAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_MATERIAS_ESTUDIANTE);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_METAS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SEGUIMIENTO);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TBL_SUBCATEGORIAS);
 

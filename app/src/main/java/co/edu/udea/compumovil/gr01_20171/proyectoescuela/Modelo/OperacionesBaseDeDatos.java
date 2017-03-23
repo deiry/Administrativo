@@ -194,25 +194,43 @@ public final class OperacionesBaseDeDatos {
     /*
      *Método para agregar una nueva meta a la lista de metas (tbl_lista_metas)
      */
-    public void agregarMeta(ListaMetas nuevaMeta) {
+    public boolean agregarMeta(ListaMetas nuevaMeta) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.ListaMetas.LISTMET_NOMBRE,nuevaMeta.getNombre());
         valores.put(ContratoEscuela.ListaMetas.MET_TIPO, nuevaMeta.getTipo());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS,null,valores);
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_LISTA_METAS,null,valores);
+
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
      * Método para asignar una meta a un estudiante (tbl_metas)
      */
-    public void asignarMeta(Meta meta){
+    public boolean asignarMeta(Meta meta){
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(ContratoEscuela.Metas.EST_ID, meta.getEstudianteId());
         valores.put(ContratoEscuela.Metas.LISTMETA_ID, meta.getListaMetasId());
         valores.put(ContratoEscuela.Metas.MET_FECHA_INICIO, String.valueOf(meta.getFechaInicio()));
         valores.put(ContratoEscuela.Metas.MET_DURACION, meta.getDuracion());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_METAS,null,valores);
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_METAS,null,valores);
+
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**
