@@ -10,7 +10,9 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal"
-        android:paddingRight="0dp">
+        android:paddingRight="0dp"
+        android:clickable="false"
+        android:focusable="false">
 
         <ImageView
             android:id="@+id/imgEstM"
@@ -24,7 +26,9 @@
             android:layout_height="100dp"
             android:layout_weight="5"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false">
 
             <TextView
                 android:id="@+id/txtNombreM"
@@ -55,29 +59,34 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:clickable="false"
+                android:focusable="false">
 
                 <RadioGroup
                     android:id="@+id/grupoOpcionesC"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <RadioButton
-                        android:id="@+id/cumplio"
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/cumple"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:enabled="false"
                         android:text="Cumplió"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:focusable="false"/>
 
-                    <RadioButton
-                        android:id="@+id/noCumplio"
-                        android:layout_width="match_parent"
+                    <CheckBox
+                        android:id="@+id/noCumple"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="No Cumplió"
-                        android:textColor="@android:color/black" />
-
+                        android:enabled="false"
+                        android:text="No Cumpló"
+                        android:textColor="@android:color/black"
+                        android:focusable="false"/>
                 </RadioGroup>
 
             </LinearLayout>

@@ -33,32 +33,78 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
     ImageView imageEst;
     TextView nombreEst;
     TextView apellidoEst;
-    RadioButton opcionCumplio, opcionNoCumplio;
-    RadioGroup opciones;
-    private ArrayList<Boolean> selectionCumplio;
-    private ArrayList<Boolean> selectionNoCumplio;
+    private ArrayList<Boolean> itemSelection;
+    private ArrayList<Boolean> itemSelection2;
     Estudiante est;
+    private CheckBox cumple, noCumple;
 
     public CustomListAdapterMC(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
         this.context = context;
         this.resource = resource;
-        selectionCumplio = new ArrayList<Boolean>();
-        selectionNoCumplio = new ArrayList<Boolean>();
+        itemSelection = new ArrayList<>();
+        itemSelection2 = new ArrayList<>();
     }
 
-    @NonNull
-    @Override
     public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+
         if(convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater) getContext()
                     .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.activity_list_metas_cumplimiento, null, true);
+
         }
 
         try{
-            selectionCumplio.add(false);
-            selectionNoCumplio.add(false);
+            if(itemSelection.size()<100){
+                itemSelection.add(false);
+                itemSelection2.add(false);
+            }
+            cumple = (CheckBox)convertView.findViewById(R.id.cumple);
+            noCumple = (CheckBox)convertView.findViewById(R.id.noCumple);
+            cumple.setTag(position);
+            cumple.setOnClickListener(
+                    new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            CheckBox check = (CheckBox)v;
+                            itemSelection.set(position, check.isChecked());
+                            est = null;
+                            for(int i=0 ; i<getCount() ; i++){
+                                if(i==position){
+                                    est = getItem(i);
+                                    break;
+                                }
+                            }
+
+                            itemSelection2.set(position,!check.isChecked());
+
+                        }
+                    }
+            );
+            noCumple.setTag(position);
+            noCumple.setOnClickListener(
+                    new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v){
+                            CheckBox check = (CheckBox)v;
+                            itemSelection2.set(position, check.isChecked());
+                            est = null;
+                            for(int i=0 ; i<getCount() ; i++){
+                                if(i==position){
+                                    est = getItem(i);
+                                    break;
+                                }
+                            }
+
+                            itemSelection.set(position,!check.isChecked());
+
+                        }
+                    }
+            );
+            /*
+            //selectionCumplio.add(false);
+            //selectionNoCumplio.add(false);
             opcionCumplio = (RadioButton) convertView.findViewById(R.id.cumplio);
             opcionNoCumplio = (RadioButton) convertView.findViewById(R.id.noCumplio);
             opciones=(RadioGroup) convertView.findViewById(R.id.grupoOpcionesC);
@@ -68,28 +114,15 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                     RadioButton seleccionado = (RadioButton)group.findViewById(checkedId);
                     boolean cumplio;
-                    /*if(seleccionado.getText().toString().compareTo(opcionCumplio.getText().toString())==0){
-                        selectionCumplio.set(position, opcionCumplio.isChecked());
-                        selectionNoCumplio.set(position, opcionNoCumplio.isChecked());
+                    if(seleccionado.getText().toString().compareTo(opcionCumplio.getText().toString())==0){
+                        selectionCumplio.set(position, true);
+                        selectionNoCumplio.set(position, false);
                         cumplio = true;
                     }else{
-                        selectionNoCumplio.set(position, opcionNoCumplio.isChecked());
-                        selectionCumplio.set(position, opcionNoCumplio.isChecked());
-                        cumplio = false;
-                    }*/
-
-                    RadioButton btn1 = (RadioButton)group.getChildAt(0);
-                    RadioButton btn2 = (RadioButton)group.getChildAt(1);
-                    if(checkedId == btn1.getId()){
-                        selectionCumplio.set(position, btn1.isChecked());
-                        selectionNoCumplio.set(position, btn2.isChecked());
-                        cumplio = true;
-                    }else{
-                        selectionNoCumplio.set(position, btn2.isChecked());
-                        selectionCumplio.set(position, btn1.isChecked());
+                        selectionNoCumplio.set(position, true);
+                        selectionCumplio.set(position, false);
                         cumplio = false;
                     }
-
                     for(int i=0 ; i<getCount() ; i++){
                         if(i==position){
                             est = getItem(i);
@@ -127,7 +160,7 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
                                 est.getGestorMetas().setAsignacionCumplimiento(false);
                         }
                     }
-            )*/;}catch (Exception e){e.printStackTrace();}
+            );*/}catch (Exception e){e.printStackTrace();}
 
         Estudiante estudiante = getItem(position);
 
@@ -146,12 +179,21 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
         apellidoEst.setText(estudiante.getApellidos());
         nombreEst.setTextColor(Color.BLACK);
         apellidoEst.setTextColor(Color.BLACK);
-        opciones = (RadioGroup)convertView.findViewById(R.id.grupoOpcionesC);
+        /*
+        opciones=(RadioGroup) convertView.findViewById(R.id.grupoOpcionesC);
+        opciones.setTag(position);
         opcionCumplio = (RadioButton)convertView.findViewById(R.id.cumplio);
-        opcionNoCumplio = (RadioButton)convertView.findViewById(R.id.noCumplio);
 
         opcionCumplio.setChecked(selectionCumplio.get(position));
+
+        opcionNoCumplio = (RadioButton)convertView.findViewById(R.id.noCumplio);
         opcionNoCumplio.setChecked(selectionNoCumplio.get(position));
+        */
+        cumple = (CheckBox)convertView.findViewById(R.id.cumple);
+        noCumple = (CheckBox)convertView.findViewById(R.id.noCumple);
+
+        cumple.setChecked(itemSelection.get(position));
+        noCumple.setChecked(itemSelection2.get(position));
 
         return convertView;
     }

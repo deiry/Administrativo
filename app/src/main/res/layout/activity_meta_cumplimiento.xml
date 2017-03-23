@@ -9,13 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clickable="false"
+        android:focusable="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="false"
+            android:focusable="false">
 
             <TextView
                 android:id="@+id/nombreMeta"
@@ -39,7 +43,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="false"
+            android:focusable="false">
 
             <TextView
                 android:id="@+id/fecha"
@@ -71,7 +77,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp">
+                tools:layout_editor_absoluteY="8dp"
+                android:clickable="false"
+                android:focusable="false">
 
                 <ListView
                     android:id="@+id/list_cumplimiento"

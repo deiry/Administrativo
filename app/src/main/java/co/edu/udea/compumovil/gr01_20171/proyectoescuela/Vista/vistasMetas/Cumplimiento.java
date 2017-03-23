@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,6 +62,30 @@ public class Cumplimiento extends AppCompatActivity {
         if(customListAdapter != null && lista!=null && estudiantes!=null ){
             lista.setAdapter(customListAdapter);
         }
+
+        lista.setClickable(true);
+        lista.setItemsCanFocus(false);
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final CheckBox cumple = (CheckBox)view.findViewById(R.id.cumple);
+                final CheckBox noCumple = (CheckBox)view.findViewById(R.id.noCumple);
+                cumple.setEnabled(true);
+                noCumple.setEnabled(true);
+                /*cumple.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        noCumple.setChecked(false);
+                    }
+                });
+                noCumple.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        cumple.setChecked(false);
+                    }
+                });*/
+            }
+        });
     }
 
     @Override
