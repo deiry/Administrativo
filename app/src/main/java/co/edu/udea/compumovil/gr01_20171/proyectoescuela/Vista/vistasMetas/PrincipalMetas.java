@@ -52,6 +52,8 @@ public class PrincipalMetas extends AppCompatActivity {
     private Meta metaPorEstudiante;
     private EditText campoEdicion;
     private Button boton;
+    private CheckBox duracionEq;
+    private boolean diasEquivalentesActivado;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,8 @@ public class PrincipalMetas extends AppCompatActivity {
         setSupportActionBar(barra);
         opciones = (Spinner)findViewById(R.id.opcionesMetas);
         campoEdicion = (EditText)findViewById(R.id.duracionGlobal);
+        duracionEq = (CheckBox)findViewById(R.id.duracionEq);
+        diasEquivalentesActivado = false;
         boton = (Button)findViewById(R.id.aceptarMetaGrupal);
         cambiarEstadoComponentesMG(false);
         listarMetas();
@@ -87,6 +91,23 @@ public class PrincipalMetas extends AppCompatActivity {
         if(customListAdapter != null && list!=null && estudiantes!=null ){
             list.setAdapter(customListAdapter);
         }
+
+        duracionEq.setClickable(true);
+        duracionEq.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        duracionEq = (CheckBox)v;
+                        if(duracionEq.isChecked()){
+                            diasEquivalentesActivado = true;
+                            cmabiarEstadoCampo(true);
+                        }else{
+                            diasEquivalentesActivado = false;
+                            cmabiarEstadoCampo(false);
+                        }
+                    }
+                }
+        );
     }
 
     @Override
@@ -146,6 +167,18 @@ public class PrincipalMetas extends AppCompatActivity {
         startActivity(intencion);
     }
 
+    private void activarEstadisticas(){
+        int seleccion = opciones.getSelectedItemPosition();
+        if (seleccion == -1){
+            mensaje("Se debe seleccionar una meta", 0);
+            return;
+        }
+        metaSeleccionada = metas.get(seleccion);
+        Intent intencion = new Intent(this, Estadistica.class);
+        intencion.putExtra("IDMETA",metaSeleccionada.getId());
+        startActivity(intencion);
+    }
+
     // Seleccion de Grupo
     private void listarMetas(){
         metas = ManejaBDMetas.listarMetas(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()));
@@ -167,7 +200,8 @@ public class PrincipalMetas extends AppCompatActivity {
         metaSeleccionada = metas.get(seleccion);
         for (int i=0; i<estudiantes.size(); i++){
             if(estudiantes.get(i).getGestorMetas().estado()){
-                setMeta(estudiantes.get(i), 0);
+                if(diasEquivalentesActivado) setMeta(estudiantes.get(i), 1);
+                else setMeta(estudiantes.get(i), 0);
                 ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), metaPorEstudiante);
             }
         }
@@ -187,6 +221,10 @@ public class PrincipalMetas extends AppCompatActivity {
     private void cambiarEstadoComponentesMG(boolean estado){
         campoEdicion.setEnabled(estado);
         boton.setEnabled(estado);
+    }
+
+    private void cmabiarEstadoCampo(boolean estado){
+        campoEdicion.setEnabled(estado);
     }
 
     // Menu
@@ -210,6 +248,8 @@ public class PrincipalMetas extends AppCompatActivity {
             case (R.id.opcionAsignarMG): cambiarEstadoComponentesMG(true);
                 break;
             case (R.id.opcionCumplimiento): activarCumplimiento();
+                break;
+            case (R.id.opcionEstadistica): activarEstadisticas();
                 break;
         }
         return(true);

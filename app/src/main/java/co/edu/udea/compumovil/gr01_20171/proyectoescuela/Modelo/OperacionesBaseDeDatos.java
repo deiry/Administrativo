@@ -333,7 +333,7 @@ public final class OperacionesBaseDeDatos {
 
     // Se recuperan los cumplimientos asociados a una meta
     public ArrayList<CumplimientoMeta> recuperarCumplimientos(int idMeta){
-        String consulta = String.format("SELECT FROM tbl_cumplimiento_metas WHERE ("+
+        String consulta = String.format("SELECT * FROM tbl_cumplimiento_metas WHERE ("+
                 ContratoEscuela.ColumnasCumplimientoMetas.MET_ID+" = %s)", idMeta);
         Cursor cursor = obtenerDataDB(consulta);
         CumplimientoMeta cumplimiento;

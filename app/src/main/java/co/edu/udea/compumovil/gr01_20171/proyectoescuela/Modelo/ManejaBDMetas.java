@@ -66,6 +66,10 @@ public class ManejaBDMetas {
         finally {operador.getDb().endTransaction();}
     }
 
+    public static ArrayList<CumplimientoMeta> recuperaCumplimientos(OperacionesBaseDeDatos operador, int idMeta){
+        return(operador.recuperarCumplimientos(idMeta));
+    }
+
     public static void borrarMeta(OperacionesBaseDeDatos operador, int idMeta){
         try {
             operador.getDb().beginTransaction();
