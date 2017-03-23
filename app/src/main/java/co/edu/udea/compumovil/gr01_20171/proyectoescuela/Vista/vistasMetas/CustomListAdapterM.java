@@ -42,7 +42,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
     TextView nombreEst;
     TextView apellidoEst;
     CheckBox seleccion;
-    EditText duracionMeta;
+    EditText  duracionMeta;
     private ArrayList<Boolean> itemSelection;
     private ArrayList<String> duracionSelection;
     Estudiante est;
@@ -88,35 +88,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                         }
                     }
             );
-            /*duracionSelection.add("");
-            duracionMeta.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    return;
-                }
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    return;
-                }
 
-                @Override
-                public void afterTextChanged(Editable s) {
-                    EditText edit = (EditText)s;
-                    duracionSelection.set(position, edit.getText().toString());
-                    Estudiante est = null;
-                    for(int i=0 ; i<getCount() ; i++){
-                        if(i==position){
-                            est = getItem(i);
-                            break;
-                        }
-                    }
-                    String textoDuracion = edit.getText().toString();
-                    // MODIFICAR
-                    if(textoDuracion.compareTo("")!=0)
-                        est.getGestorMetas().setDuracionMeta(Integer.parseInt(textoDuracion));
-                    else est.getGestorMetas().setDuracionMeta(0);
-                }
-            });*/
             duracionSelection.add("");
             duracionMeta.setOnEditorActionListener(new TextView.OnEditorActionListener(){
 
@@ -144,7 +116,6 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                                 (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         procesado = true;
-                        //duracionMeta.setText(duracionSelection.get(position));
                     }
                     return(procesado);
                 }

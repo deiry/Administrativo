@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
@@ -33,11 +35,16 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
     TextView apellidoEst;
     RadioButton opcionCumplio, opcionNoCumplio;
     RadioGroup opciones;
+    private ArrayList<Boolean> selectionCumplio;
+    private ArrayList<Boolean> selectionNoCumplio;
+    Estudiante est;
 
     public CustomListAdapterMC(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
         this.context = context;
         this.resource = resource;
+        selectionCumplio = new ArrayList<Boolean>();
+        selectionNoCumplio = new ArrayList<Boolean>();
     }
 
     @NonNull
@@ -50,11 +57,43 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
         }
 
         try{
+            //selectionCumplio.add(false);
+            //selectionNoCumplio.add(false);
             opcionCumplio = (RadioButton) convertView.findViewById(R.id.cumplio);
             opcionNoCumplio = (RadioButton) convertView.findViewById(R.id.noCumplio);
             opciones=(RadioGroup) convertView.findViewById(R.id.grupoOpcionesC);
             opciones.setTag(position);
-            opciones.setOnClickListener(
+            opciones.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                    RadioButton seleccionado = (RadioButton)group.findViewById(checkedId);
+                    boolean cumplio;
+                    if(seleccionado.getText().toString().compareTo(opcionCumplio.getText().toString())==0){
+                        selectionCumplio.set(position, true);
+                        selectionNoCumplio.set(position, false);
+                        cumplio = true;
+                    }else{
+                        selectionNoCumplio.set(position, true);
+                        selectionCumplio.set(position, false);
+                        cumplio = false;
+                    }
+                    for(int i=0 ; i<getCount() ; i++){
+                        if(i==position){
+                            est = getItem(i);
+                            break;
+                        }
+                    }
+                    if(cumplio) {
+                        est.getGestorMetas().setCumplimiento(true);
+                        est.getGestorMetas().setAsignacionCumplimiento(true);
+                    }else {
+                        est.getGestorMetas().setCumplimiento(false);
+                        est.getGestorMetas().setAsignacionCumplimiento(true);
+                    }
+                }
+            });
+
+            /*opciones.setOnClickListener(
                     new View.OnClickListener(){
                         @Override
                         public void onClick(View v){
@@ -75,7 +114,7 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
                                 est.getGestorMetas().setAsignacionCumplimiento(false);
                         }
                     }
-            );}catch (Exception e){e.printStackTrace();}
+            )*/;}catch (Exception e){e.printStackTrace();}
 
         Estudiante estudiante = getItem(position);
 
@@ -94,6 +133,9 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
         apellidoEst.setText(estudiante.getApellidos());
         nombreEst.setTextColor(Color.BLACK);
         apellidoEst.setTextColor(Color.BLACK);
+        opcionCumplio.setChecked(selectionCumplio.get(position));
+        opcionNoCumplio.setChecked(selectionNoCumplio.get(position));
+
         return convertView;
     }
 
