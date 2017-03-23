@@ -7,7 +7,20 @@ public class Asistencia {
     private int idEstudiante;
     private String asistencia;
 
+<<<<<<< HEAD
     public Date getFecha() {
+=======
+    public Asistencia() {
+    }
+
+    public Asistencia(String fecha, int idEstudiante, String asistencia) {
+        this.fecha = fecha;
+        this.idEstudiante = idEstudiante;
+        this.asistencia = asistencia;
+    }
+
+    public String getFecha() {
+>>>>>>> testConfiguracion
         return fecha;
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoEscuela</string>
+    <string name="app_name">Administrativo</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -26,6 +26,14 @@
     <string name="seguimiento_etico">Seguimiento Etico</string>
     <string name="metas">Metas</string>
     <string name="asistencia">Asistencia</string>
+    <string name="title_activity_estadistica_model">activity_estadistica_model</string>
+    <string name="ubicacion">Ubicación</string>
+
+
+    <string-array name="filtros">
+        <item>Asistencia</item>
+        <item>Falta</item>
+    </string-array>
 
     <!-- String Metas-->
     <string name="seleccionGrupo">GRUPOS</string>

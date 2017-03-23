@@ -44,7 +44,7 @@ public class DialogSubCategoria extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.seg_cog_dialog_sub_categorias,container,false);
         vistadialog = view;
-        manager = OperacionesBaseDeDatos.obtenerInstancia(getContext());
+        manager = OperacionesBaseDeDatos.obtenerInstancia(getActivity().getApplicationContext());
 
 
         init(view);
@@ -81,13 +81,21 @@ public class DialogSubCategoria extends DialogFragment {
                 if(manager.insertarSubCategorias(sub))
                 {
 
+<<<<<<< HEAD
                     Toast.makeText(getContext(),"insertado",Toast.LENGTH_SHORT).show();
+=======
+                    Toast.makeText(getActivity().getApplicationContext(),"Insertado",Toast.LENGTH_SHORT).show();
+>>>>>>> testConfiguracion
                     setDataListView();
                     et_sub_categoria.setText("");
                 }
                 else
                 {
+<<<<<<< HEAD
                     Toast.makeText(getContext(),"no insertado",Toast.LENGTH_SHORT).show();
+=======
+                    Toast.makeText(getActivity().getApplicationContext(),"No Insertado",Toast.LENGTH_SHORT).show();
+>>>>>>> testConfiguracion
                 }
             }
         });

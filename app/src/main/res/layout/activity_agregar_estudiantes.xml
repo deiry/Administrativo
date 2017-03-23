@@ -72,11 +72,36 @@
                 android:id="@+id/nombreEstudiante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:layout_alignParentTop="true"
                 android:ems="10"
 
                 android:hint="Nombre"
                 android:inputType="textCapWords|textPersonName"
+=======
+                android:hint="Identificación"
+
+                android:textSize="14sp"
+                android:numeric="integer"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"></LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+>>>>>>> testConfiguracion
 
                 android:textSize="14sp" />
 

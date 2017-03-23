@@ -64,6 +64,14 @@
                 android:layout_weight="1"
                 android:onClick="ClickIrAsistencia"
                 android:text="@string/asistencia" />
+
+            <Button
+                android:id="@+id/btn_ubicacion"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="ClickIrUbicacion"
+                android:text="@string/ubicacion" />
         </LinearLayout>
 
 
