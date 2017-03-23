@@ -7,13 +7,20 @@ import android.net.Uri;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +32,8 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseD
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
 
     Context context;
@@ -34,11 +43,16 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
     TextView apellidoEst;
     CheckBox seleccion;
     EditText duracionMeta;
+    private ArrayList<Boolean> itemSelection;
+    private ArrayList<String> duracionSelection;
+    Estudiante est;
 
     public CustomListAdapterM(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
         this.context = context;
         this.resource = resource;
+        itemSelection = new ArrayList<Boolean>();
+        duracionSelection = new ArrayList<String>();
     }
 
     @NonNull
@@ -51,6 +65,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
         }
 
         try{
+            itemSelection.add(false);
             seleccion = (CheckBox) convertView.findViewById(R.id.estudianteSeleccionado);
             duracionMeta = (EditText)convertView.findViewById(R.id.duracion);
             seleccion.setTag(position);
@@ -58,7 +73,9 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                     new View.OnClickListener(){
                         @Override
                         public void onClick(View v){
-                            Estudiante est = null;
+                            CheckBox check = (CheckBox)v;
+                            itemSelection.set(position, check.isChecked());
+                            est = null;
                             for(int i=0 ; i<getCount() ; i++){
                                 if(i==position){
                                     est = getItem(i);
@@ -68,14 +85,73 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                             if(est.getGestorMetas().estado()){
                                 est.getGestorMetas().setEstado(false);
                             }else est.getGestorMetas().setEstado(true);
-                            String textoDuracion = duracionMeta.getText().toString();
-                            // MODIFICAR
-                            if(textoDuracion.compareTo("")!=0)
-                                est.getGestorMetas().setDuracionMeta(Integer.parseInt(textoDuracion));
-                            else est.getGestorMetas().setDuracionMeta(1);
                         }
                     }
-            );}catch (Exception e){e.printStackTrace();}
+            );
+            /*duracionSelection.add("");
+            duracionMeta.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    return;
+                }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    return;
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    EditText edit = (EditText)s;
+                    duracionSelection.set(position, edit.getText().toString());
+                    Estudiante est = null;
+                    for(int i=0 ; i<getCount() ; i++){
+                        if(i==position){
+                            est = getItem(i);
+                            break;
+                        }
+                    }
+                    String textoDuracion = edit.getText().toString();
+                    // MODIFICAR
+                    if(textoDuracion.compareTo("")!=0)
+                        est.getGestorMetas().setDuracionMeta(Integer.parseInt(textoDuracion));
+                    else est.getGestorMetas().setDuracionMeta(0);
+                }
+            });*/
+            //duracionSelection.add("");
+            duracionMeta.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    boolean procesado = false;
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        EditText edit = (EditText)v;
+                        duracionSelection.add("");
+                        duracionSelection.set(position, edit.getText().toString());
+                        Estudiante est = null;
+                        for(int i=0 ; i<getCount() ; i++){
+                            if(i==position){
+                                est = getItem(i);
+                                break;
+                            }
+                        }
+                        String textoDuracion = edit.getText().toString();
+                        // MODIFICAR
+                        if(textoDuracion.compareTo("")!=0)
+                            est.getGestorMetas().setDuracionMeta(Integer.parseInt(textoDuracion));
+                        else est.getGestorMetas().setDuracionMeta(0);
+
+                        // Ocultar teclado virtual
+                        InputMethodManager imm =
+                                (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        procesado = true;
+                        duracionMeta.setText(duracionSelection.get(position));
+                    }
+                    return(procesado);
+                }
+            });
+
+        }catch (Exception e){e.printStackTrace();}
 
         Estudiante estudiante = getItem(position);
 
@@ -96,6 +172,9 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
         apellidoEst.setTextColor(Color.BLACK);
         seleccion = (CheckBox)convertView.findViewById(R.id.estudianteSeleccionado);
         duracionMeta = (EditText)convertView.findViewById(R.id.duracion);
+
+        //duracionMeta.setText(duracionSelection.get(position));
+        seleccion.setChecked(itemSelection.get(position));
         return convertView;
     }
 

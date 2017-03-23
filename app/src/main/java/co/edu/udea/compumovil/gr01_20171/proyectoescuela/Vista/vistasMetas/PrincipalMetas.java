@@ -72,6 +72,7 @@ public class PrincipalMetas extends AppCompatActivity {
         grupo = (Grupo) intent.getSerializableExtra("GRUPO");
         estudiantes = retornaEstudiantes(grupo);
         Collections.sort(estudiantes);
+
         list = (ListView)findViewById(R.id.list_metas);
         customListAdapter = new CustomListAdapterM(getApplicationContext()
                 ,R.layout.activity_list_metas);
