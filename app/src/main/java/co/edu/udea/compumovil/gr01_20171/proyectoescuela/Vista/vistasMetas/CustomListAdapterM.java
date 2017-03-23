@@ -125,7 +125,6 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                     boolean procesado = false;
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         EditText edit = (EditText)v;
-                        //duracionSelection.add("");
                         duracionSelection.set(position, edit.getText().toString());
                         Estudiante est = null;
                         for(int i=0 ; i<getCount() ; i++){
@@ -145,7 +144,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                                 (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         procesado = true;
-                        duracionMeta.setText(duracionSelection.get(position));
+                        //duracionMeta.setText(duracionSelection.get(position));
                     }
                     return(procesado);
                 }
