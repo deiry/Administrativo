@@ -117,7 +117,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                     else est.getGestorMetas().setDuracionMeta(0);
                 }
             });*/
-            //duracionSelection.add("");
+            duracionSelection.add("");
             duracionMeta.setOnEditorActionListener(new TextView.OnEditorActionListener(){
 
                 @Override
@@ -125,7 +125,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
                     boolean procesado = false;
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         EditText edit = (EditText)v;
-                        duracionSelection.add("");
+                        //duracionSelection.add("");
                         duracionSelection.set(position, edit.getText().toString());
                         Estudiante est = null;
                         for(int i=0 ; i<getCount() ; i++){
@@ -173,7 +173,7 @@ public class CustomListAdapterM extends ArrayAdapter<Estudiante> {
         seleccion = (CheckBox)convertView.findViewById(R.id.estudianteSeleccionado);
         duracionMeta = (EditText)convertView.findViewById(R.id.duracion);
 
-        //duracionMeta.setText(duracionSelection.get(position));
+        duracionMeta.setText(duracionSelection.get(position));
         seleccion.setChecked(itemSelection.get(position));
         return convertView;
     }
