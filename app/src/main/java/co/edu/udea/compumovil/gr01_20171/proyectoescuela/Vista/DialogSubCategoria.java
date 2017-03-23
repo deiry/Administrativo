@@ -58,7 +58,7 @@ public class DialogSubCategoria extends DialogFragment {
 
         setDataListView();
 
-        Toast.makeText(getContext(),"dialogActivo",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity().getApplicationContext(),"dialogActivo",Toast.LENGTH_SHORT).show();
     }
 
     private void init(final View view)
