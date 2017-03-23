@@ -9,6 +9,19 @@ public class CumplimientoMeta {
     private Date fecha;
     private int estado;
 
+    public CumplimientoMeta(int meta, Date fecha, int estado){
+        this.metaId = meta;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
+
+    public CumplimientoMeta(int id, int metaId, Date fecha, int estado) {
+        this.id = id;
+        this.metaId = metaId;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
+
     public int getId() {
         return id;
     }

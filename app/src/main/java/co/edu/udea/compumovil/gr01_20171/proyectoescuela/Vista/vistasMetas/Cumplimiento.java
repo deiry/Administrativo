@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import java.util.Collections;
 
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ManejaBDMetas;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.CumplimientoMeta;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Estudiante;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.GestionEstudianteMeta;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.ListaMetas;
@@ -31,6 +33,7 @@ public class Cumplimiento extends AppCompatActivity {
     private ListView lista;
     private CustomListAdapterMC customListAdapter;
     private ArrayList<Meta> metas;
+    private CumplimientoMeta cumplimiento;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +62,24 @@ public class Cumplimiento extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
+
     public void guardarCumplimientos(View vista){
-        // Logica de asignacion para los cumplimientos
-        // Recordar: usar el valor asignacionCumplimiento de estudiante
+        Estudiante estudiante;
+        for(int i=0;i<estudiantes.size(); i++){
+            estudiante = estudiantes.get(i);
+            if(estudiante.getGestorMetas().asignacionCumplimiento()){
+                boolean estadoCumplimiento = estudiante.getGestorMetas().estado();
+                if(estadoCumplimiento) cumplimiento = new CumplimientoMeta(idMeta, Calendar.getInstance().getTime(),1);
+                else cumplimiento = new CumplimientoMeta(idMeta, Calendar.getInstance().getTime(),0);
+                ManejaBDMetas.agregarRegistro(OperacionesBaseDeDatos.obtenerInstancia(getApplicationContext()), cumplimiento);
+            }
+        }mensaje("Se asignaron correctamente los cumplimientos");
     }
 
     private void setMeta(){
@@ -89,5 +107,9 @@ public class Cumplimiento extends AppCompatActivity {
             if(!lista.contains(e)) lista.add(e);
         }
         return(lista);
+    }
+
+    private void mensaje(String mensaje){
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
 }

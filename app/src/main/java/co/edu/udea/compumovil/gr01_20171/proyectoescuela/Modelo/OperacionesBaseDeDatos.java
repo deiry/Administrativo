@@ -19,6 +19,7 @@ import java.util.Locale;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.*;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.R;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.EstudianteAdapter;
+import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.vistasMetas.Cumplimiento;
 
 /**
  * Clase auxiliar que implementa a {@link ManejaSQL} para llevar a cabo el CRUD
@@ -330,7 +331,38 @@ public final class OperacionesBaseDeDatos {
         return(meta);
     }
 
-    //se recuperan las metas que tengan el un id de lista metas
+    // Se recuperan los cumplimientos asociados a una meta
+    public ArrayList<CumplimientoMeta> recuperarCumplimientos(int idMeta){
+        String consulta = String.format("SELECT FROM tbl_cumplimiento_metas WHERE ("+
+                ContratoEscuela.ColumnasCumplimientoMetas.MET_ID+" = %s)", idMeta);
+        Cursor cursor = obtenerDataDB(consulta);
+        CumplimientoMeta cumplimiento;
+        ArrayList<CumplimientoMeta> lista = new ArrayList<CumplimientoMeta>();
+        if(cursor.moveToFirst()){
+            do{
+                cumplimiento = new CumplimientoMeta(
+                        Integer.parseInt(cursor.getString(0)),
+                        Integer.parseInt(cursor.getString(1)),
+                        new Date(),
+                        Integer.parseInt(cursor.getString(3)));
+                String s= cursor.getString(2);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
+                Date d = new Date();
+                try {
+                    d = dateFormat.parse(s);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                cumplimiento.setFecha(d);
+                lista.add(cumplimiento);
+            }while(cursor.moveToNext());
+        }
+        return (lista);
+    }
+
+
+    //se recuperan las metas que tengan un id de lista metas
     public ArrayList<Meta> obtenerMetasPorIdListaMtas(int idListaMetas){
         String consulta = String.format("SELECT * FROM tbl_meta WHERE ("+
                 ContratoEscuela.ColumnasMetas.LISTMETA_ID+" = %s)", idListaMetas);
@@ -356,14 +388,9 @@ public final class OperacionesBaseDeDatos {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(meta.getFechaInicio());
                 calendar.add(Calendar.DAY_OF_YEAR,meta.getDuracion());
-
-                Log.d("MENSAJE", calendar.getTime().toString());
-                Log.d("MENSAJE", Calendar.getInstance().getTime().toString());
-                Log.d("MENSAJE", String.valueOf(calendar.getTime().compareTo(Calendar.getInstance().getTime())));
                 if(calendar.getTime().compareTo(Calendar.getInstance().getTime()) >= 0){
                     listarMetas.add(meta);
                 }
-                //borrarMetaPorIdListaMetas(idListaMetas);
 
             }while(cursor.moveToNext());
         }
@@ -400,7 +427,6 @@ public final class OperacionesBaseDeDatos {
         }
         return listarMetas;
     }
-
 
     //borra de la tabla tabla_meta
     public boolean borrarMetaPorIdListaMetas(int idMeta) {

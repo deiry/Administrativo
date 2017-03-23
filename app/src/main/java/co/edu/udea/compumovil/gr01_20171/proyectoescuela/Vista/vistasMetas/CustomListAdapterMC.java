@@ -57,8 +57,8 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
         }
 
         try{
-            //selectionCumplio.add(false);
-            //selectionNoCumplio.add(false);
+            selectionCumplio.add(false);
+            selectionNoCumplio.add(false);
             opcionCumplio = (RadioButton) convertView.findViewById(R.id.cumplio);
             opcionNoCumplio = (RadioButton) convertView.findViewById(R.id.noCumplio);
             opciones=(RadioGroup) convertView.findViewById(R.id.grupoOpcionesC);
@@ -68,15 +68,28 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
                 public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                     RadioButton seleccionado = (RadioButton)group.findViewById(checkedId);
                     boolean cumplio;
-                    if(seleccionado.getText().toString().compareTo(opcionCumplio.getText().toString())==0){
-                        selectionCumplio.set(position, true);
-                        selectionNoCumplio.set(position, false);
+                    /*if(seleccionado.getText().toString().compareTo(opcionCumplio.getText().toString())==0){
+                        selectionCumplio.set(position, opcionCumplio.isChecked());
+                        selectionNoCumplio.set(position, opcionNoCumplio.isChecked());
                         cumplio = true;
                     }else{
-                        selectionNoCumplio.set(position, true);
-                        selectionCumplio.set(position, false);
+                        selectionNoCumplio.set(position, opcionNoCumplio.isChecked());
+                        selectionCumplio.set(position, opcionNoCumplio.isChecked());
+                        cumplio = false;
+                    }*/
+
+                    RadioButton btn1 = (RadioButton)group.getChildAt(0);
+                    RadioButton btn2 = (RadioButton)group.getChildAt(1);
+                    if(checkedId == btn1.getId()){
+                        selectionCumplio.set(position, btn1.isChecked());
+                        selectionNoCumplio.set(position, btn2.isChecked());
+                        cumplio = true;
+                    }else{
+                        selectionNoCumplio.set(position, btn2.isChecked());
+                        selectionCumplio.set(position, btn1.isChecked());
                         cumplio = false;
                     }
+
                     for(int i=0 ; i<getCount() ; i++){
                         if(i==position){
                             est = getItem(i);
@@ -133,6 +146,10 @@ public class CustomListAdapterMC extends ArrayAdapter<Estudiante>{
         apellidoEst.setText(estudiante.getApellidos());
         nombreEst.setTextColor(Color.BLACK);
         apellidoEst.setTextColor(Color.BLACK);
+        opciones = (RadioGroup)convertView.findViewById(R.id.grupoOpcionesC);
+        opcionCumplio = (RadioButton)convertView.findViewById(R.id.cumplio);
+        opcionNoCumplio = (RadioButton)convertView.findViewById(R.id.noCumplio);
+
         opcionCumplio.setChecked(selectionCumplio.get(position));
         opcionNoCumplio.setChecked(selectionNoCumplio.get(position));
 

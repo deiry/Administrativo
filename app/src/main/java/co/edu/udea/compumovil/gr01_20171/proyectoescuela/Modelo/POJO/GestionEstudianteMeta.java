@@ -22,20 +22,12 @@ public class GestionEstudianteMeta {
         this.duracionMeta = duracionMeta;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
     public boolean cumplimiento() {
         return cumplimiento;
     }
 
     public void setCumplimiento(boolean cumplimiento) {
         this.cumplimiento = cumplimiento;
-    }
-
-    public boolean isCumplimiento() {
-        return cumplimiento;
     }
 
     public boolean asignacionCumplimiento() {
