@@ -110,8 +110,6 @@ public class PantallaProfesor extends AppCompatActivity {
         dialog.show();
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Acciona el botón y permite pasa la actividad para agregar las materias a dictar.
      * @param view: Recibe una vista
@@ -121,8 +119,4 @@ public class PantallaProfesor extends AppCompatActivity {
         Intent intent = new Intent(this, MateriaAdicion.class);
         startActivity(intent);
     }
-
->>>>>>> testConfiguracion
-
-
 }

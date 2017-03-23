@@ -7,8 +7,26 @@ public class Seguimiento {
     private int idSubSeg;
     private int idEst;
     private String estado;
-    private Date fecha;
-    private String tipo;
+    private String fecha;
+    private int tipo;
+    private int idMateria;
+
+    public Seguimiento(int idSubSeg, int idEst, String estado, String fecha, int tipo,int idMateria) {
+        this.idSubSeg = idSubSeg;
+        this.idEst = idEst;
+        this.estado = estado;
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.idMateria = idMateria;
+    }
+
+    public int getIdMateria() {
+        return idMateria;
+    }
+
+    public void setIdMateria(int idMateria) {
+        this.idMateria = idMateria;
+    }
 
     public int getIdSeg() {
         return idSeg;
@@ -42,20 +60,20 @@ public class Seguimiento {
         this.estado = estado;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    
+
 }

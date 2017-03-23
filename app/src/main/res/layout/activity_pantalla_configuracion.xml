@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.PantallaConfiguracion">
-<<<<<<< HEAD
-
-    <Button
-        android:id="@+id/pruebita"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:text="Ver grupos" />
-
-    <Button
-        android:id="@+id/btn_ingreso_profe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="177dp"
-        android:text="Agregar elementos" />
-</RelativeLayout>
-=======
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -113,4 +93,3 @@
     </LinearLayout>
 
 </LinearLayout>
->>>>>>> testConfiguracion

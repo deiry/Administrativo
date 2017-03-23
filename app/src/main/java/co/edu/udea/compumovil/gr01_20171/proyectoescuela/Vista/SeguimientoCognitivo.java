@@ -25,10 +25,6 @@ public class SeguimientoCognitivo extends Activity {
 
     private ArrayList<Estudiante> estudiantes;
     private Grupo grupo;
-<<<<<<< HEAD
-    private int hola = 0;
-    private int[] contadores;
-=======
     private int tipoVista;
     private ArrayList<Categoria> categorias;
     private ArrayList<Subcategoria> subcategorias;
@@ -36,7 +32,6 @@ public class SeguimientoCognitivo extends Activity {
     private Intent intent;
     private EstadisticaCognitiva estadistica;
 
->>>>>>> testConfiguracion
 
     private OperacionesBaseDeDatos manager;
     @Override
@@ -61,16 +56,8 @@ public class SeguimientoCognitivo extends Activity {
     {
         estudiantes = manager.obtenerEstudiantesDB(grupo);
 
-<<<<<<< HEAD
-        contadores = new int[estudiantes.size()];
-
-        for (int i = 0; i < contadores.length;i++)
-        {
-            contadores[i] = 0;
-        }
-=======
         estudiantes = completarEstudiantes(estudiantes,grupo.getColumnas()*grupo.getFilas());
->>>>>>> testConfiguracion
+
 
         EstudianteAdapter adapter = new EstudianteAdapter(this, estudiantes);
 
@@ -86,34 +73,11 @@ public class SeguimientoCognitivo extends Activity {
                 idEstudiante = estudiantes.get(position).getIdentificacion();
                 estadistica.setIdEstudiante(idEstudiante);
                 //Toast.makeText(SeguimientoCognitivo.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-                contadores[position]++;
-                LinearLayout ll = (LinearLayout) view.findViewById(R.id.contenedor_item_estudiante);
-                switch (contadores[position])
-                {
-                    case 1:
-                    {
-                        ll.setBackground(getDrawable(R.color.colorAccent));
-                        break;
-                    }
-                    case 2:
-                    {
-                        ll.setBackground(getDrawable(R.color.colorPrimary));
-                        break;
-                    }
-                    case 3:
-                    {
-                        ll.setBackground(getDrawable(R.color.cardview_light_background));
-                        contadores[position] = 0;
-                        break;
-                    }
-                }
 
-
-<<<<<<< HEAD
                 Intent intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
                 intent.putExtra("id",estudiantes.get(position).getIdentificacion());
                 //startActivity(intent);
-=======
+
                 if(tipoVista == 1){
 
                     intent = new Intent(SeguimientoCognitivo.this, SegCogEstudiante.class);
@@ -134,8 +98,6 @@ public class SeguimientoCognitivo extends Activity {
                     startActivity(intent);*/
 
                 }
->>>>>>> testConfiguracion
-
 
             }
         });

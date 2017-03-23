@@ -233,16 +233,24 @@ public final class OperacionesBaseDeDatos {
     /**
      * Método para insertar seguimiento en la tabla de seguimiento
      */
-    public void insertarSeguimiento(Seguimiento seguimiento) {
+    public boolean insertarSeguimiento(Seguimiento seguimiento) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Seguimiento.SEG_ID, seguimiento.getIdSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_SUBC_ID, seguimiento.getIdSubSeg());
         valores.put(ContratoEscuela.Seguimiento.SEG_EST_ID, seguimiento.getIdEst());
         valores.put(ContratoEscuela.Seguimiento.SEG_ESTADO, seguimiento.getEstado());
         valores.put(ContratoEscuela.Seguimiento.SEG_FECHA, seguimiento.getFecha().toString());
         valores.put(ContratoEscuela.Seguimiento.SEG_TIPO, seguimiento.getTipo());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
+        valores.put(ContratoEscuela.Seguimiento.SEG_MAT_ID, seguimiento.getIdMateria());
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_SEGUIMIENTO, null, valores);
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void actualizarFila(int identificacionEstudiante, int posicionFila)
@@ -328,9 +336,6 @@ public final class OperacionesBaseDeDatos {
         return grupoAL;
     }
 
-<<<<<<< HEAD
-    public boolean borrarEstudiante(String idEstudiante) {
-=======
     /**
      * Obtiene todos los registros de asistencia de la base de datos
      * */
@@ -421,7 +426,6 @@ public final class OperacionesBaseDeDatos {
      * Borra el registro del estudiante cuyo id haya sido pasado por parametros de la tabla tbl_estudiantes
      * */
     public boolean borrarEstudiante(String idEstudiante){
->>>>>>> testConfiguracion
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         String whereClause = String.format("%s=?", ContratoEscuela.Estudiantes.EST_IDENTIFICACION);
         String[] whereArgs = {idEstudiante};
@@ -705,8 +709,6 @@ public final class OperacionesBaseDeDatos {
 
         return subcategorias;
     }
-<<<<<<< HEAD
-=======
 
     /**
      * obtiene todas las materias desde la table de materias y las lleva a un ArrayList
@@ -794,7 +796,4 @@ public final class OperacionesBaseDeDatos {
         return cursor.getCount();
     }
 
-
-
->>>>>>> testConfiguracion
 }

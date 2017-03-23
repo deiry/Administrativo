@@ -6,6 +6,10 @@ public class Materia implements Serializable{
     private int id;
     private String nombre;
 
+    public Materia(String nombre) {
+        this.nombre = nombre;
+    }
+
     public int getId() {
         return id;
     }
@@ -21,5 +25,5 @@ public class Materia implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 }

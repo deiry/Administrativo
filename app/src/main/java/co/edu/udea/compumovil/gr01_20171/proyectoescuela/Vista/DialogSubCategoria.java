@@ -81,21 +81,15 @@ public class DialogSubCategoria extends DialogFragment {
                 if(manager.insertarSubCategorias(sub))
                 {
 
-<<<<<<< HEAD
-                    Toast.makeText(getContext(),"insertado",Toast.LENGTH_SHORT).show();
-=======
                     Toast.makeText(getActivity().getApplicationContext(),"Insertado",Toast.LENGTH_SHORT).show();
->>>>>>> testConfiguracion
                     setDataListView();
                     et_sub_categoria.setText("");
                 }
                 else
                 {
-<<<<<<< HEAD
-                    Toast.makeText(getContext(),"no insertado",Toast.LENGTH_SHORT).show();
-=======
+
                     Toast.makeText(getActivity().getApplicationContext(),"No Insertado",Toast.LENGTH_SHORT).show();
->>>>>>> testConfiguracion
+
                 }
             }
         });
