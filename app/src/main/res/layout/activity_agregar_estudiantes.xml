@@ -8,10 +8,6 @@
     tools:context="co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.AgregarEstudiantes">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="2"

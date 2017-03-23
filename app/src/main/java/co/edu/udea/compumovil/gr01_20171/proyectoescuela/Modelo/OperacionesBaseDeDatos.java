@@ -163,12 +163,20 @@ public final class OperacionesBaseDeDatos {
      * Método para materias a la base de datos
      */
 
-    public void insertarMaterias(Materia materia) {
+    public boolean insertarMaterias(Materia materia) {
         SQLiteDatabase db = baseDatos.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(ContratoEscuela.Materias.MTA_ID, materia.getId());
         valores.put(ContratoEscuela.Materias.MTA_NOMBRE, materia.getNombre());
-        db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
+        long response = db.insertOrThrow(ManejaSQL.Tablas.TBL_MATERIAS, null, valores);
+
+        if(response != -1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**

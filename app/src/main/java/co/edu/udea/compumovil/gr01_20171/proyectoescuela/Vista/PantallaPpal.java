@@ -1,11 +1,21 @@
 package co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
+
 import java.util.ArrayList;
+
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.ContratoEscuela;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.OperacionesBaseDeDatos;
 import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Modelo.POJO.Categoria;
@@ -16,14 +26,14 @@ import co.edu.udea.compumovil.gr01_20171.proyectoescuela.Vista.vistasMetas.Princ
 
 public class PantallaPpal extends AppCompatActivity {
 
-    private Grupo grupo;
+    Grupo grupo;
+    Intent intent;
+    Bundle bundle;
 
     int tipoVista;
 
     private OperacionesBaseDeDatos manager;
     private String GRUPO = "GRUPO";
-    private Intent intent;
-    private Bundle bundle;
 
 
     @Override
@@ -54,7 +64,6 @@ public class PantallaPpal extends AppCompatActivity {
                 startActivity(ingresar);
             }
         });
-
 */
 
     }
@@ -62,10 +71,10 @@ public class PantallaPpal extends AppCompatActivity {
     public void ClckIrSeguimientoCognitivo(View view)
     {
 
-            Intent intent = new Intent(this,SeguimientoCognitivo.class);
-            intent.putExtra("GRUPO",grupo);
-            intent.putExtra("tipoVista",tipoVista);
-            startActivity(intent);
+        Intent intent = new Intent(this,SeguimientoCognitivo.class);
+        intent.putExtra("GRUPO",grupo);
+        intent.putExtra("tipoVista",tipoVista);
+        startActivity(intent);
 
 
 
@@ -77,13 +86,14 @@ public class PantallaPpal extends AppCompatActivity {
         //DE LA VISTA SE ASIGNA EL ONCLICK
     }
 
+
     public void ClickIrAsistencia(View view) {
 
         if (tipoVista == 1)
         {
             intent = new Intent(PantallaPpal.this, AsistenciaV.class);
             intent.putExtra("GRUPO",grupo);
-                 
+
         }
         else if (tipoVista == 2)
         {
@@ -93,12 +103,22 @@ public class PantallaPpal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void ClckIrMetas(View view)
+    public void ClickIrMetas(View view)
     {
+        if (tipoVista == 1)
+        {
+            intent = new Intent(this, PrincipalMetas.class);
+            intent.putExtra("GRUPO",grupo);
 
-        Intent intencion = new Intent(this, PrincipalMetas.class);
-        intencion.putExtra("GRUPO",grupo);
-        startActivity(intencion);
+        }
+        else if (tipoVista == 2)
+        {
+            //intent = new Intent(this,.class);
+            intent.putExtra("GRUPO",grupo);
+        }
+        startActivity(intent);
+
+
     }
 
     public void ClickIrUbicacion(View view)
@@ -107,6 +127,8 @@ public class PantallaPpal extends AppCompatActivity {
         intent.putExtra(GRUPO,grupo);
         startActivity(intent);
     }
+
+
 
 }
 
